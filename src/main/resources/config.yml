@@ -1,0 +1,30 @@
+Messages:
+  listMessage: '&b[&cPropiedades&b] &eLista de propiedades: '
+  notEnoughArgs: '&b[&cPropiedades&b] &eNo has especificado suficientes argumentos.'
+  alreadyHasProperty: '&b[&cPropiedades&b] &eEsta propiedad ya está presente en este objeto.'
+  noPermission: '&b[&cPropiedades&b] &eNo tienes permiso para hacer esto.'
+  propertyAdded: '&b[&cPropiedades&b] &eHas añadido la propiedad %property%.'
+  propertyAddedDisc: '&b[&cPropiedades&b] &ePropiedad añadida con éxito.'
+  propertyNotPresent: '&b[&cPropiedades&b] &eEsa propiedad no está presente en el objeto.'
+  propertyRemoved: '&b[&cPropiedades&b] &ePropiedad %property% eliminada con éxito.'
+  propertyGiven: '&b[&cPropiedades&b] &eHas conseguido la propiedad %property% de nivel %level%.'
+  addParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties add <Propiedad> <Nivel> <Código de color>.'
+  addDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties addDiablo <Propiedad> <Nivel> <Código de color>.'
+  removeParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties remove <Propiedad>.'
+  getParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties get <Propiedad> <Nivel>'
+  getDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties getDiablo <Propiedad> <Nivel>'
+  giveParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties give <Jugador> <Propiedad> <Nivel>.'
+  giveDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveDiablo <Jugador> <Propiedad> <Nivel>.'
+  giveRandomParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveRandom <Jugador> <Propiedad>'
+  giveRandomDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveRandomDiablo <Jugador> <Propiedad> <Máximo>'
+  help:
+    - "&b/rareprorties &eMuestra esta página."
+    - "&b/rareproperties list &eMuestra todas las propiedades."
+    - "&b/rareproperties add <Propiedad> <Nivel> <Código de color> &eAñade la propiedad al objeto en la mano."
+    - "&b/rareproperties addDiablo <Propiedad> <Nivel> <Código de color> &eAñade la propiedad al objeto en la mano."
+    - "&b/rareproperties remove <Propiedad> &eElimina la propiedad del objeto en la mano."
+    - "&b/rareproperties get <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
+    - "&b/rareproperties getDiablo <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
+    - "&b/rareproperties give <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
+    - "&b/rareproperties giveDiablo <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
+  upgradeMaterial: MUSIC_DISC_5

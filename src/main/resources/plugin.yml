@@ -1,0 +1,12 @@
+name: RareProperties
+version: 1.0
+main: wbe.rareproperties.RareProperties
+api-version: 1.19
+author: wbe
+commands:
+  RareProperties:
+    description: RareProperties main command
+    aliases:
+      - rp
+      - rareproperties
+    permission: rareproperties.command
