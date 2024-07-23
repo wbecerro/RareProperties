@@ -1,0 +1,154 @@
+package wbe.rareproperties;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+public class CommandListener implements CommandExecutor {
+
+    private RareProperties plugin;
+
+    private FileConfiguration config;
+
+    public CommandListener(RareProperties plugin) {
+        this.plugin = plugin;
+        this.config = this.plugin.getConfig();
+    }
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("RareProperties")) {
+            Player p = null;
+            if(sender instanceof Player) {
+                p = (Player) sender;
+            }
+            if(args.length == 0 || args[0].equalsIgnoreCase("help")) {
+                if(!p.hasPermission("rareproperties.command.help")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                for(String x : config.getStringList("Messages.help")) {
+                    p.sendMessage(x.replace("&", "§"));
+                }
+            } else if(args[0].equalsIgnoreCase("list")) {
+                if(!p.hasPermission("rareproperties.command.list")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                p.sendMessage(config.getString("Messages.listMessage").replace("&", "§") + "\n" + String.valueOf(plugin.getTipos()));
+            } else if(args[0].equalsIgnoreCase("add")) {
+                if (!p.hasPermission("rareproperties.command.add")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if (args.length != 4) {
+                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    p.sendMessage(config.getString("Messages.addParams").replace("&", "§"));
+                    return false;
+                }
+                ItemStack item = p.getInventory().getItemInMainHand();
+                plugin.addProperty(item, args[1], args[2], args[3], p, false);
+                p.updateInventory();
+            } else if(args[0].equalsIgnoreCase("addDiablo")) {
+                if(!p.hasPermission("rareproperties.command.add")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if(args.length != 4) {
+                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    p.sendMessage(config.getString("Messages.addDiabloParams").replace("&", "§"));
+                    return false;
+                }
+                ItemStack item = p.getInventory().getItemInMainHand();
+                plugin.addProperty(item, args[1], args[2], args[3], p, true);
+                p.updateInventory();
+            } else if(args[0].equalsIgnoreCase("remove")) {
+                if(!p.hasPermission("rareproperties.command.remove")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if(args.length != 2) {
+                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    p.sendMessage(config.getString("Messages.removeParams").replace("&", "§"));
+                    return false;
+                }
+                ItemStack item = p.getInventory().getItemInMainHand();
+                plugin.removeProperty(item, args[1], p);
+                p.updateInventory();
+            } else if(args[0].equalsIgnoreCase("get")) {
+                if (!p.hasPermission("rareproperties.command.get")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if (args.length != 3) {
+                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    p.sendMessage(config.getString("Messages.getParams").replace("&", "§"));
+                    return false;
+                }
+                plugin.giveProperty(args[1], args[2], p, false);
+            } else if(args[0].equalsIgnoreCase("getDiablo")) {
+                if (!p.hasPermission("rareproperties.command.get")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if (args.length != 3) {
+                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    p.sendMessage(config.getString("Messages.getDiabloParams").replace("&", "§"));
+                    return false;
+                }
+                plugin.giveProperty(args[1], args[2], p, true);
+            } else if(args[0].equalsIgnoreCase("give")) {
+                if(!p.hasPermission("rareproperties.command.give")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if(args.length != 4) {
+                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    p.sendMessage(config.getString("Messages.giveParams").replace("&", "§"));
+                    return false;
+                }
+                Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
+                plugin.giveProperty(args[2], args[3], otherPlayer, false);
+            } else if(args[0].equalsIgnoreCase("giveDiablo")) {
+                if(!p.hasPermission("rareproperties.command.give")) {
+                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if(args.length != 4) {
+                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    p.sendMessage(config.getString("Messages.giveDiabloParams").replace("&", "§"));
+                    return false;
+                }
+                Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
+                plugin.giveProperty(args[2], args[3], otherPlayer, true);
+            } else if(args[0].equalsIgnoreCase("giveRandom")) {
+                if(!sender.hasPermission("rareproperties.command.giveRandom")) {
+                    sender.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if(args.length != 3) {
+                    sender.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    sender.sendMessage(config.getString("Messages.giveRandomParams").replace("&", "§"));
+                    return false;
+                }
+                Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
+                plugin.giveRandomProperty(args[2], otherPlayer);
+            } else if(args[0].equalsIgnoreCase("giveRandomDiablo")) {
+                if(!sender.hasPermission("rareproperties.command.giveRandom")) {
+                    sender.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    return false;
+                }
+                if(args.length != 4) {
+                    sender.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
+                    sender.sendMessage(config.getString("Messages.giveRandomDiabloParams").replace("&", "§"));
+                    return false;
+                }
+                Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
+                plugin.giveRandomDiabloProperty(args[2], args[3], otherPlayer);
+            }
+        }
+        return true;
+    }
+}

@@ -8,6 +8,7 @@ Messages:
   propertyNotPresent: '&b[&cPropiedades&b] &eEsa propiedad no está presente en el objeto.'
   propertyRemoved: '&b[&cPropiedades&b] &ePropiedad %property% eliminada con éxito.'
   propertyGiven: '&b[&cPropiedades&b] &eHas conseguido la propiedad %property% de nivel %level%.'
+  cannotRemoveProperty: '&b[&cPropiedades&b] &eEsa propiedad no puede ser eliminada.'
   addParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties add <Propiedad> <Nivel> <Código de color>.'
   addDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties addDiablo <Propiedad> <Nivel> <Código de color>.'
   removeParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties remove <Propiedad>.'
@@ -17,8 +18,10 @@ Messages:
   giveDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveDiablo <Jugador> <Propiedad> <Nivel>.'
   giveRandomParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveRandom <Jugador> <Propiedad>'
   giveRandomDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveRandomDiablo <Jugador> <Propiedad> <Máximo>'
+  cannotTeleport: '&b[&cPropiedades&b] &eNo se puede teletransportar a un bloque opaco.'
+  captureSuccess: '&b[&cPropiedades&b] &eCaptura te ha dado un huevo.'
   help:
-    - "&b/rareprorties &eMuestra esta página."
+    - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
     - "&b/rareproperties add <Propiedad> <Nivel> <Código de color> &eAñade la propiedad al objeto en la mano."
     - "&b/rareproperties addDiablo <Propiedad> <Nivel> <Código de color> &eAñade la propiedad al objeto en la mano."
@@ -26,5 +29,8 @@ Messages:
     - "&b/rareproperties get <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
     - "&b/rareproperties getDiablo <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
     - "&b/rareproperties give <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
-    - "&b/rareproperties giveDiablo <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
+    - "&b/rareproperties giveDiablo <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
+    - "&b/rareproperties giveRandom <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
   upgradeMaterial: MUSIC_DISC_5
+  blacklistedWorlds:
+    - world
