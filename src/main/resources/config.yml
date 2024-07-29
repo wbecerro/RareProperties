@@ -34,3 +34,19 @@ Messages:
   upgradeMaterial: MUSIC_DISC_5
   blacklistedWorlds:
     - world
+
+Properties:
+  Fly:
+    baseCost: 8
+    time: 5
+  Repair:
+    baseCost: 10
+    repairPercentage: 10
+  Burst:
+    baseCost: 11
+    baseVelocity: 2
+  Teleport:
+    baseCost: 1
+    extraBlocksPerLevel: 2
+  Capture:
+    maxProbability: 10000

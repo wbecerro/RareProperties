@@ -135,11 +135,11 @@ public class EventListeners implements Listener {
                     return;
                 }
 
-                int coste = 10 - level;
+                int coste = config.getInt("Properties.Repair.baseCost") - level;
                 ItemStack primerObjeto = in.getItem(0);
                 Damageable meta = (Damageable) primerObjeto.getItemMeta();
                 if (player.getFoodLevel() > coste && primerObjeto != null && meta.getDamage() > 0) {
-                    int cantidad = Math.round(primerObjeto.getType().getMaxDurability() / 100 * 10 * level);
+                    int cantidad = Math.round(primerObjeto.getType().getMaxDurability() / 100 * config.getInt("Properties.Repair.repairPercentage") * level);
                     int durabilidad = (meta.getDamage() - cantidad);
 
                     if (durabilidad < 0) {
@@ -179,7 +179,7 @@ public class EventListeners implements Listener {
                 return;
             }
 
-            int coste = 11 - level;
+            int coste = config.getInt("Properties.Burst.baseCost") - level;
 
             if(player.getFoodLevel() < coste) {
                 return;
@@ -191,7 +191,7 @@ public class EventListeners implements Listener {
             for(Entity ent : nearbyEntities) {
                 Vector unitVector = ent.getLocation().toVector().subtract(vPlayer).normalize();
                 unitVector.setY(0.55/level);
-                ent.setVelocity(unitVector.multiply(level*2));
+                ent.setVelocity(unitVector.multiply(level*config.getInt("Properties.Burst.baseVelocity")));
             }
 
             player.setFoodLevel(player.getFoodLevel() - coste);
@@ -220,13 +220,13 @@ public class EventListeners implements Listener {
                 return;
             }
 
-            int coste = 1;
+            int coste = config.getInt("Properties.Teleport.baseCost");
 
             if(player.getFoodLevel() < coste) {
                 return;
             }
 
-            int distance = 2 + 2 * level;
+            int distance = 2 + config.getInt("Properties.Teleport.extraBlocksPerLevel") * level;
 
             Location playerLocation = player.getLocation();
             Vector direction = playerLocation.getDirection();
@@ -288,7 +288,7 @@ public class EventListeners implements Listener {
             }
 
             Random random = new Random();
-            int prob = random.nextInt(10000);
+            int prob = random.nextInt(config.getInt("Properties.Capture.maxProbability"));
             if (level < prob) {
                 return;
             }
@@ -373,13 +373,5 @@ public class EventListeners implements Listener {
         }
 
         return level;
-    }
-
-    private ItemStack createItem(ItemStack item, List<String> lore) {
-        ItemStack newItem = new ItemStack(item);
-        ItemMeta meta = newItem.getItemMeta();
-        meta.setLore(lore);
-        newItem.setItemMeta(meta);
-        return newItem;
     }
 }

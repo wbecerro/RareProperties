@@ -26,9 +26,9 @@ public class RareProperties extends JavaPlugin implements Listener {
 
     private final EventListeners eventListeners = new EventListeners(this);
 
-    ArrayList<String> tipos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Ataque", "Encogimiento", "Solem", "Noctis", "Electro",
+    ArrayList<String> tipos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte", "Ataque", "Encogimiento", "Solem", "Noctis", "Electro",
             "Vampirismo", "Invocador", "Puñalada", "Fuego", "Explosión", "Armadura", "Invisibility", "Speed", "Regeneration", "Resistance", "Night_Vision", "Jump",
-            "Teletransporte"));
+            "Congelamiento", "Crítico"));
 
     ArrayList<String> validos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte"));
 
@@ -59,7 +59,7 @@ public class RareProperties extends JavaPlugin implements Listener {
                 for(Player player : keys) {
                     if(player.isFlying()) {
                         int level = EventListeners.cobrarComida.get(player);
-                        int rest = (int)(7.0F - level);
+                        int rest = (int)(getConfig().getDouble("Properties.Fly.baseCost") - level);
                         final int food = rest;
                         player.setFoodLevel(player.getFoodLevel() - food);
                     }
@@ -69,7 +69,7 @@ public class RareProperties extends JavaPlugin implements Listener {
                     }
                 }
             }
-        }, 10L, 200L);
+        }, 10L, getConfig().getLong("Properties.Fly.time") * 20);
     }
 
     public void onDisable() {
