@@ -50,3 +50,21 @@ Properties:
     extraBlocksPerLevel: 2
   Capture:
     maxProbability: 10000
+  Reinforced:
+    baseProbability: 5
+  Aegis:
+    resistanceLevel: 2
+    absortionLevel: 2
+    sizeMultiplier: 1.5
+    healthCost: 10
+  Demolition:
+    baseDamage: 15
+    baseRange: 4
+    foodCost: 5
+  Promptness:
+    velocityLevel: 1
+    sizeMultiplier: 0.6
+    healthCost: 7
+  Propulsion:
+    baseImpulse: 2
+    foodCost: 10

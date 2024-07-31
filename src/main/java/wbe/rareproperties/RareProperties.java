@@ -5,17 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import wbe.rareproperties.properties.Fly;
 
 import java.text.Normalizer;
 import java.util.*;
@@ -26,11 +23,13 @@ public class RareProperties extends JavaPlugin implements Listener {
 
     private final EventListeners eventListeners = new EventListeners(this);
 
-    ArrayList<String> tipos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte", "Ataque", "Encogimiento", "Solem", "Noctis", "Electro",
-            "Vampirismo", "Invocador", "Puñalada", "Fuego", "Explosión", "Armadura", "Invisibility", "Speed", "Regeneration", "Resistance", "Night_Vision", "Jump",
-            "Congelamiento", "Crítico"));
+    ArrayList<String> tipos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte",
+            "Reforzado", "Égida", "Demolición", "Presteza", "Propulsión", "Ataque", "Encogimiento", "Solem", "Noctis", "Electro",
+            "Vampirismo", "Invocador", "Puñalada", "Fuego", "Explosión", "Armadura", "Invisibility", "Speed", "Regeneration",
+            "Resistance", "Night_Vision", "Jump", "Congelamiento", "Crítico"));
 
-    ArrayList<String> validos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte"));
+    ArrayList<String> validos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte"
+            , "Reforzado", "Égida", "Demolición", "Presteza", "Propulsión"));
 
     ArrayList<EntityType> mobs = new ArrayList<EntityType>(Arrays.asList(EntityType.ALLAY, EntityType.ARMADILLO, EntityType.AXOLOTL, EntityType.BAT,
             EntityType.BEE, EntityType.BLAZE, EntityType.BOGGED, EntityType.BREEZE, EntityType.CAMEL, EntityType.CAT, EntityType.CAVE_SPIDER,
@@ -55,10 +54,10 @@ public class RareProperties extends JavaPlugin implements Listener {
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
-                Set<Player> keys = EventListeners.cobrarComida.keySet();
+                Set<Player> keys = Fly.playersFlying.keySet();
                 for(Player player : keys) {
                     if(player.isFlying()) {
-                        int level = EventListeners.cobrarComida.get(player);
+                        int level = Fly.playersFlying.get(player);
                         int rest = (int)(getConfig().getDouble("Properties.Fly.baseCost") - level);
                         final int food = rest;
                         player.setFoodLevel(player.getFoodLevel() - food);
