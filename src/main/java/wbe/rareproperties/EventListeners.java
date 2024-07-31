@@ -152,21 +152,4 @@ public class EventListeners implements Listener {
         e.setCancelled(true);
         p.updateInventory();
     }
-
-    public int checkProperty(ItemStack is, String property) {
-        ItemMeta meta = is.getItemMeta();
-        int level = 0;
-
-        NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
-        if(meta == null) {
-            return level;
-        }
-
-        PersistentDataContainer itemData = meta.getPersistentDataContainer();
-        if(itemData.has(key, PersistentDataType.INTEGER)) {
-            level = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
-        }
-
-        return level;
-    }
 }

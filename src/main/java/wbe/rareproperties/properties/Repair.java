@@ -34,7 +34,6 @@ public class Repair extends RareProperty {
             meta.setDamage(durability);
             firstObject.setItemMeta(meta);
 
-            in.setItem(0, new ItemStack(firstObject));
             player.updateInventory();
         }
     }
