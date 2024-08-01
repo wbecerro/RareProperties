@@ -6,7 +6,7 @@
 
     <groupId>wbe</groupId>
     <artifactId>RareProperties</artifactId>
-    <version>1.0</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>RareProperties</name>

@@ -30,7 +30,7 @@ public class Fly extends RareProperty {
     }
 
     @Override
-    public boolean checkUse(Player player) {
+    public boolean checkUse(Player player, Event event) {
         boolean fly = false;
         int level = 0;
 

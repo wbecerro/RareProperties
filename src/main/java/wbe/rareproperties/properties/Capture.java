@@ -1,6 +1,7 @@
 package wbe.rareproperties.properties;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -38,11 +39,12 @@ public class Capture extends RareProperty {
         ItemStack egg = new ItemStack(eggMaterial);
         egg.setAmount(1);
         player.sendMessage(getConfig().getString("Messages.captureSuccess").replace("&", "§"));
+        player.playSound(player.getLocation(), Sound.BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM, 1F, 1F);
         ((EntityDeathEvent) event).getDrops().add(egg);
     }
 
     @Override
-    public boolean checkUse(Player player) {
+    public boolean checkUse(Player player, Event event) {
         boolean capture = false;
         int level = 0;
 

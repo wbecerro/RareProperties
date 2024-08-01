@@ -11,14 +11,13 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.properties.*;
 
-import java.text.Normalizer;
 
 public class EventListeners implements Listener {
     private RareProperties plugin;
@@ -36,10 +35,9 @@ public class EventListeners implements Listener {
 
         // Comprobación de Vuelo
         Fly fly = new Fly(plugin);
-        boolean flyProperty = fly.checkUse(player);
+        boolean flyProperty = fly.checkUse(player, event);
         if(flyProperty) {
             fly.applyEffect(player, event);
-            return;
         }
     }
 
@@ -59,45 +57,71 @@ public class EventListeners implements Listener {
 
         // Comprobación de Reparación
         Repair repair = new Repair(plugin);
-        boolean repairProperty = repair.checkUse(player);
+        boolean repairProperty = repair.checkUse(player, event);
         if(repairProperty) {
             repair.applyEffect(player, event);
-            return;
         }
 
         // Comprobación de Andanada
         Burst burst = new Burst(plugin);
-        boolean burstProperty = burst.checkUse(player);
+        boolean burstProperty = burst.checkUse(player, event);
         if(burstProperty) {
             burst.applyEffect(player, event);
-            return;
         }
 
         // Comprobación de Teletransporte
         Teleport teleport = new Teleport(plugin);
-        boolean teleportProperty = teleport.checkUse(player);
+        boolean teleportProperty = teleport.checkUse(player, event);
         if(teleportProperty) {
             teleport.applyEffect(player, event);
-            return;
+        }
+
+        // Comprobación de Égida
+        Aegis aegis = new Aegis(plugin);
+        boolean aegisProperty = aegis.checkUse(player, event);
+        if(aegisProperty) {
+            aegis.applyEffect(player, event);
+        }
+
+        // Comprobación de Demolición
+        Demolition demolition = new Demolition(plugin);
+        boolean demolitionProperty = demolition.checkUse(player, event);
+        if(demolitionProperty) {
+            demolition.applyEffect(player, event);
+        }
+
+        // Comprobación de Propulsión
+        Propulsion propulsion = new Propulsion(plugin);
+        boolean propulsionProperty = propulsion.checkUse(player, event);
+        if(propulsionProperty) {
+            propulsion.applyEffect(player, event);
         }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onMobDeath(EntityDeathEvent event) {
-        try {
-            Player player = event.getEntity().getKiller();
-            if(player == null) {
-                return;
-            }
+        Player player = event.getEntity().getKiller();
+        if(player == null) {
+            return;
+        }
 
-            // Comprobación de Captura
-            Capture capture = new Capture(plugin);
-            boolean captureProperty = capture.checkUse(player);
-            if(captureProperty) {
-                capture.applyEffect(player, event);
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
+        // Comprobación de Captura
+        Capture capture = new Capture(plugin);
+        boolean captureProperty = capture.checkUse(player, event);
+        if(captureProperty) {
+            capture.applyEffect(player, event);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onDamageReceived(PlayerItemDamageEvent event) {
+        Player player = event.getPlayer();
+
+        // Comprobación de Reforzado
+        Reinforced reinforced = new Reinforced(plugin);
+        boolean reinforcedProperty = reinforced.checkUse(player.getPlayer(), event);
+        if(reinforcedProperty) {
+            reinforced.applyEffect(player, event);
         }
     }
 

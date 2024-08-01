@@ -2,6 +2,7 @@ package wbe.rareproperties.properties;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
@@ -36,6 +37,7 @@ public class Teleport extends RareProperty {
             if(playerLocation.add(0, 1, 0).getBlock().isEmpty() || playerLocation.add(0, 1, 0).getBlock().isPassable()) {
                 player.teleport(playerLocation);
                 player.setFoodLevel(player.getFoodLevel() - cost);
+                player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F);
                 return;
             }
         }
@@ -43,7 +45,7 @@ public class Teleport extends RareProperty {
     }
 
     @Override
-    public boolean checkUse(Player player) {
+    public boolean checkUse(Player player, Event event) {
         boolean tp = false;
         int level = 0;
 

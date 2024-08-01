@@ -57,7 +57,7 @@ public abstract class RareProperty {
 
     public abstract void applyEffect(Player player, Event event);
 
-    public abstract boolean checkUse(Player player);
+    public abstract boolean checkUse(Player player, Event event);
 
     public int checkProperty(ItemStack is, String property) {
         ItemMeta meta = is.getItemMeta();

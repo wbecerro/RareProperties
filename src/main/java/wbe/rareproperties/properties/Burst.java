@@ -1,5 +1,6 @@
 package wbe.rareproperties.properties;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -27,6 +28,7 @@ public class Burst extends RareProperty {
         List<Entity> nearbyEntities = player.getNearbyEntities(8, 8, 8);
         Vector vPlayer = player.getLocation().toVector();
 
+        player.playSound(player.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1F, 1F);
         for(Entity ent : nearbyEntities) {
             Vector unitVector = ent.getLocation().toVector().subtract(vPlayer).normalize();
             unitVector.setY(0.55 / getLevel());
@@ -37,7 +39,7 @@ public class Burst extends RareProperty {
     }
 
     @Override
-    public boolean checkUse(Player player) {
+    public boolean checkUse(Player player, Event event) {
         boolean burst = false;
         int level = 0;
 

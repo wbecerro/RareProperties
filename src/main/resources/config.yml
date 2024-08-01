@@ -20,6 +20,7 @@ Messages:
   giveRandomDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveRandomDiablo <Jugador> <Propiedad> <Máximo>'
   cannotTeleport: '&b[&cPropiedades&b] &eNo se puede teletransportar a un bloque opaco.'
   captureSuccess: '&b[&cPropiedades&b] &eCaptura te ha dado un huevo.'
+  notEnoughHealth: '&b[&cPropiedades&b] &eNo tienes suficiente vida para sacrificar.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
@@ -56,14 +57,16 @@ Properties:
     resistanceLevel: 2
     absortionLevel: 2
     sizeMultiplier: 1.5
+    effectsDuration: 60
     healthCost: 10
   Demolition:
     baseDamage: 15
     baseRange: 4
     foodCost: 5
   Promptness:
-    velocityLevel: 1
+    speedLevel: 1
     sizeMultiplier: 0.6
+    effectsDuration: 60
     healthCost: 7
   Propulsion:
     baseImpulse: 2

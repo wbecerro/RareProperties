@@ -39,11 +39,11 @@ public class Repair extends RareProperty {
     }
 
     @Override
-    public boolean checkUse(Player player) {
+    public boolean checkUse(Player player, Event event) {
         boolean repair = false;
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.repair")) {
+        if(!player.hasPermission("rareproperties.use.repair")) {
             return false;
         }
 
