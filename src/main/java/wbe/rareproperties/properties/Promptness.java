@@ -11,10 +11,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
+
 public class Promptness extends RareProperty {
 
     public Promptness(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "promptness", "Presteza");
+        setDescription(getConfig().getStringList("Properties.Promptness.description"));
     }
 
     @Override

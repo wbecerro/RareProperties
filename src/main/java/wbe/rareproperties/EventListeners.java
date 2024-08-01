@@ -83,6 +83,13 @@ public class EventListeners implements Listener {
             aegis.applyEffect(player, event);
         }
 
+        // Comprobación de Presteza
+        Promptness promptness = new Promptness(plugin);
+        boolean promptnessProperty = promptness.checkUse(player, event);
+        if(promptnessProperty) {
+            promptness.applyEffect(player, event);
+        }
+
         // Comprobación de Demolición
         Demolition demolition = new Demolition(plugin);
         boolean demolitionProperty = demolition.checkUse(player, event);
@@ -137,14 +144,12 @@ public class EventListeners implements Listener {
 
         NamespacedKey propertyKey = new NamespacedKey(plugin, "SindrisFavourProperty");
         NamespacedKey levelKey = new NamespacedKey(plugin, "SindrisFavourLevel");
-        NamespacedKey diabloKey = new NamespacedKey(plugin, "SindrisFavourDiablo");
 
         if(!meta.getPersistentDataContainer().has(propertyKey)) {
             return;
         }
         String property = meta.getPersistentDataContainer().get(propertyKey, PersistentDataType.STRING);
         String level = meta.getPersistentDataContainer().get(levelKey, PersistentDataType.STRING);
-        boolean diablo = meta.getPersistentDataContainer().get(diabloKey, PersistentDataType.BOOLEAN);
 
         // Se añade la propiedad
         ItemStack inventoryItem = e.getCurrentItem();
@@ -167,7 +172,7 @@ public class EventListeners implements Listener {
         newItem.setItemMeta(inventoryItemMeta);
         newItem.getItemMeta().setLore(inventoryItemMeta.getLore());
 
-        plugin.addProperty(newItem, property, level, "d", p, diablo);
+        plugin.addProperty(newItem, property, level, "d", p);
 
         p.sendMessage(config.getString("Messages.propertyAddedDisc").replace("&", "§"));
 

@@ -10,12 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Capture extends RareProperty {
 
     public Capture(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "capture", "Captura");
+        setDescription(getConfig().getStringList("Properties.Capture.description"));
     }
 
     @Override

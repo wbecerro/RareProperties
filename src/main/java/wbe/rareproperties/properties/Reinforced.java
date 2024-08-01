@@ -7,12 +7,14 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Reinforced extends RareProperty {
 
     public Reinforced(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "reinforced", "Reforzado");
+        setDescription(getConfig().getStringList("Properties.Reinforced.description"));
     }
 
     @Override

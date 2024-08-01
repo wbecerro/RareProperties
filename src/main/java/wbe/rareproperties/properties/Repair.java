@@ -9,10 +9,13 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.Damageable;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
+
 public class Repair extends RareProperty {
 
     public Repair(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "repair", "Reparación");
+        setDescription(getConfig().getStringList("Properties.Repair.description"));
     }
 
     @Override

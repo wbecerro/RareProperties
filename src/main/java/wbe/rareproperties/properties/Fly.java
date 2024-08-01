@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Fly extends RareProperty {
@@ -14,7 +15,8 @@ public class Fly extends RareProperty {
     public static HashMap<Player, Integer> playersFlying = new HashMap<Player, Integer>();
 
     public Fly(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "fly", "Vuelo");
+        setDescription(getConfig().getStringList("Properties.Fly.description"));
     }
 
     @Override

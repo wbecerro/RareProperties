@@ -10,10 +10,13 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
+
 public class Teleport extends RareProperty {
 
     public Teleport(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "teleport", "Teletransporte");
+        setDescription(getConfig().getStringList("Properties.Teleport.description"));
     }
 
     @Override

@@ -9,12 +9,14 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Burst extends RareProperty {
 
     public Burst(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "burst", "Andanada");
+        setDescription(getConfig().getStringList("Properties.Burst.description"));
     }
 
     @Override

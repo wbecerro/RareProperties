@@ -12,7 +12,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import wbe.rareproperties.properties.Fly;
+import wbe.rareproperties.properties.*;
 
 import java.text.Normalizer;
 import java.util.*;
@@ -23,15 +23,11 @@ public class RareProperties extends JavaPlugin implements Listener {
 
     private final EventListeners eventListeners = new EventListeners(this);
 
-    ArrayList<String> tipos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte",
-            "Reforzado", "Égida", "Demolición", "Presteza", "Propulsión", "Ataque", "Encogimiento", "Solem", "Noctis", "Electro",
-            "Vampirismo", "Invocador", "Puñalada", "Fuego", "Explosión", "Armadura", "Invisibility", "Speed", "Regeneration",
-            "Resistance", "Night_Vision", "Jump", "Congelamiento", "Crítico"));
+    private final ArrayList<RareProperty> properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
+            new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
+            new Propulsion(this)));
 
-    ArrayList<String> validos = new ArrayList<String>(Arrays.asList("Vuelo", "Reparación", "Andanada", "Captura", "Teletransporte"
-            , "Reforzado", "Égida", "Demolición", "Presteza", "Propulsión"));
-
-    ArrayList<EntityType> mobs = new ArrayList<EntityType>(Arrays.asList(EntityType.ALLAY, EntityType.ARMADILLO, EntityType.AXOLOTL, EntityType.BAT,
+    private final ArrayList<EntityType> mobs = new ArrayList<EntityType>(Arrays.asList(EntityType.ALLAY, EntityType.ARMADILLO, EntityType.AXOLOTL, EntityType.BAT,
             EntityType.BEE, EntityType.BLAZE, EntityType.BOGGED, EntityType.BREEZE, EntityType.CAMEL, EntityType.CAT, EntityType.CAVE_SPIDER,
             EntityType.CHICKEN, EntityType.COD, EntityType.COW, EntityType.CREEPER, EntityType.DOLPHIN, EntityType.DONKEY, EntityType.DROWNED,
             EntityType.ELDER_GUARDIAN, EntityType.ENDERMAN, EntityType.ENDERMITE, EntityType.EVOKER, EntityType.FOX, EntityType.FROG, EntityType.GHAST,
@@ -76,20 +72,25 @@ public class RareProperties extends JavaPlugin implements Listener {
         getLogger().info("RareProperties disabled correctly");
     }
 
-    public ArrayList<String> getTipos() {
-        return tipos;
+    public ArrayList<String> getValid() {
+        ArrayList<String> validProperties = new ArrayList<>();
+        for(RareProperty property : properties) {
+            validProperties.add(property.getExternalName());
+        }
+
+        return validProperties;
     }
 
     public ArrayList<EntityType> getMobs() {
         return mobs;
     }
 
-    public void addProperty(ItemStack item, String property, String level, String color, Player p, boolean diablo) {
+    public void addProperty(ItemStack item, String property, String level, String color, Player p) {
         ItemMeta meta = item.getItemMeta();
         List<String> lore;
 
         if(!meta.hasLore()) {
-            lore = new ArrayList<String>();
+            lore = new ArrayList<>();
         } else {
             lore = meta.getLore();
         }
@@ -99,91 +100,49 @@ public class RareProperties extends JavaPlugin implements Listener {
             return;
         }
 
-        String propertyLine;
-        int propertyLevel = 0;
-        if(diablo) {
-            propertyLine = ("&" + color + level + " " + property).replace("&", "§");
-            propertyLevel = Integer.parseInt(level);
-        } else {
-            propertyLine = ("&" + color + property + " " + level).replace("&", "§");
-            propertyLevel = RomanToDecimal.romanToDecimal(level);
-        }
+        String propertyLine = ("&" + color + property + " " + level).replace("&", "§");
+        int propertyLevel = RomanToDecimal.romanToDecimal(level);
         lore.add(propertyLine);
-
-        p.sendMessage(this.getConfig().getString("Messages.propertyAdded").replace("&", "§").replace("%property%", property));
         meta.setLore(lore);
 
         NamespacedKey key = new NamespacedKey(this, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, propertyLevel);
 
         item.setItemMeta(meta);
+        p.sendMessage(this.getConfig().getString("Messages.propertyAdded").replace("&", "§").replace("%property%", property));
     }
 
     public void removeProperty(ItemStack item, String property, Player p) {
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(this, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
 
-        if(!tipos.contains(property)) {
-            p.sendMessage(this.getConfig().getString("Messages.propertyNotPresent").replace("&", "§"));
-            return;
-        }
-
-        if(!meta.hasLore()) {
-            p.sendMessage(this.getConfig().getString("Messages.propertyNotPresent").replace("&", "§"));
-            return;
-        }
-
-        List<String> lore = meta.getLore();
-        int len = lore.size();
-        int line = -1;
-
-        for (int i = 0; i < len; i++) {
-            String loreLine = lore.get(i).toString();
-            if (loreLine.contains(property)) {
-                line = i;
-                break;
-            }
-        }
-
-        if(line == -1) {
+        if(!hasProperty(item, property)) {
             p.sendMessage(this.getConfig().getString("Messages.propertyNotPresent").replace("&", "§"));
             return;
         }
 
         int level = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
 
-        String[] levelLine = lore.get(line).split(" ");
-        String color = levelLine[0].substring(1, 2);
+        if(meta.hasLore()) {
+            List<String> lore = meta.getLore();
+            int line = getLine(lore, property);
 
-        if(validos.contains(property)) {
-            giveProperty(property, String.valueOf(level), p, false);
-        } else {
-            if(color.equalsIgnoreCase("d")) {
-                ItemStack dragonEgg = new ItemStack(Material.DRAGON_EGG);
-                ItemMeta dragonEggMeta = dragonEgg.getItemMeta();
-                dragonEggMeta.setDisplayName("§d§lHuevo de Dragón");
-                ArrayList<String> dragonEggLore = new ArrayList<>(Arrays.asList("§d", "§7Huevo con la esencia de un dragón", "§7legendario extinto hace mucho tiempo."));
-                dragonEggMeta.setLore(dragonEggLore);
-                dragonEgg.setItemMeta(dragonEggMeta);
-                if(p.getInventory().firstEmpty() == -1) {
-                    p.getWorld().dropItem(p.getLocation(), dragonEgg);
-                } else {
-                    p.getInventory().addItem(dragonEgg);
-                }
-            }
+            lore.remove(line);
+            meta.getPersistentDataContainer().remove(key);
+
+            meta.setLore(lore);
+            item.setItemMeta(meta);
         }
 
-        lore.remove(line);
-        meta.getPersistentDataContainer().remove(key);
-
+        if(getProperty(property) != null) {
+            giveProperty(property, DecimalToRoman.intToRoman(level), p);
+        }
         p.sendMessage(this.getConfig().getString("Messages.propertyRemoved").replace("&", "§").replace("%property%", property));
-        meta.setLore(lore);
-        item.setItemMeta(meta);
     }
 
-    public void giveProperty(String property, String level, Player p, boolean diablo) {
+    public void giveProperty(String property, String level, Player p) {
         SindrisFavour sindrisFavour = new SindrisFavour(Material.valueOf(this.getConfig().getString("Messages.upgradeMaterial")));
-        sindrisFavour.setProperty(property, level, diablo, this);
+        sindrisFavour.setProperty(getProperty(property), level, this);
         p.getInventory().addItem(new ItemStack[] { sindrisFavour });
         p.sendMessage(this.getConfig().getString("Messages.propertyGiven").replace("&", "§").replace("%property%", property).replace("%level%", level));
         p.updateInventory();
@@ -192,25 +151,10 @@ public class RareProperties extends JavaPlugin implements Listener {
     public void giveRandomProperty(String property, Player p) {
         Random random = new Random();
         int lvl = random.nextInt(5) + 1;
-        String level = decimalToRoman(lvl);
+        String level = DecimalToRoman.intToRoman(lvl);
 
         SindrisFavour sindrisFavour = new SindrisFavour(Material.valueOf(this.getConfig().getString("Messages.upgradeMaterial")));
-        sindrisFavour.setProperty(property, level, false, this);
-        p.getInventory().addItem(new ItemStack[] { sindrisFavour });
-        p.updateInventory();
-    }
-
-    public void giveRandomDiabloProperty(String property, String max, Player p) {
-        int maximum = Integer.valueOf(max);
-
-        Random random = new Random();
-        int lvl = random.nextInt(maximum) + 1;
-
-        String level;
-        level = "+" + String.valueOf(lvl);
-
-        SindrisFavour sindrisFavour = new SindrisFavour(Material.valueOf(this.getConfig().getString("Messages.upgradeMaterial")));
-        sindrisFavour.setProperty(property, level, true, this);
+        sindrisFavour.setProperty(getProperty(property), level, this);
         p.getInventory().addItem(new ItemStack[] { sindrisFavour });
         p.updateInventory();
     }
@@ -231,21 +175,26 @@ public class RareProperties extends JavaPlugin implements Listener {
         return false;
     }
 
-    private String decimalToRoman(int decimal) {
-        switch(decimal) {
-            case 1:
-                return "I";
-            case 2:
-                return "II";
-            case 3:
-                return "III";
-            case 4:
-                return "IV";
-            case 5:
-                return "V";
+    public int getLine(List<String> lore, String property) {
+        int size = lore.size();
+
+        for (int i = 0; i < size; i++) {
+            String loreLine = lore.get(i).toString();
+            if (loreLine.contains(property)) {
+                return i;
+            }
         }
 
-        return "";
+        return -1;
+    }
+
+    public RareProperty getProperty(String property) {
+        for(RareProperty rareProperty : properties) {
+            if(rareProperty.getExternalName().equalsIgnoreCase(property)) {
+                return rareProperty;
+            }
+        }
+        return null;
     }
 }
 

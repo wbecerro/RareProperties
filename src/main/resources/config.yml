@@ -10,14 +10,10 @@ Messages:
   propertyGiven: '&b[&cPropiedades&b] &eHas conseguido la propiedad %property% de nivel %level%.'
   cannotRemoveProperty: '&b[&cPropiedades&b] &eEsa propiedad no puede ser eliminada.'
   addParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties add <Propiedad> <Nivel> <Código de color>.'
-  addDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties addDiablo <Propiedad> <Nivel> <Código de color>.'
   removeParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties remove <Propiedad>.'
   getParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties get <Propiedad> <Nivel>'
-  getDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties getDiablo <Propiedad> <Nivel>'
   giveParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties give <Jugador> <Propiedad> <Nivel>.'
-  giveDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveDiablo <Jugador> <Propiedad> <Nivel>.'
   giveRandomParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveRandom <Jugador> <Propiedad>'
-  giveRandomDiabloParams: '&b[&cPropiedades&b] &eEl uso es /rareproperties giveRandomDiablo <Jugador> <Propiedad> <Máximo>'
   cannotTeleport: '&b[&cPropiedades&b] &eNo se puede teletransportar a un bloque opaco.'
   captureSuccess: '&b[&cPropiedades&b] &eCaptura te ha dado un huevo.'
   notEnoughHealth: '&b[&cPropiedades&b] &eNo tienes suficiente vida para sacrificar.'
@@ -25,49 +21,95 @@ Messages:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
     - "&b/rareproperties add <Propiedad> <Nivel> <Código de color> &eAñade la propiedad al objeto en la mano."
-    - "&b/rareproperties addDiablo <Propiedad> <Nivel> <Código de color> &eAñade la propiedad al objeto en la mano."
     - "&b/rareproperties remove <Propiedad> &eElimina la propiedad del objeto en la mano."
     - "&b/rareproperties get <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
-    - "&b/rareproperties getDiablo <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
     - "&b/rareproperties give <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
-    - "&b/rareproperties giveDiablo <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
     - "&b/rareproperties giveRandom <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
   upgradeMaterial: MUSIC_DISC_5
   blacklistedWorlds:
-    - world
+    - Halloween
 
 Properties:
   Fly:
     baseCost: 8
     time: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Gasta comida permitiendo volar."
   Repair:
     baseCost: 10
     repairPercentage: 10
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Gasta comida permitiendo reparar el"
+      - "&7objeto de la primera posición."
   Burst:
     baseCost: 11
     baseVelocity: 2
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Gasta comida permitiendo enviar"
+      - "&7a volar a las entidades cercanas."
   Teleport:
     baseCost: 1
     extraBlocksPerLevel: 2
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Gasta comida permitiendo teletransportarte"
+      - "&7hacia donde estés mirando."
   Capture:
     maxProbability: 10000
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Permite conseguir huevos de entidades"
+      - "&7al matarlas con una pequeña posibilidad."
   Reinforced:
     baseProbability: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Permite no gastar usos al objeto al"
+      - "&7que se pone con una probabilidad."
   Aegis:
     resistanceLevel: 2
     absortionLevel: 2
     sizeMultiplier: 1.5
     effectsDuration: 60
     healthCost: 10
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Sacrifica vida obteniendo resistencia,"
+      - "&7absorción y un aumento de tamaño."
   Demolition:
     baseDamage: 15
     baseRange: 4
     foodCost: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Gasta comida permitiendo hacer un"
+      - "&7golpe en área de gran poder."
   Promptness:
     speedLevel: 1
     sizeMultiplier: 0.6
     effectsDuration: 60
     healthCost: 7
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Sacrifica vida obteniendo velocidad"
+      - "&7y una disminución de tamaño."
   Propulsion:
     baseImpulse: 2
     foodCost: 10
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Gasta comida permitiendo elevarte"
+      - "&7en el aire como un cohete."

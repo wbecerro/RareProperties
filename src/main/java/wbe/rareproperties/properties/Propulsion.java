@@ -8,10 +8,13 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
+
 public class Propulsion extends RareProperty {
 
     public Propulsion(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "propulsion", "Propulsión");
+        setDescription(getConfig().getStringList("Properties.Propulsion.description"));
     }
 
     @Override
@@ -20,6 +23,8 @@ public class Propulsion extends RareProperty {
 
         player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
         player.setVelocity(new Vector(0, getConfig().getInt("Properties.Propulsion.baseImpulse") * getLevel(), 0));
+
+        player.setFoodLevel(player.getFoodLevel() - cost);
     }
 
     @Override

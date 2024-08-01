@@ -9,12 +9,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Demolition extends RareProperty {
 
     public Demolition(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "demolition", "Demolición");
+        setDescription(getConfig().getStringList("Properties.Demolition.description"));
     }
 
     @Override

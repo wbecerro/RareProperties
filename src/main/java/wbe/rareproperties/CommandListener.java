@@ -37,7 +37,7 @@ public class CommandListener implements CommandExecutor {
                     p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
                     return false;
                 }
-                p.sendMessage(config.getString("Messages.listMessage").replace("&", "§") + "\n" + String.valueOf(plugin.getTipos()));
+                p.sendMessage(config.getString("Messages.listMessage").replace("&", "§") + "\n" + String.valueOf(plugin.getValid()));
             } else if(args[0].equalsIgnoreCase("add")) {
                 if (!p.hasPermission("rareproperties.command.add")) {
                     p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
@@ -49,20 +49,7 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 ItemStack item = p.getInventory().getItemInMainHand();
-                plugin.addProperty(item, args[1], args[2], args[3], p, false);
-                p.updateInventory();
-            } else if(args[0].equalsIgnoreCase("addDiablo")) {
-                if(!p.hasPermission("rareproperties.command.add")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
-                    return false;
-                }
-                if(args.length != 4) {
-                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    p.sendMessage(config.getString("Messages.addDiabloParams").replace("&", "§"));
-                    return false;
-                }
-                ItemStack item = p.getInventory().getItemInMainHand();
-                plugin.addProperty(item, args[1], args[2], args[3], p, true);
+                plugin.addProperty(item, args[1], args[2], args[3], p);
                 p.updateInventory();
             } else if(args[0].equalsIgnoreCase("remove")) {
                 if(!p.hasPermission("rareproperties.command.remove")) {
@@ -87,18 +74,7 @@ public class CommandListener implements CommandExecutor {
                     p.sendMessage(config.getString("Messages.getParams").replace("&", "§"));
                     return false;
                 }
-                plugin.giveProperty(args[1], args[2], p, false);
-            } else if(args[0].equalsIgnoreCase("getDiablo")) {
-                if (!p.hasPermission("rareproperties.command.get")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
-                    return false;
-                }
-                if (args.length != 3) {
-                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    p.sendMessage(config.getString("Messages.getDiabloParams").replace("&", "§"));
-                    return false;
-                }
-                plugin.giveProperty(args[1], args[2], p, true);
+                plugin.giveProperty(args[1], args[2], p);
             } else if(args[0].equalsIgnoreCase("give")) {
                 if(!p.hasPermission("rareproperties.command.give")) {
                     p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
@@ -110,19 +86,7 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
-                plugin.giveProperty(args[2], args[3], otherPlayer, false);
-            } else if(args[0].equalsIgnoreCase("giveDiablo")) {
-                if(!p.hasPermission("rareproperties.command.give")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
-                    return false;
-                }
-                if(args.length != 4) {
-                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    p.sendMessage(config.getString("Messages.giveDiabloParams").replace("&", "§"));
-                    return false;
-                }
-                Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
-                plugin.giveProperty(args[2], args[3], otherPlayer, true);
+                plugin.giveProperty(args[2], args[3], otherPlayer);
             } else if(args[0].equalsIgnoreCase("giveRandom")) {
                 if(!sender.hasPermission("rareproperties.command.giveRandom")) {
                     sender.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
@@ -135,18 +99,6 @@ public class CommandListener implements CommandExecutor {
                 }
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
                 plugin.giveRandomProperty(args[2], otherPlayer);
-            } else if(args[0].equalsIgnoreCase("giveRandomDiablo")) {
-                if(!sender.hasPermission("rareproperties.command.giveRandom")) {
-                    sender.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
-                    return false;
-                }
-                if(args.length != 4) {
-                    sender.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    sender.sendMessage(config.getString("Messages.giveRandomDiabloParams").replace("&", "§"));
-                    return false;
-                }
-                Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
-                plugin.giveRandomDiabloProperty(args[2], args[3], otherPlayer);
             }
         }
         return true;

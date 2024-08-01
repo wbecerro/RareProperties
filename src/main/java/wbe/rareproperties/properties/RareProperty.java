@@ -11,22 +11,35 @@ import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
 
 import java.text.Normalizer;
+import java.util.List;
 
 public abstract class RareProperty {
 
     private int level;
 
+    private String name;
+
+    private String externalName;
+
+    private List<String> description;
+
     private RareProperties plugin;
 
     private FileConfiguration config;
 
-    public RareProperty(RareProperties plugin) {
+    public RareProperty(RareProperties plugin, List<String> description, String name, String externalName) {
+        this.name = name;
+        this.externalName = externalName;
+        this.description = description;
         this.plugin = plugin;
         this.config = this.plugin.getConfig();
     }
 
-    public RareProperty(int level, RareProperties plugin) {
+    public RareProperty(int level, RareProperties plugin, List<String> description, String name, String externalName) {
         this.level = level;
+        this.name = name;
+        this.externalName = externalName;
+        this.description = description;
         this.plugin = plugin;
         this.config = this.plugin.getConfig();
     }
@@ -37,6 +50,30 @@ public abstract class RareProperty {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getExternalName() {
+        return externalName;
+    }
+
+    public void setExternalName(String externalName) {
+        this.externalName = externalName;
+    }
+
+    public List<String> getDescription() {
+        return description;
+    }
+
+    public void setDescription(List<String> description) {
+        this.description = description;
     }
 
     public RareProperties getPlugin() {

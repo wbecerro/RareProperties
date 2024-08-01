@@ -11,10 +11,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
 
+import java.util.ArrayList;
+
 public class Aegis extends RareProperty {
 
     public Aegis(RareProperties plugin) {
-        super(plugin);
+        super(plugin, new ArrayList<>(), "aegis", "Égida");
+        setDescription(getConfig().getStringList("Properties.Aegis.description"));
     }
 
     @Override
