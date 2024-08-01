@@ -93,8 +93,8 @@ Properties:
     description:
       - "&7"
       - "&7&nDescripción:"
-      - "&7Gasta comida permitiendo hacer un"
-      - "&7golpe en área de gran poder."
+      - "&7Gasta comida permitiendo hacer un golpe"
+      - "&7en área de gran poder que además empuja."
   Promptness:
     speedLevel: 1
     sizeMultiplier: 0.6
