@@ -56,7 +56,7 @@ public class Capture extends RareProperty {
             return false;
         }
 
-        if (!getPlugin().hasProperty(player.getInventory().getItemInMainHand(), "Captura")) {
+        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Captura")) {
             return false;
         }
 

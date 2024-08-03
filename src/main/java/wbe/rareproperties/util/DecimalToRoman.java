@@ -1,4 +1,4 @@
-package wbe.rareproperties;
+package wbe.rareproperties.util;
 
 public class DecimalToRoman {
 

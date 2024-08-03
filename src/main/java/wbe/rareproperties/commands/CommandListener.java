@@ -1,4 +1,4 @@
-package wbe.rareproperties;
+package wbe.rareproperties.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.util.Utilities;
 
 public class CommandListener implements CommandExecutor {
 
@@ -14,9 +16,12 @@ public class CommandListener implements CommandExecutor {
 
     private FileConfiguration config;
 
+    private Utilities utilities;
+
     public CommandListener(RareProperties plugin) {
         this.plugin = plugin;
         this.config = this.plugin.getConfig();
+        this.utilities = new Utilities(plugin);
     }
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("RareProperties")) {
@@ -37,7 +42,7 @@ public class CommandListener implements CommandExecutor {
                     p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
                     return false;
                 }
-                p.sendMessage(config.getString("Messages.listMessage").replace("&", "§") + "\n" + String.valueOf(plugin.getValid()));
+                p.sendMessage(config.getString("Messages.listMessage").replace("&", "§") + "\n" + String.valueOf(utilities.getValid()));
             } else if(args[0].equalsIgnoreCase("add")) {
                 if (!p.hasPermission("rareproperties.command.add")) {
                     p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
@@ -49,7 +54,7 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 ItemStack item = p.getInventory().getItemInMainHand();
-                plugin.addProperty(item, args[1], args[2], args[3], p);
+                utilities.addProperty(item, args[1], args[2], args[3], p);
                 p.updateInventory();
             } else if(args[0].equalsIgnoreCase("remove")) {
                 if(!p.hasPermission("rareproperties.command.remove")) {
@@ -62,7 +67,7 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 ItemStack item = p.getInventory().getItemInMainHand();
-                plugin.removeProperty(item, args[1], p);
+                utilities.removeProperty(item, args[1], p);
                 p.updateInventory();
             } else if(args[0].equalsIgnoreCase("get")) {
                 if (!p.hasPermission("rareproperties.command.get")) {
@@ -74,7 +79,7 @@ public class CommandListener implements CommandExecutor {
                     p.sendMessage(config.getString("Messages.getParams").replace("&", "§"));
                     return false;
                 }
-                plugin.giveProperty(args[1], args[2], p);
+                utilities.giveProperty(args[1], args[2], p);
             } else if(args[0].equalsIgnoreCase("give")) {
                 if(!p.hasPermission("rareproperties.command.give")) {
                     p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
@@ -86,7 +91,7 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
-                plugin.giveProperty(args[2], args[3], otherPlayer);
+                utilities.giveProperty(args[2], args[3], otherPlayer);
             } else if(args[0].equalsIgnoreCase("giveRandom")) {
                 if(!sender.hasPermission("rareproperties.command.giveRandom")) {
                     sender.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
@@ -98,7 +103,7 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
-                plugin.giveRandomProperty(args[2], otherPlayer);
+                utilities.giveRandomProperty(args[2], otherPlayer);
             }
         }
         return true;

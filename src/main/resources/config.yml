@@ -25,9 +25,22 @@ Messages:
     - "&b/rareproperties get <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
     - "&b/rareproperties give <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
     - "&b/rareproperties giveRandom <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
-  upgradeMaterial: MUSIC_DISC_5
   blacklistedWorlds:
     - Halloween
+
+SindrisFavour:
+  material: MUSIC_DISC_5
+  name: "&d&lFavor de Sindri"
+  lore:
+    - "&7"
+    - "&7Sindri te hará el favor de mejorar"
+    - "&7tu objeto con la propiedad mágica de"
+  property: "&d%property% %level%"
+
+Permissions:
+  - "rareproperties.limit.3"
+  - "rareproperties.limit.2"
+  - "rareproperties.limit.1"
 
 Properties:
   Fly:

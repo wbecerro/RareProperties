@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.util.Utilities;
 
 import java.text.Normalizer;
 import java.util.List;
@@ -27,12 +28,15 @@ public abstract class RareProperty {
 
     private FileConfiguration config;
 
+    public Utilities utilities;
+
     public RareProperty(RareProperties plugin, List<String> description, String name, String externalName) {
         this.name = name;
         this.externalName = externalName;
         this.description = description;
         this.plugin = plugin;
         this.config = this.plugin.getConfig();
+        this.utilities = new Utilities(plugin);
     }
 
     public RareProperty(int level, RareProperties plugin, List<String> description, String name, String externalName) {
@@ -42,6 +46,7 @@ public abstract class RareProperty {
         this.description = description;
         this.plugin = plugin;
         this.config = this.plugin.getConfig();
+        this.utilities = new Utilities(plugin);
     }
 
     public int getLevel() {

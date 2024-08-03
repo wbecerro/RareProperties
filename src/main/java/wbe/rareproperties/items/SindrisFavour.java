@@ -1,22 +1,29 @@
-package wbe.rareproperties;
+package wbe.rareproperties.items;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SindrisFavour extends ItemStack {
-    public SindrisFavour(Material mat) {
+
+    FileConfiguration config;
+
+    public SindrisFavour(Material mat, FileConfiguration config) {
         super(mat);
+        this.config = config;
+
         ItemMeta meta;
         if (hasItemMeta()) {
             meta = getItemMeta();
@@ -26,14 +33,16 @@ public class SindrisFavour extends ItemStack {
         setItemMeta(meta);
 
         meta = getItemMeta();
-        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Favor de Sindri");
+        meta.setDisplayName(config.getString("SindrisFavour.name").replace("&", "§"));
+
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.RESET + "");
-        lore.add(ChatColor.GRAY + "Sindri te hará el favor de mejorar");
-        lore.add(ChatColor.GRAY + "tu objeto con la propiedad mágica de");
+        for(String line : config.getStringList("SindrisFavour.lore")) {
+            lore.add(line.replace("&", "§"));
+        }
+
         meta.addEnchant(Enchantment.POWER, 10, true);
         meta.setLore(lore);
-        meta.getItemFlags().add(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         setItemMeta(meta);
     }
 
@@ -41,7 +50,8 @@ public class SindrisFavour extends ItemStack {
         ItemMeta meta = getItemMeta();
         List<String> lore;
         lore = meta.getLore();
-        lore.add(ChatColor.LIGHT_PURPLE + property.getExternalName() + " " + level);
+        lore.add(config.getString("SindrisFavour.property").replace("&", "§")
+                .replace("%property%", property.getExternalName()).replace("%level%", level));
 
         for(String description : property.getDescription()) {
             lore.add(description.replace("&", "§"));
