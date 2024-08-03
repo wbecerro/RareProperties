@@ -42,7 +42,6 @@ public class Aegis extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean aegis = false;
         int level = 0;
 
         if(!player.hasPermission("rareproperties.use.aegis")) {
@@ -53,15 +52,10 @@ public class Aegis extends RareProperty {
             player.sendMessage(getConfig().getString("Messages.notEnoughHealth").replace("&", "§"));
         }
 
-        PlayerInventory in = player.getInventory();
-        if(!aegis) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Égida");
-            if (level > 0)
-                aegis = true;
-        }
+        PlayerInventory inventory = player.getInventory();
+        level = checkHands(inventory, "Égida");
 
-        if(!aegis) {
+        if(level < 0) {
             return false;
         }
 

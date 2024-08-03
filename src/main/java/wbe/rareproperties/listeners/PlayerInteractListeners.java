@@ -84,5 +84,12 @@ public class PlayerInteractListeners implements Listener {
         if(propulsionProperty) {
             propulsion.applyEffect(player, event);
         }
+
+        // Comprobación de Sanación
+        Healing healing = new Healing(plugin);
+        boolean healingProperty = healing.checkUse(player, event);
+        if(healingProperty) {
+            healing.applyEffect(player, event);
+        }
     }
 }

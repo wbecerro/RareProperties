@@ -29,7 +29,6 @@ public class Propulsion extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean propulsion = false;
         int level = 0;
 
         if(!player.hasPermission("rareproperties.use.propulsion")) {
@@ -40,15 +39,10 @@ public class Propulsion extends RareProperty {
             return false;
         }
 
-        PlayerInventory in = player.getInventory();
-        if(!propulsion) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Propulsión");
-            if (level > 0)
-                propulsion = true;
-        }
+        PlayerInventory inventory = player.getInventory();
+        level = checkHands(inventory, "Propulsión");
 
-        if(!propulsion) {
+        if(level < 0) {
             return false;
         }
 

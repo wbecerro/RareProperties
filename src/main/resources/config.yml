@@ -1,3 +1,20 @@
+#########################################################################################################################################################
+#########################################################################################################################################################
+###                                                                                                                                                   ###
+###  #######   #######   #######   #######         #######   #######   #######   #######   #######   #######   #######   #######   #######   #######  ###
+###  ##   ##   ##   ##   ##   ##   ##              ##   ##   ##   ##   ##   ##   ##   ##   ##        ##   ##   #######     ###     ##        ##       ###
+###  #######   ##   ##   #######   #######         #######   #######   ##   ##   #######   #######   #######     ###       ###     #######   #######  ###
+###  ###       #######   ###       #######         ##        ###       ##   ##   ##        #######   ###         ###       ###     #######   #######  ###
+###  ## ##     ##   ##   ## ##     ##              ##        ## ##     ##   ##   ##        ##        ## ##       ###       ###     ##             ##  ###
+###  ##   ##   ##   ##   ##   ##   #######         ##        ##   ##   #######   ##        #######   ##   ##     ###     #######   #######   #######  ###
+###                                                                                                                                                   ###
+#########################################################################################################################################################
+#########################################################################################################################################################
+
+################
+### MENSAJES ###
+################
+
 Messages:
   listMessage: '&b[&cPropiedades&b] &eLista de propiedades: '
   notEnoughArgs: '&b[&cPropiedades&b] &eNo has especificado suficientes argumentos.'
@@ -28,6 +45,10 @@ Messages:
   blacklistedWorlds:
     - Halloween
 
+###############
+### OBJETOS ###
+###############
+
 SindrisFavour:
   material: MUSIC_DISC_5
   name: "&d&lFavor de Sindri"
@@ -37,10 +58,80 @@ SindrisFavour:
     - "&7tu objeto con la propiedad mágica de"
   property: "&d%property% %level%"
 
+################
+### PERMISOS ###
+################
+
 Permissions:
   - "rareproperties.limit.3"
   - "rareproperties.limit.2"
   - "rareproperties.limit.1"
+
+###############
+### RAREZAS ###
+###############
+
+Rarities:
+  Mythic:
+    name: "Mítico"
+    color: "&d"
+    weight: 0
+    properties:
+      - "Égida"
+      - "Andanada"
+      - "Captura"
+      - "Demolición"
+      - "Vuelo"
+      - "Presteza"
+      - "Propulsion"
+      - "Reforzado"
+      - "Reparación"
+      - "Teletransporte"
+      - "Sanación"
+  Legendary:
+    name: "Legendario"
+    color: "&6"
+    weight: 0
+    properties:
+      - "Solem"
+      - "Noctis"
+      - "Armadura"
+  Epic:
+    name: "Épico"
+    color: "&5"
+    weight: 0
+    properties:
+      - "Vampirismo"
+      - "Puñalada"
+      - "Crítico"
+  Rare:
+    name: "Raro"
+    color: "&9"
+    weight: 0
+    properties:
+      - "Electro"
+      - "Corte"
+      - "Putrefacción"
+      - "Descomposición"
+  Uncommon:
+    name: "Poco común"
+    color: "&a"
+    weight: 0
+    properties:
+      - "Ígneo"
+      - "Gélido"
+  Common:
+    name: "Común"
+    color: "&f"
+    weight: 0
+    properties:
+      - "Explosión"
+      - "Encogimiento"
+
+
+###################
+### PROPIEDADES ###
+###################
 
 Properties:
   Fly:
@@ -50,6 +141,8 @@ Properties:
       - "&7"
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo volar."
+      - "&7Solo funciona en armadura o un objeto"
+      - "&7en la mano primaria o secundaria."
   Repair:
     baseCost: 10
     repairPercentage: 10
@@ -126,3 +219,11 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo elevarte"
       - "&7en el aire como un cohete."
+  Healing:
+    foodCost: 6
+    healthPercent: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Gasta comida permitiendo curarte"
+      - "&7un porcentaje de tu vida."

@@ -42,7 +42,6 @@ public class Burst extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean burst = false;
         int level = 0;
 
         if(getConfig().getStringList("Messages.blacklistedWorlds").contains(player.getWorld().getName())) {
@@ -53,15 +52,10 @@ public class Burst extends RareProperty {
             return false;
         }
 
-        PlayerInventory in = player.getInventory();
-        if (!burst) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Andanada");
-            if (level > 0)
-                burst = true;
-        }
+        PlayerInventory inventory = player.getInventory();
+        level = checkHands(inventory, "Andanada");
 
-        if (!burst) {
+        if(level < 0) {
             return false;
         }
 

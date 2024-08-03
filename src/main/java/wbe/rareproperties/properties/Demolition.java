@@ -72,7 +72,6 @@ public class Demolition extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean demolition = false;
         int level = 0;
 
         if(!player.hasPermission("rareproperties.use.demolition")) {
@@ -83,15 +82,10 @@ public class Demolition extends RareProperty {
             return false;
         }
 
-        PlayerInventory in = player.getInventory();
-        if(!demolition) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Demolición");
-            if (level > 0)
-                demolition = true;
-        }
+        PlayerInventory inventory = player.getInventory();
+        level = checkHands(inventory, "Demolición");
 
-        if(!demolition) {
+        if(level < 0) {
             return false;
         }
 
@@ -102,7 +96,7 @@ public class Demolition extends RareProperty {
     private ArrayList<Location> getCircle(Location center, double radius, int amount){
         World world = center.getWorld();
         double increment = ((2 * Math.PI) / amount);
-        ArrayList<Location> locations = new ArrayList<Location>();
+        ArrayList<Location> locations = new ArrayList<>();
         for(int i = 0;i < amount; i++){
             double angle = i * increment;
             double x = center.getX() + (radius * Math.cos(angle));

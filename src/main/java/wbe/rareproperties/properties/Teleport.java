@@ -64,11 +64,18 @@ public class Teleport extends RareProperty {
         if (!tp) {
             ItemStack hand = in.getItemInMainHand();
             level = checkProperty(hand, "Teletransporte");
-            if (level > 0)
+            if(level > 0) {
                 tp = true;
+            } else {
+                ItemStack offHand = in.getItemInOffHand();
+                level = checkProperty(offHand, "Teletransporte");
+                if(level > 0) {
+                    tp = true;
+                }
+            }
         }
 
-        if (!tp) {
+        if(!tp) {
             return false;
         }
 

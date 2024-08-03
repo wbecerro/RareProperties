@@ -47,7 +47,6 @@ public class Capture extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean capture = false;
         int level = 0;
 
         if(player.getInventory().getItemInMainHand().getType() == Material.AIR) {
@@ -64,15 +63,11 @@ public class Capture extends RareProperty {
             return false;
         }
 
-        PlayerInventory in = player.getInventory();
-        if (!capture) {
-            ItemStack cursor = in.getItemInMainHand();
-            level = checkProperty(cursor, "Captura");
-            if (level > 0)
-                capture = true;
-        }
+        PlayerInventory inventory = player.getInventory();
+        ItemStack item = inventory.getItemInMainHand();
+        level = checkProperty(item, "Captura");
 
-        if (!capture) {
+        if (level < 0) {
             return false;
         }
 

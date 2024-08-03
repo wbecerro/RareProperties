@@ -33,7 +33,6 @@ public class Fly extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean fly = false;
         int level = 0;
 
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
@@ -46,36 +45,14 @@ public class Fly extends RareProperty {
             return false;
         }
 
-        PlayerInventory in = player.getInventory();
-        ItemStack[] armor = in.getArmorContents();
-        for(ItemStack is : armor) {
-            if(is == null) {
-                continue;
-            }
-            level = checkProperty(is, "Vuelo");
-            if(level > 0) {
-                fly = true;
-                break;
-            }
+        PlayerInventory inventory = player.getInventory();
+        level = checkArmor(inventory, "Vuelo");
+
+        if(level < 0) {
+            level = checkHands(inventory, "Vuelo");
         }
 
-        // Si no hay fly en la armadura se comprueba la mano primaria y luego la secundaria.
-        if(!fly) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Vuelo");
-            if(level > 0) {
-                fly = true;
-            } else {
-                ItemStack offHand = in.getItemInOffHand();
-                level = checkProperty(offHand, "Vuelo");
-                if(level > 0) {
-                    fly = true;
-                }
-            }
-        }
-
-        // Si no se encuentra Vuelo en armor o item en la mano sale.
-        if(!fly) {
+        if(level < 0) {
             Fly.playersFlying.remove(player);
             player.setAllowFlight(false);
             return false;

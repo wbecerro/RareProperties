@@ -54,11 +54,18 @@ public class Repair extends RareProperty {
         if (!repair) {
             ItemStack hand = in.getItemInMainHand();
             level = checkProperty(hand, "Reparación");
-            if (level > 0)
+            if(level > 0) {
                 repair = true;
+            } else {
+                ItemStack offHand = in.getItemInOffHand();
+                level = checkProperty(offHand, "Reparación");
+                if(level > 0) {
+                    repair = true;
+                }
+            }
         }
 
-        if (!repair) {
+        if(!repair) {
             return false;
         }
 

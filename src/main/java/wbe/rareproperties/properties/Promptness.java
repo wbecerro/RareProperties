@@ -39,7 +39,6 @@ public class Promptness extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean promptness = false;
         int level = 0;
 
         if(!player.hasPermission("rareproperties.use.promptness")) {
@@ -50,15 +49,10 @@ public class Promptness extends RareProperty {
             player.sendMessage(getConfig().getString("Messages.notEnoughHealth").replace("&", "§"));
         }
 
-        PlayerInventory in = player.getInventory();
-        if(!promptness) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Presteza");
-            if (level > 0)
-                promptness = true;
-        }
+        PlayerInventory inventory = player.getInventory();
+        level = checkHands(inventory, "Presteza");
 
-        if(!promptness) {
+        if(level < 0) {
             return false;
         }
 
