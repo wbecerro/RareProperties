@@ -10,6 +10,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.epic.Backstab;
+import wbe.rareproperties.properties.epic.Critic;
+import wbe.rareproperties.properties.epic.Vampirism;
 import wbe.rareproperties.properties.legendary.Noctis;
 import wbe.rareproperties.properties.legendary.Solem;
 
@@ -59,6 +62,27 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean noctisProperty = noctis.checkUse(player, event);
         if(noctisProperty) {
             noctis.applyEffect(player, event);
+        }
+
+        // Comprobación de Vampirismo
+        Vampirism vampirism = new Vampirism(plugin);
+        boolean vampirismProperty = vampirism.checkUse(player, event);
+        if(vampirismProperty) {
+            vampirism.applyEffect(player, event);
+        }
+
+        // Comprobación de Puñalada
+        Backstab backstab = new Backstab(plugin);
+        boolean backstabProperty = backstab.checkUse(player, event);
+        if(backstabProperty) {
+            backstab.applyEffect(player, event);
+        }
+
+        // Comprobación de Crítico
+        Critic critic = new Critic(plugin);
+        boolean criticProperty = critic.checkUse(player, event);
+        if(criticProperty) {
+            critic.applyEffect(player, event);
         }
     }
 }
