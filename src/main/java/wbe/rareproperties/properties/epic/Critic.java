@@ -1,12 +1,10 @@
-package wbe.rareproperties.properties.legendary;
+package wbe.rareproperties.properties.epic;
 
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
@@ -15,37 +13,44 @@ import wbe.rareproperties.properties.RareProperty;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Solem extends RareProperty {
+public class Critic extends RareProperty {
 
-    public static double power = 0.0;
-
-    public Solem(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "solem", "Solem");
-        setDescription(getConfig().getStringList("Properties.Solem.description"));
+    public Critic(RareProperties plugin) {
+        super(plugin, new ArrayList<>(), "critic", "Crítico");
+        setDescription(getConfig().getStringList("Properties.Critic.description"));
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         double damage = ((EntityDamageByEntityEvent) event).getDamage();
-        damage = damage * (1 + power * getLevel());
+
+        Random rand = new Random();
+        int random = rand.nextInt(100);
+
+        if (random > getLevel() * getConfig().getInt("Properties.Critic.chancePerLevel")) {
+            return;
+        }
+
+        damage = damage * (1 + getLevel() * getConfig().getDouble("Properties.Critic.extraDamage"));
         ((EntityDamageByEntityEvent) event).setDamage(damage);
+        player.playSound(player.getLocation(), Sound.valueOf(getConfig().getString("Properties.Critic.sound")), 0.5F, 1.0F);
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.solem")) {
+        if (!player.hasPermission("rareproperties.use.critic")) {
             return false;
         }
 
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Solem")) {
+        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Crítico")) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Solem");
+        level = checkProperty(item, "Crítico");
 
         if (level < 0) {
             return false;

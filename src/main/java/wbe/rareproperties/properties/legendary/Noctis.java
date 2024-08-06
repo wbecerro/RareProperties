@@ -35,12 +35,6 @@ public class Noctis extends RareProperty {
             return false;
         }
 
-        if(player.getInventory().getItemInMainHand().getType() == Material.AIR) {
-            return false;
-        } else if(player.getInventory().getItemInMainHand().getItemMeta() == null) {
-            return false;
-        }
-
         if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Noctis")) {
             return false;
         }

@@ -1,5 +1,6 @@
 package wbe.rareproperties.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -37,6 +38,12 @@ public class EntityDamageByEntityListeners implements Listener {
         }
 
         if(player.getAttackCooldown() < 0.3) {
+            return;
+        }
+
+        if(player.getInventory().getItemInMainHand().getType() == Material.AIR) {
+            return;
+        } else if(player.getInventory().getItemInMainHand().getItemMeta() == null) {
             return;
         }
 

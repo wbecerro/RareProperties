@@ -1,51 +1,50 @@
-package wbe.rareproperties.properties.legendary;
+package wbe.rareproperties.properties.epic;
 
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class Solem extends RareProperty {
+public class Backstab extends RareProperty {
 
-    public static double power = 0.0;
-
-    public Solem(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "solem", "Solem");
-        setDescription(getConfig().getStringList("Properties.Solem.description"));
+    public Backstab(RareProperties plugin) {
+        super(plugin, new ArrayList<>(), "backstab", "Puñalada");
+        setDescription(getConfig().getStringList("Properties.Backstab.description"));
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         double damage = ((EntityDamageByEntityEvent) event).getDamage();
-        damage = damage * (1 + power * getLevel());
-        ((EntityDamageByEntityEvent) event).setDamage(damage);
+        LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
+
+        if(damaged.getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D) {
+            damage = damage * (1 + getConfig().getDouble("Properties.Backstab.extraDamage") * getLevel());
+            ((EntityDamageByEntityEvent) event).setDamage(damage);
+        }
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.solem")) {
+        if (!player.hasPermission("rareproperties.use.backstab")) {
             return false;
         }
 
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Solem")) {
+        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Puñalada")) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Solem");
+        level = checkProperty(item, "Puñalada");
 
         if (level < 0) {
             return false;

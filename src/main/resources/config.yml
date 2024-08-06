@@ -248,3 +248,23 @@ Properties:
       - "&7&nDescripción:"
       - "&7Otorga mitigación de daño al ser golpeado."
       - "&7&oSolo funciona en armadura."
+  Vampirism:
+    healthSteal: 0.01
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Al golpear te curarás una parte del daño."
+  Backstab:
+    extraDamage: 0.1
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Al golpear por la espalda harás más daño."
+  Critic:
+    extraDamage: 0.2
+    chancePerLevel: 1
+    sound: "ENTITY_ZOMBIE_ATTACK_IRON_DOOR"
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Probabilidad de hacer daño extra."
