@@ -7,7 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.properties.Capture;
+import wbe.rareproperties.properties.mythic.Capture;
 
 public class EntityDeathListeners implements Listener {
 

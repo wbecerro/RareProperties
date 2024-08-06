@@ -1,6 +1,5 @@
-package wbe.rareproperties.properties;
+package wbe.rareproperties.properties.mythic;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -8,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.Damageable;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
 

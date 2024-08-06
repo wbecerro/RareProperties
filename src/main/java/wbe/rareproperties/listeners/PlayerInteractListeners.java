@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.properties.*;
+import wbe.rareproperties.properties.mythic.*;
 
 public class PlayerInteractListeners implements Listener {
 

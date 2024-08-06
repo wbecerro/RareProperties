@@ -141,8 +141,8 @@ Properties:
       - "&7"
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo volar."
-      - "&7Solo funciona en armadura o un objeto"
-      - "&7en la mano primaria o secundaria."
+      - "&7&oSolo funciona en armadura o un objeto"
+      - "&7&oen la mano primaria o secundaria."
   Repair:
     baseCost: 10
     repairPercentage: 10
@@ -227,3 +227,24 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo curarte"
       - "&7un porcentaje de tu vida."
+  Solem:
+    damagePercent: 0.2
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Si es de día harás cada vez más"
+      - "&7daño hasta el mediodía."
+  Noctis:
+    damagePercent: 0.2
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Si es de noche harás cada vez más"
+      - "&7daño hasta la medianoche."
+  Armor:
+    reductionPercent: 0.025
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Otorga mitigación de daño al ser golpeado."
+      - "&7&oSolo funciona en armadura."

@@ -1,15 +1,15 @@
-package wbe.rareproperties.properties;
+package wbe.rareproperties.properties.mythic;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
 

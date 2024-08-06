@@ -7,7 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.properties.Fly;
+import wbe.rareproperties.properties.mythic.Fly;
 
 public class PlayerMoveListeners implements Listener {
 

@@ -1,11 +1,11 @@
-package wbe.rareproperties.properties;
+package wbe.rareproperties.properties.mythic;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
 import java.util.Random;

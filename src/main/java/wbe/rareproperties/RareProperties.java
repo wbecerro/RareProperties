@@ -4,7 +4,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 import wbe.rareproperties.commands.CommandListener;
 import wbe.rareproperties.listeners.EventListeners;
-import wbe.rareproperties.properties.*;
+import wbe.rareproperties.properties.RareProperty;
+import wbe.rareproperties.properties.legendary.Armor;
+import wbe.rareproperties.properties.legendary.Noctis;
+import wbe.rareproperties.properties.legendary.Solem;
+import wbe.rareproperties.properties.mythic.*;
 import wbe.rareproperties.util.Scheduler;
 
 import java.util.*;
@@ -17,7 +21,7 @@ public class RareProperties extends JavaPlugin {
 
     private final ArrayList<RareProperty> properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
             new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
-            new Propulsion(this), new Healing(this)));
+            new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this)));
 
     private final ArrayList<EntityType> mobs = new ArrayList<>(Arrays.asList(EntityType.ALLAY, EntityType.ARMADILLO, EntityType.AXOLOTL, EntityType.BAT,
             EntityType.BEE, EntityType.BLAZE, EntityType.BOGGED, EntityType.BREEZE, EntityType.CAMEL, EntityType.CAT, EntityType.CAVE_SPIDER,
@@ -39,7 +43,7 @@ public class RareProperties extends JavaPlugin {
         getCommand("rareproperties").setExecutor(this.commandListener);
         this.eventListeners.initializeListeners();
 
-        Scheduler.startFlyCost(getConfig(), this);
+        Scheduler.startSchedulers(getConfig(), this);
     }
 
     public void onDisable() {

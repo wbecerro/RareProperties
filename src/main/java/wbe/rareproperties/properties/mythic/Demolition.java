@@ -1,4 +1,4 @@
-package wbe.rareproperties.properties;
+package wbe.rareproperties.properties.mythic;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -7,10 +7,10 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
 import java.util.List;

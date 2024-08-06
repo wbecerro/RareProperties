@@ -1,4 +1,4 @@
-package wbe.rareproperties.properties;
+package wbe.rareproperties.properties.mythic;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,6 +50,10 @@ public class Capture extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
+        if (!player.hasPermission("rareproperties.use.capture")) {
+            return false;
+        }
+
         if(player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             return false;
         } else if(player.getInventory().getItemInMainHand().getItemMeta() == null) {
@@ -56,10 +61,6 @@ public class Capture extends RareProperty {
         }
 
         if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Captura")) {
-            return false;
-        }
-
-        if (!player.hasPermission("rareproperties.use.capture")) {
             return false;
         }
 
