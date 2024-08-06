@@ -16,6 +16,8 @@ import wbe.rareproperties.properties.rare.Cut;
 import wbe.rareproperties.properties.rare.Electro;
 import wbe.rareproperties.properties.rare.Poison;
 import wbe.rareproperties.properties.rare.Wither;
+import wbe.rareproperties.properties.uncommon.Fire;
+import wbe.rareproperties.properties.uncommon.Freezee;
 import wbe.rareproperties.util.Scheduler;
 
 import java.util.*;
@@ -29,7 +31,8 @@ public class RareProperties extends JavaPlugin {
     private final ArrayList<RareProperty> properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
             new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
             new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),
-            new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this)));
+            new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this),
+            new Fire(this), new Freezee(this)));
 
     private final ArrayList<EntityType> mobs = new ArrayList<>(Arrays.asList(EntityType.ALLAY, EntityType.ARMADILLO, EntityType.AXOLOTL, EntityType.BAT,
             EntityType.BEE, EntityType.BLAZE, EntityType.BOGGED, EntityType.BREEZE, EntityType.CAMEL, EntityType.CAT, EntityType.CAVE_SPIDER,

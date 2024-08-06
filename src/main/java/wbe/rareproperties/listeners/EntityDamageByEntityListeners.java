@@ -19,6 +19,8 @@ import wbe.rareproperties.properties.rare.Cut;
 import wbe.rareproperties.properties.rare.Electro;
 import wbe.rareproperties.properties.rare.Poison;
 import wbe.rareproperties.properties.rare.Wither;
+import wbe.rareproperties.properties.uncommon.Fire;
+import wbe.rareproperties.properties.uncommon.Freezee;
 
 public class EntityDamageByEntityListeners implements Listener {
 
@@ -115,6 +117,20 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean poisonProperty = poison.checkUse(player, event);
         if(poisonProperty) {
             poison.applyEffect(player, event);
+        }
+
+        // Comprobación de Ígneo
+        Fire fire = new Fire(plugin);
+        boolean fireProperty = fire.checkUse(player, event);
+        if(fireProperty) {
+            fire.applyEffect(player, event);
+        }
+
+        // Comprobación de Gélido
+        Freezee freezee = new Freezee(plugin);
+        boolean freezeeProperty = freezee.checkUse(player, event);
+        if(freezeeProperty) {
+            freezee.applyEffect(player, event);
         }
     }
 }
