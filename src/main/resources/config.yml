@@ -268,3 +268,34 @@ Properties:
       - "&7"
       - "&7&nDescripción:"
       - "&7Probabilidad de hacer daño extra."
+  Electro:
+    damagePerLevel: 2
+    chancePerLevel: 7
+    sound: "ITEM_TRIDENT_THUNDER"
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Probabilidad de lanzar un rayo que"
+      - "&7no destruye objeto y hace daño."
+  Cut:
+    damagePerLevel: 1
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Añadirá daño extra a tus ataques."
+  Wither:
+    modifierPerLevel: 1
+    duration: 5
+    chancePerLevel: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Probabilidad de infligir wither al golpear."
+  Poison:
+    modifierPerLevel: 1
+    duration: 5
+    chancePerLevel: 6
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Probabilidad de infligir veneno al golpear."

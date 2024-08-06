@@ -15,6 +15,10 @@ import wbe.rareproperties.properties.epic.Critic;
 import wbe.rareproperties.properties.epic.Vampirism;
 import wbe.rareproperties.properties.legendary.Noctis;
 import wbe.rareproperties.properties.legendary.Solem;
+import wbe.rareproperties.properties.rare.Cut;
+import wbe.rareproperties.properties.rare.Electro;
+import wbe.rareproperties.properties.rare.Poison;
+import wbe.rareproperties.properties.rare.Wither;
 
 public class EntityDamageByEntityListeners implements Listener {
 
@@ -83,6 +87,34 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean criticProperty = critic.checkUse(player, event);
         if(criticProperty) {
             critic.applyEffect(player, event);
+        }
+
+        // Comprobación de Electro
+        Electro electro = new Electro(plugin);
+        boolean electroProperty = electro.checkUse(player, event);
+        if(electroProperty) {
+            electro.applyEffect(player, event);
+        }
+
+        // Comprobación de Corte
+        Cut cut = new Cut(plugin);
+        boolean cutProperty = cut.checkUse(player, event);
+        if(cutProperty) {
+            cut.applyEffect(player, event);
+        }
+
+        // Comprobación de Descomposición
+        Wither wither = new Wither(plugin);
+        boolean witherProperty = wither.checkUse(player, event);
+        if(witherProperty) {
+            wither.applyEffect(player, event);
+        }
+
+        // Comprobación de Putrefacción
+        Poison poison = new Poison(plugin);
+        boolean poisonProperty = poison.checkUse(player, event);
+        if(poisonProperty) {
+            poison.applyEffect(player, event);
         }
     }
 }
