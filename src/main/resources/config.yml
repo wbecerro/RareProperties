@@ -127,6 +127,7 @@ Rarities:
     properties:
       - "Explosión"
       - "Encogimiento"
+      - "Agrandamiento"
 
 
 ###################
@@ -313,3 +314,31 @@ Properties:
       - "&7&nDescripción:"
       - "&7Congelará a los enemigos al golpearlos"
       - "&7y les hará un poco de daño."
+  Explosion:
+    chancePerLevel: 5
+    damage: 2
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Al golpear a los enemigos les hará un"
+      - "&7poco de daño e invocará un cohete."
+  Shrink:
+    chancePerLevel: 1
+    durationPerLevel: 3
+    sound: "BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM"
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Al golpear a los enemigos tendrá la"
+      - "&7posibilidad de hacer a los enemigos"
+      - "&7más pequeños por un tiempo."
+  Enlarge:
+    chancePerLevel: 1
+    durationPerLevel: 3
+    sound: "BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM"
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Al golpear a los enemigos tendrá la"
+      - "&7posibilidad de hacer a los enemigos"
+      - "&7más grandes por un tiempo."

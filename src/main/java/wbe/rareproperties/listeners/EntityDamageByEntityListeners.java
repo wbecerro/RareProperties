@@ -10,6 +10,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.common.Enlarge;
+import wbe.rareproperties.properties.common.Explosion;
+import wbe.rareproperties.properties.common.Shrink;
 import wbe.rareproperties.properties.epic.Backstab;
 import wbe.rareproperties.properties.epic.Critic;
 import wbe.rareproperties.properties.epic.Vampirism;
@@ -131,6 +134,27 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean freezeeProperty = freezee.checkUse(player, event);
         if(freezeeProperty) {
             freezee.applyEffect(player, event);
+        }
+
+        // Comprobación de Explosión
+        Explosion explosion = new Explosion(plugin);
+        boolean explosionProperty = explosion.checkUse(player, event);
+        if(explosionProperty) {
+            explosion.applyEffect(player, event);
+        }
+
+        // Comprobación de Encogimiento
+        Shrink shrink = new Shrink(plugin);
+        boolean shrinkProperty = shrink.checkUse(player, event);
+        if(shrinkProperty) {
+            shrink.applyEffect(player, event);
+        }
+
+        // Comprobación de Agrandamiento
+        Enlarge enlarge = new Enlarge(plugin);
+        boolean enlargeProperty = enlarge.checkUse(player, event);
+        if(enlargeProperty) {
+            enlarge.applyEffect(player, event);
         }
     }
 }

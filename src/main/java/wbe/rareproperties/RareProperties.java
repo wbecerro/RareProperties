@@ -5,6 +5,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import wbe.rareproperties.commands.CommandListener;
 import wbe.rareproperties.listeners.EventListeners;
 import wbe.rareproperties.properties.RareProperty;
+import wbe.rareproperties.properties.common.Enlarge;
+import wbe.rareproperties.properties.common.Explosion;
+import wbe.rareproperties.properties.common.Shrink;
 import wbe.rareproperties.properties.epic.Backstab;
 import wbe.rareproperties.properties.epic.Critic;
 import wbe.rareproperties.properties.epic.Vampirism;
@@ -32,7 +35,7 @@ public class RareProperties extends JavaPlugin {
             new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
             new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),
             new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this),
-            new Fire(this), new Freezee(this)));
+            new Fire(this), new Freezee(this), new Explosion(this), new Shrink(this), new Enlarge(this)));
 
     private final ArrayList<EntityType> mobs = new ArrayList<>(Arrays.asList(EntityType.ALLAY, EntityType.ARMADILLO, EntityType.AXOLOTL, EntityType.BAT,
             EntityType.BEE, EntityType.BLAZE, EntityType.BOGGED, EntityType.BREEZE, EntityType.CAMEL, EntityType.CAT, EntityType.CAVE_SPIDER,
