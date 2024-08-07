@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
@@ -25,23 +26,25 @@ public class Capture extends RareProperty {
     public void applyEffect(Player player, Event event) {
         LivingEntity entity = ((EntityDeathEvent) event).getEntity();
 
-        if (!getPlugin().getMobs().contains(entity.getType())) {
-            return;
-        }
-
         Random random = new Random();
         int prob = random.nextInt(getConfig().getInt("Properties.Capture.maxProbability"));
         if (getLevel() < prob) {
             return;
         }
 
-        String conversion = entity.getType().toString() + "_SPAWN_EGG";
+        Material eggMaterial = Material.AIR;
+        try {
+            String conversion = entity.getType().toString() + "_SPAWN_EGG";
 
-        Material eggMaterial = Material.valueOf(conversion);
+            eggMaterial = Material.valueOf(conversion);
+        } catch(IllegalArgumentException ex) {
+            return;
+        }
+
 
         ItemStack egg = new ItemStack(eggMaterial);
         egg.setAmount(1);
-        player.sendMessage(getConfig().getString("Messages.captureSuccess").replace("&", "§"));
+        player.sendMessage(RareProperties.messages.captureSuccess);
         player.playSound(player.getLocation(), Sound.BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM, 1F, 1F);
         ((EntityDeathEvent) event).getDrops().add(egg);
     }

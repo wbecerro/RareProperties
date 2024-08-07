@@ -2,6 +2,7 @@ package wbe.rareproperties.listeners;
 
 import org.bukkit.plugin.PluginManager;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 
 public class EventListeners {
 

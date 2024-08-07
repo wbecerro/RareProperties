@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Teleport extends RareProperty {
                 return;
             }
         }
-        player.sendMessage(getConfig().getString("Messages.cannotTeleport").replace("&", "§"));
+        player.sendMessage(RareProperties.messages.cannotTeleport);
     }
 
     @Override

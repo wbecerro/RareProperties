@@ -7,6 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.properties.legendary.Armor;
 
 public class EntityDamageListeners implements Listener {

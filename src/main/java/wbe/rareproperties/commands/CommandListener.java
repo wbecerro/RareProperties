@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.util.Utilities;
 
 public class CommandListener implements CommandExecutor {
@@ -31,26 +32,26 @@ public class CommandListener implements CommandExecutor {
             }
             if(args.length == 0 || args[0].equalsIgnoreCase("help")) {
                 if(!p.hasPermission("rareproperties.command.help")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                for(String x : config.getStringList("Messages.help")) {
-                    p.sendMessage(x.replace("&", "§"));
+                for(String line : RareProperties.messages.help) {
+                    p.sendMessage(line.replace("&", "§"));
                 }
             } else if(args[0].equalsIgnoreCase("list")) {
                 if(!p.hasPermission("rareproperties.command.list")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                p.sendMessage(config.getString("Messages.listMessage").replace("&", "§") + "\n" + String.valueOf(utilities.getValid()));
+                p.sendMessage(RareProperties.messages.listMessage + "\n" + String.valueOf(utilities.getValid()));
             } else if(args[0].equalsIgnoreCase("add")) {
                 if (!p.hasPermission("rareproperties.command.add")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if (args.length != 4) {
-                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    p.sendMessage(config.getString("Messages.addParams").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.notEnoughArgs);
+                    p.sendMessage(RareProperties.messages.addParams);
                     return false;
                 }
                 ItemStack item = p.getInventory().getItemInMainHand();
@@ -58,12 +59,12 @@ public class CommandListener implements CommandExecutor {
                 p.updateInventory();
             } else if(args[0].equalsIgnoreCase("remove")) {
                 if(!p.hasPermission("rareproperties.command.remove")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if(args.length != 2) {
-                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    p.sendMessage(config.getString("Messages.removeParams").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.notEnoughArgs);
+                    p.sendMessage(RareProperties.messages.removeParams);
                     return false;
                 }
                 ItemStack item = p.getInventory().getItemInMainHand();
@@ -71,39 +72,47 @@ public class CommandListener implements CommandExecutor {
                 p.updateInventory();
             } else if(args[0].equalsIgnoreCase("get")) {
                 if (!p.hasPermission("rareproperties.command.get")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if (args.length != 3) {
-                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    p.sendMessage(config.getString("Messages.getParams").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.notEnoughArgs);
+                    p.sendMessage(RareProperties.messages.getParams);
                     return false;
                 }
                 utilities.giveProperty(args[1], args[2], p);
             } else if(args[0].equalsIgnoreCase("give")) {
                 if(!p.hasPermission("rareproperties.command.give")) {
-                    p.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if(args.length != 4) {
-                    p.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    p.sendMessage(config.getString("Messages.giveParams").replace("&", "§"));
+                    p.sendMessage(RareProperties.messages.notEnoughArgs);
+                    p.sendMessage(RareProperties.messages.giveParams);
                     return false;
                 }
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
                 utilities.giveProperty(args[2], args[3], otherPlayer);
             } else if(args[0].equalsIgnoreCase("giveRandom")) {
                 if(!sender.hasPermission("rareproperties.command.giveRandom")) {
-                    sender.sendMessage(config.getString("Messages.noPermission").replace("&", "§"));
+                    sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if(args.length != 3) {
-                    sender.sendMessage(config.getString("Messages.notEnoughArgs").replace("&", "§"));
-                    sender.sendMessage(config.getString("Messages.giveRandomParams").replace("&", "§"));
+                    sender.sendMessage(RareProperties.messages.notEnoughArgs);
+                    sender.sendMessage(RareProperties.messages.giveRandomParams);
                     return false;
                 }
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
                 utilities.giveRandomProperty(args[2], otherPlayer);
+            } else if(args[0].equalsIgnoreCase("reload")) {
+                if (!sender.hasPermission("rareproperties.command.reload")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+                plugin.reloadConfig();
+                RareProperties.reloadConfiguration(config);
+                sender.sendMessage(RareProperties.messages.reload);
             }
         }
         return true;

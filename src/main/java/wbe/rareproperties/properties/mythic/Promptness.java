@@ -9,6 +9,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class Promptness extends RareProperty {
         }
 
         if(player.getHealth() <= getConfig().getInt("Properties.Promptness.healthCost")) {
-            player.sendMessage(getConfig().getString("Messages.notEnoughHealth").replace("&", "§"));
+            player.sendMessage(RareProperties.messages.notEnoughHealth);
         }
 
         PlayerInventory inventory = player.getInventory();

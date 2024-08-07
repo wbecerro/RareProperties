@@ -1,0 +1,107 @@
+package wbe.rareproperties.config;
+
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import wbe.rareproperties.rarities.ItemRarity;
+import wbe.rareproperties.rarities.PropertyRarity;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+public class Config {
+
+    private FileConfiguration config;
+
+    public int specialMobChance;
+    public int sockettedItemChance;
+    public int unidentifiedChance;
+    public int maxSockets;
+    public List<String> blacklistedWorlds = new ArrayList<>();
+
+    public List<String> permissions = new ArrayList<>();
+
+    public List<PropertyRarity> propertyRarities = new ArrayList<>();
+    public List<ItemRarity> itemRarities = new ArrayList<>();
+    public int totalPropertyWeight;
+    public int totalItemWeight;
+
+    public Material sindrisFavourMaterial;
+    public String sindrisFavourName;
+    public List<String> sindrisFavourLore = new ArrayList<>();
+    public String sindrisFavourProperty;
+
+    public Material socketMaterial;
+    public String socketName;
+    public List<String> socketLore = new ArrayList<>();
+    public List<String> socketColors = new ArrayList<>();
+
+    public Material identifierMaterial;
+    public String identifierName;
+    public String identifierAuthor;
+    public List<String> identifierLore;
+
+    public Config(FileConfiguration config) {
+        this.config = config;
+
+        specialMobChance = config.getInt("ConfigValues.specialMobChance");
+        sockettedItemChance = config.getInt("ConfigValues.sockettedItemChance");
+        unidentifiedChance = config.getInt("ConfigValues.unidentifiedChance");
+        maxSockets = config.getInt("ConfigValues.maxSockets");
+        blacklistedWorlds = config.getStringList("ConfigValues.blacklistedWorlds");
+
+        loadConfigVariables();
+
+        sindrisFavourMaterial = Material.valueOf(config.getString("SindrisFavour.material"));
+        sindrisFavourName = config.getString("SindrisFavour.name").replace("&", "§");
+        sindrisFavourLore = config.getStringList("SindrisFavour.lore");
+        sindrisFavourProperty = config.getString("SindrisFavour.property").replace("&", "§");
+
+        socketMaterial = Material.valueOf(config.getString("Socket.material"));
+        socketName = config.getString("Socket.name").replace("&", "§");
+        socketLore = config.getStringList("Socket.lore");
+        socketColors = config.getStringList("Socket.colors");
+
+        identifierMaterial = Material.valueOf(config.getString("IdentifierTome.material"));
+        identifierName = config.getString("IdentifierTome.name").replace("&", "§");
+        identifierAuthor = config.getString("IdentifierTome.author");
+        identifierLore = config.getStringList("IdentifierTome.lore");
+    }
+
+    private void loadConfigVariables() {
+        permissions = config.getStringList("Permissions");
+        loadPropertyRarites();
+        loadItemRarites();
+    }
+
+    private void loadPropertyRarites() {
+        Set<String> configRarities = config.getConfigurationSection("Rarities.Properties").getKeys(false);
+        for(String rarity : configRarities) {
+            int weight = config.getInt("Rarities.Properties." + rarity + ".weight");
+            if(weight <= 0) {
+                continue;
+            }
+
+            totalPropertyWeight += weight;
+            String name = config.getString("Rarities.Properties." + rarity + ".name");
+            String color = config.getString("Rarities.Properties." + rarity + ".color");
+            List<String> properties = config.getStringList("Rarities.Properties." + rarity + ".properties");
+            PropertyRarity propertyRarity = new PropertyRarity(name, color, weight, properties);
+            propertyRarities.add(propertyRarity);
+        }
+    }
+
+    private void loadItemRarites() {
+        Set<String> configRarities = config.getConfigurationSection("Rarities.Items").getKeys(false);
+        for(String rarity : configRarities) {
+            int weight = config.getInt("Rarities.Items." + rarity + ".weight");
+            totalItemWeight += weight;
+            int maxEnchants = config.getInt("Rarities.Items." + rarity + ".maxEnchants");
+            int maxEnchantLevel = config.getInt("Rarities.Items." + rarity + ".maxEnchantLevel");
+            int maxProperties = config.getInt("Rarities.Items." + rarity + ".maxProperties");
+            String color = config.getString("Rarities.Items." + rarity + ".color");
+            ItemRarity itemRarity = new ItemRarity(maxEnchants, maxEnchantLevel, maxProperties, color, weight);
+            itemRarities.add(itemRarity);
+        }
+    }
+}

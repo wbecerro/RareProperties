@@ -17,25 +17,20 @@ import java.util.List;
 
 public class SindrisFavour extends ItemStack {
 
-    FileConfiguration config;
-
-    public SindrisFavour(Material mat, FileConfiguration config) {
-        super(mat);
-        this.config = config;
+    public SindrisFavour() {
+        super(RareProperties.config.sindrisFavourMaterial);
 
         ItemMeta meta;
         if (hasItemMeta()) {
             meta = getItemMeta();
         } else {
-            meta = Bukkit.getItemFactory().getItemMeta(mat);
+            meta = Bukkit.getItemFactory().getItemMeta(RareProperties.config.sindrisFavourMaterial);
         }
-        setItemMeta(meta);
 
-        meta = getItemMeta();
-        meta.setDisplayName(config.getString("SindrisFavour.name").replace("&", "§"));
+        meta.setDisplayName(RareProperties.config.sindrisFavourName);
 
         ArrayList<String> lore = new ArrayList<>();
-        for(String line : config.getStringList("SindrisFavour.lore")) {
+        for(String line : RareProperties.config.sindrisFavourLore) {
             lore.add(line.replace("&", "§"));
         }
 
@@ -49,8 +44,8 @@ public class SindrisFavour extends ItemStack {
         ItemMeta meta = getItemMeta();
         List<String> lore;
         lore = meta.getLore();
-        lore.add(config.getString("SindrisFavour.property").replace("&", "§")
-                .replace("%property%", property.getExternalName()).replace("%level%", level));
+        lore.add(RareProperties.config.sindrisFavourProperty.replace("%property%", property.getExternalName())
+                .replace("%level%", level));
 
         for(String description : property.getDescription()) {
             lore.add(description.replace("&", "§"));

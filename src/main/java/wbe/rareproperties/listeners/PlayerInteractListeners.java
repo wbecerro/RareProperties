@@ -91,5 +91,12 @@ public class PlayerInteractListeners implements Listener {
         if(healingProperty) {
             healing.applyEffect(player, event);
         }
+
+        // Comprobación de Adrenalina
+        Adrenaline adrenaline = new Adrenaline(plugin);
+        boolean adrenalineProperty = adrenaline.checkUse(player, event);
+        if(adrenalineProperty) {
+            adrenaline.applyEffect(player, event);
+        }
     }
 }

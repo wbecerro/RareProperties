@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.util.Utilities;
 
 public class InventoryClickListeners implements Listener {
@@ -51,7 +52,7 @@ public class InventoryClickListeners implements Listener {
         ItemStack inventoryItem = e.getCurrentItem();
 
         if(utilities.hasProperty(inventoryItem, property)) {
-            p.sendMessage(config.getString("Messages.alreadyHasProperty").replace("&", "§"));
+            p.sendMessage(RareProperties.messages.alreadyHasProperty);
             return;
         }
 
@@ -87,7 +88,7 @@ public class InventoryClickListeners implements Listener {
 
         utilities.addProperty(newItem, property, level, "d", p);
 
-        p.sendMessage(config.getString("Messages.propertyAddedDisc").replace("&", "§"));
+        p.sendMessage(RareProperties.messages.propertyAddedDisc);
 
         e.setCurrentItem(newItem);
         p.setItemOnCursor(null);

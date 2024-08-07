@@ -34,6 +34,7 @@ Messages:
   cannotTeleport: '&b[&cPropiedades&b] &eNo se puede teletransportar a un bloque opaco.'
   captureSuccess: '&b[&cPropiedades&b] &eCaptura te ha dado un huevo.'
   notEnoughHealth: '&b[&cPropiedades&b] &eNo tienes suficiente vida para sacrificar.'
+  reload: '&b[&cPropiedades&b] &eEl plugin se ha recargado con éxito.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
@@ -42,8 +43,7 @@ Messages:
     - "&b/rareproperties get <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
     - "&b/rareproperties give <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
     - "&b/rareproperties giveRandom <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
-  blacklistedWorlds:
-    - Halloween
+    - "&b/rareproperties reload &eRecarga la configuración del plugin."
 
 ###############
 ### OBJETOS ###
@@ -58,6 +58,30 @@ SindrisFavour:
     - "&7tu objeto con la propiedad mágica de"
   property: "&d%property% %level%"
 
+Socket:
+  material: AMETHYST_SHARD
+  name: "Runa Valknut"
+  lore:
+    - "&7"
+    - "&7Los antiguos Aësir usaban esta"
+    - "&7runa en su equipamiento durante"
+    - "&7los tiempos de guerra."
+  colors:
+    - BLUE
+    - RED
+    - GREEN
+
+IdentifierTome:
+  material: WRITTEN_BOOK
+  author: yuxputa
+  name: "&5Libro de runas"
+  lore:
+    - "&7"
+    - "&7Libro que contiene un diccionario"
+    - "&7de runas mágicas usadas por los"
+    - "&7dioses para identificar objetos"
+    - "&7perdidos en el tiempo."
+
 ################
 ### PERMISOS ###
 ################
@@ -67,68 +91,130 @@ Permissions:
   - "rareproperties.limit.2"
   - "rareproperties.limit.1"
 
+#####################
+### CONFIGURACIÓN ###
+#####################
+
+ConfigValues:
+  specialMobChance: 4
+  sockettedItemChance: 10
+  maxSockets: 3
+  unidentifiedChance: 2
+  blacklistedWorlds:
+    - Halloween
+
 ###############
 ### RAREZAS ###
 ###############
 
 Rarities:
-  Mythic:
-    name: "Mítico"
-    color: "&d"
-    weight: 0
-    properties:
-      - "Égida"
-      - "Andanada"
-      - "Captura"
-      - "Demolición"
-      - "Vuelo"
-      - "Presteza"
-      - "Propulsion"
-      - "Reforzado"
-      - "Reparación"
-      - "Teletransporte"
-      - "Sanación"
-  Legendary:
-    name: "Legendario"
-    color: "&6"
-    weight: 0
-    properties:
-      - "Solem"
-      - "Noctis"
-      - "Armadura"
-  Epic:
-    name: "Épico"
-    color: "&5"
-    weight: 0
-    properties:
-      - "Vampirismo"
-      - "Puñalada"
-      - "Crítico"
-  Rare:
-    name: "Raro"
-    color: "&9"
-    weight: 0
-    properties:
-      - "Electro"
-      - "Corte"
-      - "Putrefacción"
-      - "Descomposición"
-  Uncommon:
-    name: "Poco común"
-    color: "&a"
-    weight: 0
-    properties:
-      - "Ígneo"
-      - "Gélido"
-  Common:
-    name: "Común"
-    color: "&f"
-    weight: 0
-    properties:
-      - "Explosión"
-      - "Encogimiento"
-      - "Agrandamiento"
-
+  Properties:
+    Mythic:
+      name: "Mítico"
+      color: "&d"
+      weight: 0
+      properties:
+        - "Égida"
+        - "Andanada"
+        - "Captura"
+        - "Demolición"
+        - "Vuelo"
+        - "Presteza"
+        - "Propulsion"
+        - "Reforzado"
+        - "Reparación"
+        - "Teletransporte"
+        - "Sanación"
+        - "Adrenalina"
+    Legendary:
+      name: "Legendario"
+      color: "&6"
+      weight: 5
+      properties:
+        - "Solem"
+        - "Noctis"
+        - "Armadura"
+    Epic:
+      name: "Épico"
+      color: "&5"
+      weight: 25
+      properties:
+        - "Vampirismo"
+        - "Puñalada"
+        - "Crítico"
+    Rare:
+      name: "Raro"
+      color: "&9"
+      weight: 60
+      properties:
+        - "Electro"
+        - "Corte"
+        - "Putrefacción"
+        - "Descomposición"
+    Uncommon:
+      name: "Poco común"
+      color: "&a"
+      weight: 120
+      properties:
+        - "Ígneo"
+        - "Gélido"
+    Common:
+      name: "Común"
+      color: "&f"
+      weight: 200
+      properties:
+        - "Explosión"
+        - "Encogimiento"
+        - "Agrandamiento"
+  Items:
+    Supreme:
+      maxEnchants: 10
+      maxEnchantLevel: 10
+      maxProperties: 4
+      color: "&c"
+      weight: 1
+    Divine:
+      maxEnchants: 8
+      maxEnchantLevel: 8
+      maxProperties: 3
+      color: "&f"
+      weight: 5
+    Mythic:
+      maxEnchants: 6
+      maxEnchantLevel: 7
+      maxProperties: 2
+      color: "&d"
+      weight: 15
+    Legendary:
+      maxEnchants: 5
+      maxEnchantLevel: 6
+      maxProperties: 2
+      color: "&6"
+      weight: 45
+    Epic:
+      maxEnchants: 4
+      maxEnchantLevel: 4
+      maxProperties: 1
+      color: "&5"
+      weight: 135
+    Rare:
+      maxEnchants: 3
+      maxEnchantLevel: 3
+      maxProperties: 1
+      color: "&9"
+      weight: 405
+    Uncommon:
+      maxEnchants: 2
+      maxEnchantLevel: 2
+      maxProperties: 0
+      color: "&a"
+      weight: 1215
+    Common:
+      maxEnchants: 1
+      maxEnchantLevel: 1
+      maxProperties: 0
+      color: "&b"
+      weight: 3645
 
 ###################
 ### PROPIEDADES ###
@@ -221,13 +307,27 @@ Properties:
       - "&7Gasta comida permitiendo elevarte"
       - "&7en el aire como un cohete."
   Healing:
-    foodCost: 6
+    foodCost: 14
     healthPercent: 5
     description:
       - "&7"
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo curarte"
       - "&7un porcentaje de tu vida."
+  Adrenaline:
+    strengthLevel: 6
+    poisonLevel: 2
+    sizePerLevel: 0.1
+    durationPerLevelStrength: 12
+    durationPerLevelPoison: 6
+    sound: "ENTITY_WOLF_GROWL"
+    soundOff: "ENTITY_WOLF_PANT"
+    healthCost: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Sacrifica vida obteniendo fuerza,"
+      - "&7veneno y un aumento de tamaño."
   Solem:
     damagePercent: 0.2
     description:

@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.items.SindrisFavour;
 import wbe.rareproperties.properties.RareProperty;
 
@@ -48,7 +49,7 @@ public class Utilities {
         }
 
         if(hasProperty(item, property)) {
-            p.sendMessage(config.getString("Messages.alreadyHasProperty").replace("&", "§"));
+            p.sendMessage(RareProperties.messages.alreadyHasProperty);
             return;
         }
 
@@ -61,7 +62,7 @@ public class Utilities {
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, propertyLevel);
 
         item.setItemMeta(meta);
-        p.sendMessage(config.getString("Messages.propertyAdded").replace("&", "§").replace("%property%", property));
+        p.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
     }
 
     public void removeProperty(ItemStack item, String property, Player p) {
@@ -69,7 +70,7 @@ public class Utilities {
         NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
 
         if(!hasProperty(item, property)) {
-            p.sendMessage(config.getString("Messages.propertyNotPresent").replace("&", "§"));
+            p.sendMessage(RareProperties.messages.propertyNotPresent);
             return;
         }
 
@@ -100,14 +101,14 @@ public class Utilities {
         if(getProperty(property) != null) {
             giveProperty(property, DecimalToRoman.intToRoman(level), p);
         }
-        p.sendMessage(config.getString("Messages.propertyRemoved").replace("&", "§").replace("%property%", property));
+        p.sendMessage(RareProperties.messages.propertyRemoved.replace("%property%", property));
     }
 
     public void giveProperty(String property, String level, Player p) {
-        SindrisFavour sindrisFavour = new SindrisFavour(Material.valueOf(config.getString("SindrisFavour.material")), config);
+        SindrisFavour sindrisFavour = new SindrisFavour();
         sindrisFavour.setProperty(getProperty(property), level, plugin);
         p.getInventory().addItem(new ItemStack[] { sindrisFavour });
-        p.sendMessage(config.getString("Messages.propertyGiven").replace("&", "§").replace("%property%", property).replace("%level%", level));
+        p.sendMessage(RareProperties.messages.propertyGiven.replace("%property%", property).replace("%level%", level));
         p.updateInventory();
     }
 
@@ -116,7 +117,7 @@ public class Utilities {
         int lvl = random.nextInt(5) + 1;
         String level = DecimalToRoman.intToRoman(lvl);
 
-        SindrisFavour sindrisFavour = new SindrisFavour(Material.valueOf(config.getString("SindrisFavour.material")), config);
+        SindrisFavour sindrisFavour = new SindrisFavour();
         sindrisFavour.setProperty(getProperty(property), level, plugin);
         p.getInventory().addItem(new ItemStack[] { sindrisFavour });
         p.updateInventory();
