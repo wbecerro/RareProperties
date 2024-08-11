@@ -45,11 +45,11 @@ public class CommandListener implements CommandExecutor {
                 }
                 p.sendMessage(RareProperties.messages.listMessage + "\n" + String.valueOf(utilities.getValid()));
             } else if(args[0].equalsIgnoreCase("add")) {
-                if (!p.hasPermission("rareproperties.command.add")) {
+                if(!p.hasPermission("rareproperties.command.add")) {
                     p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                if (args.length != 4) {
+                if(args.length != 4) {
                     p.sendMessage(RareProperties.messages.notEnoughArgs);
                     p.sendMessage(RareProperties.messages.addParams);
                     return false;
@@ -71,11 +71,11 @@ public class CommandListener implements CommandExecutor {
                 utilities.removeProperty(item, args[1], p);
                 p.updateInventory();
             } else if(args[0].equalsIgnoreCase("get")) {
-                if (!p.hasPermission("rareproperties.command.get")) {
+                if(!p.hasPermission("rareproperties.command.get")) {
                     p.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                if (args.length != 3) {
+                if(args.length != 3) {
                     p.sendMessage(RareProperties.messages.notEnoughArgs);
                     p.sendMessage(RareProperties.messages.getParams);
                     return false;
@@ -106,13 +106,37 @@ public class CommandListener implements CommandExecutor {
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
                 utilities.giveRandomProperty(args[2], otherPlayer);
             } else if(args[0].equalsIgnoreCase("reload")) {
-                if (!sender.hasPermission("rareproperties.command.reload")) {
+                if(!sender.hasPermission("rareproperties.command.reload")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
+                plugin.saveDefaultConfig();
                 plugin.reloadConfig();
                 RareProperties.reloadConfiguration(config);
                 sender.sendMessage(RareProperties.messages.reload);
+            } else if(args[0].equalsIgnoreCase("socket")) {
+                if(!sender.hasPermission("rareproperties.command.socket")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                if(args.length > 1) {
+                    utilities.giveSocket(p, args[1]);
+                } else {
+                    utilities.giveSocket(p, null);
+                }
+            } else if(args[0].equalsIgnoreCase("tome")) {
+                if(!sender.hasPermission("rareproperties.command.tome")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+                utilities.giveTome(p);
+            } else if(args[0].equalsIgnoreCase("showItem")) {
+                if(!sender.hasPermission("rareproperties.command.showItem")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+                p.sendMessage(p.getInventory().getItemInMainHand().toString());
             }
         }
         return true;

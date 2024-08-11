@@ -1,16 +1,15 @@
 package wbe.rareproperties.util;
 
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.config.Messages;
+import wbe.rareproperties.items.IdentifierTome;
 import wbe.rareproperties.items.SindrisFavour;
+import wbe.rareproperties.items.Socket;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.text.Normalizer;
@@ -22,11 +21,8 @@ public class Utilities {
 
     private RareProperties plugin;
 
-    private FileConfiguration config;
-
     public Utilities(RareProperties plugin) {
         this.plugin = plugin;
-        this.config = plugin.getConfig();
     }
 
     public ArrayList<String> getValid() {
@@ -121,6 +117,23 @@ public class Utilities {
         sindrisFavour.setProperty(getProperty(property), level, plugin);
         p.getInventory().addItem(new ItemStack[] { sindrisFavour });
         p.updateInventory();
+    }
+
+    public void giveSocket(Player player, String color) {
+        Socket socket = new Socket(plugin);
+        if(color != null) {
+            socket = new Socket(plugin, color.toUpperCase());
+        }
+        player.getInventory().addItem(new ItemStack[]{socket});
+        player.sendMessage(RareProperties.messages.socketGiven);
+        player.updateInventory();
+    }
+
+    public void giveTome(Player player) {
+        IdentifierTome tome = new IdentifierTome(plugin);
+        player.getInventory().addItem(new ItemStack[]{tome});
+        player.sendMessage(RareProperties.messages.tomeGiven);
+        player.updateInventory();
     }
 
     public boolean hasProperty(ItemStack item, String property) {

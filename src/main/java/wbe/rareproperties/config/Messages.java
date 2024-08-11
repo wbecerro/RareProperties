@@ -29,6 +29,8 @@ public class Messages {
     public String notEnoughHealth;
     public List<String> help;
     public String reload;
+    public String socketGiven;
+    public String tomeGiven;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -52,5 +54,7 @@ public class Messages {
         captureSuccess = config.getString("Messages.captureSuccess").replace("&", "§");
         help = config.getStringList("Messages.help");
         reload = config.getString("Messages.reload").replace("&", "§");
+        socketGiven = config.getString("Messages.socketGiven").replace("&", "§");
+        tomeGiven = config.getString("Messages.tomeGiven").replace("&", "§");
     }
 }

@@ -25,13 +25,14 @@ import wbe.rareproperties.properties.uncommon.Fire;
 import wbe.rareproperties.properties.uncommon.Freezee;
 import wbe.rareproperties.rarities.ItemRarity;
 import wbe.rareproperties.rarities.PropertyRarity;
+import wbe.rareproperties.recipes.RecipeLoader;
 import wbe.rareproperties.util.Scheduler;
 
 import java.util.*;
 
 public class RareProperties extends JavaPlugin {
 
-    private static FileConfiguration configuration;
+    private FileConfiguration configuration;
 
     private final CommandListener commandListener = new CommandListener(this);
 
@@ -40,6 +41,8 @@ public class RareProperties extends JavaPlugin {
     public static Messages messages;
 
     public static Config config;
+
+    private RecipeLoader recipeLoader;
 
     private final ArrayList<RareProperty> properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
             new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
@@ -51,14 +54,18 @@ public class RareProperties extends JavaPlugin {
         saveDefaultConfig();
         getLogger().info("RareProperties enabled correctly");
         configuration = getConfig();
+        recipeLoader =  new RecipeLoader(this);
         reloadConfiguration(configuration);
 
+        recipeLoader.loadRecipes();
         getCommand("rareproperties").setExecutor(this.commandListener);
         this.eventListeners.initializeListeners();
         Scheduler.startSchedulers(configuration, this);
     }
 
     public void onDisable() {
+        getServer().getScheduler().cancelTasks(this);
+        recipeLoader.unloadRecipes();
         reloadConfig();
         getLogger().info("RareProperties disabled correctly");
     }

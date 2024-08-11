@@ -25,8 +25,35 @@ public class Socket extends ItemStack {
             meta = Bukkit.getItemFactory().getItemMeta(RareProperties.config.socketMaterial);
         }
 
-        Random rand = new Random();
-        String color = RareProperties.config.socketColors.get(rand.nextInt(RareProperties.config.socketColors.size()));
+        Random random = new Random();
+        String color = RareProperties.config.socketColors.get(random.nextInt(RareProperties.config.socketColors.size()));
+
+        meta.setDisplayName(ChatColor.valueOf(color) + RareProperties.config.socketName);
+
+        ArrayList<String> lore = new ArrayList<>();
+        for(String line : RareProperties.config.socketLore) {
+            lore.add(line.replace("&", "§"));
+        }
+
+        meta.addEnchant(Enchantment.POWER, 5, true);
+        meta.setLore(lore);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        NamespacedKey colorKey = new NamespacedKey(plugin, "Socket");
+        meta.getPersistentDataContainer().set(colorKey, PersistentDataType.STRING, color);
+
+        setItemMeta(meta);
+    }
+
+    public Socket(RareProperties plugin, String color) {
+        super(RareProperties.config.socketMaterial);
+
+        ItemMeta meta;
+        if(hasItemMeta()) {
+            meta = getItemMeta();
+        } else {
+            meta = Bukkit.getItemFactory().getItemMeta(RareProperties.config.socketMaterial);
+        }
 
         meta.setDisplayName(ChatColor.valueOf(color) + RareProperties.config.socketName);
 

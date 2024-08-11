@@ -35,6 +35,8 @@ Messages:
   captureSuccess: '&b[&cPropiedades&b] &eCaptura te ha dado un huevo.'
   notEnoughHealth: '&b[&cPropiedades&b] &eNo tienes suficiente vida para sacrificar.'
   reload: '&b[&cPropiedades&b] &eEl plugin se ha recargado con éxito.'
+  socketGiven: '&b[&cPropiedades&b] &eHas conseguido una Runa Valknut.'
+  tomeGiven: '&b[&cPropiedades&b] &eHas conseguido un &5Libro de runas&e.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
@@ -43,7 +45,12 @@ Messages:
     - "&b/rareproperties get <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
     - "&b/rareproperties give <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
     - "&b/rareproperties giveRandom <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
+    - "&b/rareproperties socket [color] &eDa una Runa Valknut."
+    - "&b/rareproperties tome &eDa un &5Libro de runas&e."
+    - "&b/rareproperties showItem &eComando de debug para ver el objeto de la mano."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
+    - "&b"
+    - "&eLeyenda: <> Obligatorio  [] Opcional"
 
 ###############
 ### OBJETOS ###
@@ -60,7 +67,7 @@ SindrisFavour:
 
 Socket:
   material: AMETHYST_SHARD
-  name: "Runa Valknut"
+  name: "&lRuna Valknut"
   lore:
     - "&7"
     - "&7Los antiguos Aësir usaban esta"
@@ -74,7 +81,7 @@ Socket:
 IdentifierTome:
   material: WRITTEN_BOOK
   author: yuxputa
-  name: "&5Libro de runas"
+  name: "&5&lLibro de runas"
   lore:
     - "&7"
     - "&7Libro que contiene un diccionario"

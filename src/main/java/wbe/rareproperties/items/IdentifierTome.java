@@ -2,18 +2,18 @@ package wbe.rareproperties.items;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
 
 import java.util.ArrayList;
 
 public class IdentifierTome extends ItemStack {
 
-    public IdentifierTome() {
+    public IdentifierTome(RareProperties plugin) {
         super(RareProperties.config.identifierMaterial);
 
         ItemMeta meta;
@@ -31,6 +31,9 @@ public class IdentifierTome extends ItemStack {
         }
 
         meta.setLore(lore);
+
+        NamespacedKey colorKey = new NamespacedKey(plugin, "IdentifierTome");
+        meta.getPersistentDataContainer().set(colorKey, PersistentDataType.BOOLEAN, true);
         setItemMeta(meta);
 
         BookMeta bookMeta = (BookMeta) getItemMeta();
