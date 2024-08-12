@@ -51,11 +51,6 @@ public class InventoryClickListeners implements Listener {
         // Se añade la propiedad
         ItemStack inventoryItem = e.getCurrentItem();
 
-        if(utilities.hasProperty(inventoryItem, property)) {
-            p.sendMessage(RareProperties.messages.alreadyHasProperty);
-            return;
-        }
-
         ItemMeta inventoryItemMeta = inventoryItem.getItemMeta();
         if(inventoryItem.getAmount() != 1) {
             return;
@@ -75,18 +70,11 @@ public class InventoryClickListeners implements Listener {
         newItem.setItemMeta(inventoryItemMeta);
         newItem.getItemMeta().setLore(inventoryItemMeta.getLore());
 
-        // Comprobamos el límite
-        NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
-        ItemMeta newItemMeta = newItem.getItemMeta();
-        if(!inventoryItemMeta.getPersistentDataContainer().has(limitKey)) {
-            newItemMeta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, 1);
-        } else {
-            int limit = newItemMeta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER) + 1;
-            newItemMeta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, limit);
+        boolean correct = utilities.addProperty(newItem, property, level, "d", p);
+        if(!correct) {
+            e.setCancelled(true);
+            return;
         }
-        newItem.setItemMeta(newItemMeta);
-
-        utilities.addProperty(newItem, property, level, "d", p);
 
         p.sendMessage(RareProperties.messages.propertyAddedDisc);
 

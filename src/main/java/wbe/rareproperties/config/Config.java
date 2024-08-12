@@ -1,7 +1,10 @@
 package wbe.rareproperties.config;
 
 import org.bukkit.Material;
+import org.bukkit.Registry;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
+import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.rarities.ItemRarity;
 import wbe.rareproperties.rarities.PropertyRarity;
 
@@ -41,6 +44,14 @@ public class Config {
     public String identifierAuthor;
     public List<String> identifierLore;
 
+    public List<String> armorMaterials;
+    public List<String> weaponMaterials;
+
+    public List<String> prefixes;
+    public List<String> suffixes;
+
+    public List<Enchantment> enchantments = new ArrayList<>();
+
     public Config(FileConfiguration config) {
         this.config = config;
 
@@ -66,6 +77,14 @@ public class Config {
         identifierName = config.getString("IdentifierTome.name").replace("&", "§");
         identifierAuthor = config.getString("IdentifierTome.author");
         identifierLore = config.getStringList("IdentifierTome.lore");
+
+        armorMaterials = config.getStringList("RareItems.materials.armorMaterial");
+        weaponMaterials = config.getStringList("RareItems.materials.weaponMaterial");
+
+        prefixes = RareProperties.prefixesConfig.getStringList("Prefixes");
+        suffixes = RareProperties.suffixesConfig.getStringList("Suffixes");
+
+        Registry.ENCHANTMENT.iterator().forEachRemaining(enchantments::add);
     }
 
     private void loadConfigVariables() {

@@ -1,7 +1,6 @@
 package wbe.rareproperties.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import wbe.rareproperties.RareProperties;
 
 import java.util.List;
 
@@ -31,6 +30,7 @@ public class Messages {
     public String reload;
     public String socketGiven;
     public String tomeGiven;
+    public String limited;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -56,5 +56,6 @@ public class Messages {
         reload = config.getString("Messages.reload").replace("&", "§");
         socketGiven = config.getString("Messages.socketGiven").replace("&", "§");
         tomeGiven = config.getString("Messages.tomeGiven").replace("&", "§");
+        limited = config.getString("Messages.limited").replace("&", "§");
     }
 }

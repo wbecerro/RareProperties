@@ -37,6 +37,7 @@ Messages:
   reload: '&b[&cPropiedades&b] &eEl plugin se ha recargado con éxito.'
   socketGiven: '&b[&cPropiedades&b] &eHas conseguido una Runa Valknut.'
   tomeGiven: '&b[&cPropiedades&b] &eHas conseguido un &5Libro de runas&e.'
+  limited: '&b[&cPropiedades&b] &eHas llegado al límite de propiedades en este objeto %permission%/%limit%.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
@@ -89,11 +90,70 @@ IdentifierTome:
     - "&7dioses para identificar objetos"
     - "&7perdidos en el tiempo."
 
+RareItems:
+  materials:
+    armorMaterial:
+      - LEATHER_HELMET
+      - LEATHER_CHESTPLATE
+      - LEATHER_LEGGINGS
+      - LEATHER_BOOTS
+      - CHAINMAIL_HELMET
+      - CHAINMAIL_CHESTPLATE
+      - CHAINMAIL_LEGGINGS
+      - CHAINMAIL_BOOTS
+      - IRON_HELMET
+      - IRON_CHESTPLATE
+      - IRON_LEGGINGS
+      - IRON_BOOTS
+      - GOLDEN_HELMET
+      - GOLDEN_CHESTPLATE
+      - GOLDEN_LEGGINGS
+      - GOLDEN_BOOTS
+      - DIAMOND_HELMET
+      - DIAMOND_CHESTPLATE
+      - DIAMOND_LEGGINGS
+      - DIAMOND_BOOTS
+      - TURTLE_HELMET
+    weaponMaterial:
+      - WOODEN_SHOVEL
+      - WOODEN_PICKAXE
+      - WOODEN_AXE
+      - WOODEN_HOE
+      - WOODEN_SWORD
+      - STONE_SHOVEL
+      - STONE_PICKAXE
+      - STONE_AXE
+      - STONE_HOE
+      - STONE_SWORD
+      - IRON_SHOVEL
+      - IRON_PICKAXE
+      - IRON_AXE
+      - IRON_HOE
+      - IRON_SWORD
+      - GOLDEN_SHOVEL
+      - GOLDEN_PICKAXE
+      - GOLDEN_AXE
+      - GOLDEN_HOE
+      - GOLDEN_SWORD
+      - DIAMOND_SHOVEL
+      - DIAMOND_PICKAXE
+      - DIAMOND_AXE
+      - DIAMOND_HOE
+      - DIAMOND_SWORD
+      - FISHING_ROD
+      - FLINT_AND_STEEL
+      - SHEARS
+      - SHIELD
+      - BOW
+      - CROSSBOW
+
 ################
 ### PERMISOS ###
 ################
 
 Permissions:
+  - "rareproperties.limit.5"
+  - "rareproperties.limit.4"
   - "rareproperties.limit.3"
   - "rareproperties.limit.2"
   - "rareproperties.limit.1"
@@ -178,49 +238,50 @@ Rarities:
       maxEnchants: 10
       maxEnchantLevel: 10
       maxProperties: 4
-      color: "&c"
+      color: "&c&l&n"
       weight: 1
     Divine:
       maxEnchants: 8
       maxEnchantLevel: 8
       maxProperties: 3
-      color: "&f"
+      color: "&f&l&n"
       weight: 5
     Mythic:
       maxEnchants: 6
       maxEnchantLevel: 7
       maxProperties: 2
-      color: "&d"
+      color: "&d&n"
       weight: 15
     Legendary:
       maxEnchants: 5
       maxEnchantLevel: 6
       maxProperties: 2
-      color: "&6"
+      color: "&6&n"
       weight: 45
     Epic:
       maxEnchants: 4
       maxEnchantLevel: 4
       maxProperties: 1
-      color: "&5"
+      color: "&5&n"
       weight: 135
     Rare:
       maxEnchants: 3
       maxEnchantLevel: 3
       maxProperties: 1
-      color: "&9"
+      color: "&9&n"
       weight: 405
     Uncommon:
       maxEnchants: 2
       maxEnchantLevel: 2
       maxProperties: 0
-      color: "&a"
+      color: "&a&n"
       weight: 1215
     Common:
       maxEnchants: 1
+      minEnchants: 1
       maxEnchantLevel: 1
       maxProperties: 0
-      color: "&b"
+      color: "&b&n"
       weight: 3645
 
 ###################

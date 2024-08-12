@@ -1,6 +1,8 @@
 package wbe.rareproperties.util;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -11,9 +13,12 @@ import wbe.rareproperties.items.IdentifierTome;
 import wbe.rareproperties.items.SindrisFavour;
 import wbe.rareproperties.items.Socket;
 import wbe.rareproperties.properties.RareProperty;
+import wbe.rareproperties.rarities.ItemRarity;
+import wbe.rareproperties.rarities.PropertyRarity;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -34,7 +39,7 @@ public class Utilities {
         return validProperties;
     }
 
-    public void addProperty(ItemStack item, String property, String level, String color, Player p) {
+    public boolean addProperty(ItemStack item, String property, String level, String color, Player p) {
         ItemMeta meta = item.getItemMeta();
         List<String> lore;
 
@@ -45,8 +50,48 @@ public class Utilities {
         }
 
         if(hasProperty(item, property)) {
-            p.sendMessage(RareProperties.messages.alreadyHasProperty);
-            return;
+            int propertyLevel = RomanToDecimal.romanToDecimal(level);
+            String propertyLine = ("&" + color + property + " " + level).replace("&", "§");
+            NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
+                    Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+            meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, propertyLevel);
+
+            int index = 0;
+            for(String line : lore) {
+                if(line.contains(property)) {
+                    break;
+                }
+                index++;
+            }
+
+            lore.set(index, propertyLine);
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            p.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
+            return true;
+        }
+
+        NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
+        if(!meta.getPersistentDataContainer().has(limitKey)) {
+            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, 1);
+        } else {
+            int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER);
+            String permission = checkPermissions(p);
+            if(permission != null) {
+                int permissionLimit = Integer.parseInt(permission.split("\\.")[2]);
+                if(limit >= permissionLimit) {
+                    p.sendMessage(RareProperties.messages.limited
+                            .replace("%limit%", String.valueOf(limit))
+                            .replace("%permission%", String.valueOf(permissionLimit)));
+                    return false;
+                }
+            } else {
+                p.sendMessage(RareProperties.messages.limited
+                        .replace("%limit%", String.valueOf(limit))
+                        .replace("%permission%", "0"));
+                return false;
+            }
+            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, limit + 1);
         }
 
         String propertyLine = ("&" + color + property + " " + level).replace("&", "§");
@@ -54,11 +99,67 @@ public class Utilities {
         lore.add(propertyLine);
         meta.setLore(lore);
 
-        NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+        NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
+                Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, propertyLevel);
 
         item.setItemMeta(meta);
         p.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
+        return true;
+    }
+
+    public void addProperty(ItemStack item, String property, int level, String color) {
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore;
+
+        if(!meta.hasLore()) {
+            lore = new ArrayList<>();
+        } else {
+            lore = meta.getLore();
+        }
+
+        if(hasProperty(item, property)) {
+            String propertyLine = (color + property + " " + DecimalToRoman.intToRoman(level)).replace("&", "§");
+            NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
+                    Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+            meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, level);
+
+            NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
+            int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER) - 1;
+            meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, limit);
+
+            int index = 0;
+            for(String line : lore) {
+                if(line.contains(property)) {
+                    break;
+                }
+                index++;
+            }
+
+            lore.set(index, propertyLine);
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            return;
+        }
+
+        String romanLevel = DecimalToRoman.intToRoman(level);
+        String propertyLine = (color + property + " " + romanLevel).replace("&", "§");
+        lore.add(propertyLine);
+        meta.setLore(lore);
+
+        NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
+        if(!meta.getPersistentDataContainer().has(limitKey)) {
+            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, 1);
+        } else {
+            int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER) + 1;
+            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, limit);
+        }
+
+        NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
+                Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+        meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, level);
+
+        item.setItemMeta(meta);
     }
 
     public void removeProperty(ItemStack item, String property, Player p) {
@@ -169,6 +270,66 @@ public class Utilities {
         for(RareProperty rareProperty : plugin.getProperties()) {
             if(rareProperty.getExternalName().equalsIgnoreCase(property)) {
                 return rareProperty;
+            }
+        }
+        return null;
+    }
+
+    public ItemRarity calculateItemRarity() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(RareProperties.config.totalItemWeight);
+        int weight = 0;
+        List<ItemRarity> rarities = RareProperties.config.itemRarities;
+
+        for(ItemRarity rarity : rarities) {
+            weight += rarity.getWeight();
+            if(randomNumber < weight) {
+                return rarity;
+            }
+        }
+
+        return rarities.get(rarities.size() - 1);
+    }
+
+    public PropertyRarity calculatePropertyRarity() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(RareProperties.config.totalPropertyWeight);
+        int weight = 0;
+        List<PropertyRarity> rarities = RareProperties.config.propertyRarities;
+
+        for(PropertyRarity rarity : rarities) {
+            weight += rarity.getWeight();
+            if(randomNumber < weight) {
+                return rarity;
+            }
+        }
+
+        return rarities.get(rarities.size() - 1);
+    }
+
+    public String getRandomPrefix() {
+        Random random = new Random();
+        String prefix = RareProperties.config.prefixes.get(random.nextInt(RareProperties.config.prefixes.size()));
+        return prefix;
+    }
+
+    public String getRandomSuffix() {
+        Random random = new Random();
+        String suffix = RareProperties.config.suffixes.get(random.nextInt(RareProperties.config.suffixes.size()));
+        return suffix;
+    }
+
+    public Enchantment getRandomEnchantment() {
+        Random random = new Random();
+        Enchantment enchantment = RareProperties.config.enchantments.get(
+                random.nextInt(RareProperties.config.enchantments.size()));
+        return enchantment;
+    }
+
+    public String checkPermissions(Player player) {
+        for(String permission : RareProperties.config.permissions) {
+            if(player.hasPermission(permission)) {
+                return permission;
             }
         }
         return null;

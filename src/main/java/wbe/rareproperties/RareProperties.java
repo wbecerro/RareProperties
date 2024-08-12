@@ -1,10 +1,12 @@
 package wbe.rareproperties;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import wbe.rareproperties.commands.CommandListener;
 import wbe.rareproperties.config.Config;
 import wbe.rareproperties.config.Messages;
+import wbe.rareproperties.items.ItemManager;
 import wbe.rareproperties.listeners.EventListeners;
 import wbe.rareproperties.properties.RareProperty;
 import wbe.rareproperties.properties.common.Enlarge;
@@ -23,16 +25,21 @@ import wbe.rareproperties.properties.rare.Poison;
 import wbe.rareproperties.properties.rare.Wither;
 import wbe.rareproperties.properties.uncommon.Fire;
 import wbe.rareproperties.properties.uncommon.Freezee;
-import wbe.rareproperties.rarities.ItemRarity;
-import wbe.rareproperties.rarities.PropertyRarity;
 import wbe.rareproperties.recipes.RecipeLoader;
 import wbe.rareproperties.util.Scheduler;
 
+import java.io.File;
 import java.util.*;
 
 public class RareProperties extends JavaPlugin {
 
     private FileConfiguration configuration;
+
+    private File prefixes;
+    public static FileConfiguration prefixesConfig;
+
+    private File suffixes;
+    public static FileConfiguration suffixesConfig;
 
     private final CommandListener commandListener = new CommandListener(this);
 
@@ -44,6 +51,8 @@ public class RareProperties extends JavaPlugin {
 
     private RecipeLoader recipeLoader;
 
+    public static ItemManager itemManager;
+
     private final ArrayList<RareProperty> properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
             new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
             new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),
@@ -52,9 +61,12 @@ public class RareProperties extends JavaPlugin {
 
     public void onEnable() {
         saveDefaultConfig();
+        createPrefixFile();
+        createSuffixFile();
         getLogger().info("RareProperties enabled correctly");
         configuration = getConfig();
-        recipeLoader =  new RecipeLoader(this);
+        recipeLoader = new RecipeLoader(this);
+        itemManager = new ItemManager(this);
         reloadConfiguration(configuration);
 
         recipeLoader.loadRecipes();
@@ -77,6 +89,26 @@ public class RareProperties extends JavaPlugin {
     public static void reloadConfiguration(FileConfiguration configuration) {
         messages = new Messages(configuration);
         config = new Config(configuration);
+    }
+
+    private void createPrefixFile() {
+        prefixes = new File(getDataFolder(), "prefixes.yml");
+        if(!prefixes.exists()) {
+            prefixes.getParentFile().mkdirs();
+            saveResource("prefixes.yml", false);
+        }
+
+        prefixesConfig = YamlConfiguration.loadConfiguration(prefixes);
+    }
+
+    private void createSuffixFile() {
+        suffixes = new File(getDataFolder(), "suffixes.yml");
+        if(!suffixes.exists()) {
+            suffixes.getParentFile().mkdirs();
+            saveResource("suffixes.yml", false);
+        }
+
+        suffixesConfig = YamlConfiguration.loadConfiguration(suffixes);
     }
 }
 

@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.config.Messages;
+import wbe.rareproperties.items.ItemManager;
 import wbe.rareproperties.util.Utilities;
 
 public class CommandListener implements CommandExecutor {
@@ -137,6 +138,18 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 p.sendMessage(p.getInventory().getItemInMainHand().toString());
+            } else if(args[0].equalsIgnoreCase("getItemArmor")) {
+                if(!sender.hasPermission("rareproperties.command.getItem")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+                p.getInventory().addItem(new ItemStack[]{RareProperties.itemManager.generateRandomItem(true)});
+            } else if(args[0].equalsIgnoreCase("getItemWeapon")) {
+                if(!sender.hasPermission("rareproperties.command.showItem")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+                p.getInventory().addItem(new ItemStack[]{RareProperties.itemManager.generateRandomItem(false)});
             }
         }
         return true;
