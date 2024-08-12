@@ -116,10 +116,11 @@ public class Config {
             int weight = config.getInt("Rarities.Items." + rarity + ".weight");
             totalItemWeight += weight;
             int maxEnchants = config.getInt("Rarities.Items." + rarity + ".maxEnchants");
+            int minEnchants = config.getInt("Rarities.Items." + rarity + ".minEnchants");
             int maxEnchantLevel = config.getInt("Rarities.Items." + rarity + ".maxEnchantLevel");
             int maxProperties = config.getInt("Rarities.Items." + rarity + ".maxProperties");
             String color = config.getString("Rarities.Items." + rarity + ".color");
-            ItemRarity itemRarity = new ItemRarity(maxEnchants, maxEnchantLevel, maxProperties, color, weight);
+            ItemRarity itemRarity = new ItemRarity(maxEnchants, minEnchants, maxEnchantLevel, maxProperties, color, weight);
             itemRarities.add(itemRarity);
         }
     }

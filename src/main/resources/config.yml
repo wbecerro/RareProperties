@@ -236,49 +236,56 @@ Rarities:
   Items:
     Supreme:
       maxEnchants: 10
+      minEnchants: 5
       maxEnchantLevel: 10
       maxProperties: 4
       color: "&c&l&n"
       weight: 1
     Divine:
       maxEnchants: 8
+      minEnchants: 3
       maxEnchantLevel: 8
       maxProperties: 3
       color: "&f&l&n"
       weight: 5
     Mythic:
       maxEnchants: 6
+      minEnchants: 3
       maxEnchantLevel: 7
       maxProperties: 2
       color: "&d&n"
       weight: 15
     Legendary:
       maxEnchants: 5
+      minEnchants: 2
       maxEnchantLevel: 6
       maxProperties: 2
       color: "&6&n"
       weight: 45
     Epic:
       maxEnchants: 4
+      minEnchants: 2
       maxEnchantLevel: 4
       maxProperties: 1
       color: "&5&n"
       weight: 135
     Rare:
       maxEnchants: 3
+      minEnchants: 1
       maxEnchantLevel: 3
       maxProperties: 1
       color: "&9&n"
       weight: 405
     Uncommon:
       maxEnchants: 2
+      minEnchants: 1
       maxEnchantLevel: 2
       maxProperties: 0
       color: "&a&n"
       weight: 1215
     Common:
       maxEnchants: 1
-      minEnchants: 1
+      minEnchants: 0
       maxEnchantLevel: 1
       maxProperties: 0
       color: "&b&n"

@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.rarities.ItemRarity;
@@ -53,34 +54,36 @@ public class ItemManager {
         ItemRarity rarity = utilities.calculateItemRarity();
         String prefix = utilities.getRandomPrefix();
         String suffix = utilities.getRandomSuffix();
+        Random random = new Random();
 
-        Bukkit.getServer().broadcastMessage(rarity.getColor() + " " + rarity.getMaxEnchantLevel() + " " + rarity.getMaxEnchants() + " " + rarity.getMaxProperties());
-
-        int maxProperties = rarity.getMaxProperties();
+        // Cálculo de propiedades
+        int maxProperties = random.nextInt(rarity.getMaxProperties() + 1);
         if(maxProperties != 0) {
-            Random random = new Random();
-            Bukkit.getServer().broadcastMessage("Calculando propiedades");
             for(int i=0;i<maxProperties;i++) {
                 PropertyRarity propertyRarity = utilities.calculatePropertyRarity();
                 String property = propertyRarity.getProperties().get(
                         random.nextInt(propertyRarity.getProperties().size()));
-                Bukkit.getServer().broadcastMessage(propertyRarity.getName() + " " + property);
                 utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor());
             }
         }
 
-        int maxEnchantments = rarity.getMaxEnchants();
-        Random random = new Random();
+        // Cálculo de encantamientos
+        int maxEnchantments = random.nextInt(rarity.getMaxEnchants() - rarity.getMinEnchants())
+                + rarity.getMinEnchants();
         for(int i=0;i<maxEnchantments;i++) {
             Enchantment enchantment = utilities.getRandomEnchantment();
             int level = random.nextInt(rarity.getMaxEnchantLevel()) + 1;
-            Bukkit.getServer().broadcastMessage(enchantment.toString() + " " + level);
             baseItem.addUnsafeEnchantment(enchantment, level);
         }
 
         ItemMeta meta = baseItem.getItemMeta();
         meta.setDisplayName((rarity.getColor() + prefix + " " + suffix).replace("&", "§"));
         baseItem.setItemMeta(meta);
+
+        Damageable damageable = (Damageable) baseItem.getItemMeta();
+        int maxDurability = baseItem.getType().getMaxDurability();
+        damageable.setDamage(random.nextInt(maxDurability) + 1);
+        baseItem.setItemMeta(damageable);
 
         return baseItem;
     }

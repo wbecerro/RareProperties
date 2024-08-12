@@ -4,6 +4,8 @@ public class ItemRarity {
 
     private int maxEnchants;
 
+    private int minEnchants;
+
     private int maxEnchantLevel;
 
     private int maxProperties;
@@ -12,8 +14,9 @@ public class ItemRarity {
 
     private int weight;
 
-    public ItemRarity(int maxEnchants, int maxEnchantLevel, int maxProperties, String color, int weight) {
+    public ItemRarity(int maxEnchants, int minEnchants, int maxEnchantLevel, int maxProperties, String color, int weight) {
         this.maxEnchants = maxEnchants;
+        this.minEnchants = minEnchants;
         this.maxEnchantLevel = maxEnchantLevel;
         this.maxProperties = maxProperties;
         this.color = color;
@@ -26,6 +29,14 @@ public class ItemRarity {
 
     public void setMaxEnchants(int maxEnchants) {
         this.maxEnchants = maxEnchants;
+    }
+
+    public int getMinEnchants() {
+        return minEnchants;
+    }
+
+    public void setMinEnchants(int minEnchants) {
+        this.minEnchants = minEnchants;
     }
 
     public int getMaxEnchantLevel() {
