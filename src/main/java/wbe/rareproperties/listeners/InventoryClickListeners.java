@@ -1,7 +1,6 @@
 package wbe.rareproperties.listeners;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,20 +11,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.util.Utilities;
 
 public class InventoryClickListeners implements Listener {
 
     private RareProperties plugin;
 
-    private FileConfiguration config;
-
     private Utilities utilities;
 
     public InventoryClickListeners(RareProperties plugin) {
         this.plugin = plugin;
-        this.config = this.plugin.getConfig();
         this.utilities = new Utilities(plugin);
     }
 

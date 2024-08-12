@@ -20,6 +20,7 @@ public class Config {
     public int sockettedItemChance;
     public int unidentifiedChance;
     public int maxSockets;
+    public boolean blockSpawnerSpawns;
     public List<String> blacklistedWorlds = new ArrayList<>();
 
     public List<String> permissions = new ArrayList<>();
@@ -47,6 +48,10 @@ public class Config {
     public List<String> armorMaterials;
     public List<String> weaponMaterials;
 
+    public String socketTitle;
+    public String socketSlot;
+    public String unidentifiedLore;
+
     public List<String> prefixes;
     public List<String> suffixes;
 
@@ -59,6 +64,7 @@ public class Config {
         sockettedItemChance = config.getInt("ConfigValues.sockettedItemChance");
         unidentifiedChance = config.getInt("ConfigValues.unidentifiedChance");
         maxSockets = config.getInt("ConfigValues.maxSockets");
+        blockSpawnerSpawns = config.getBoolean("ConfigValues.blockSpawnerSpawns");
         blacklistedWorlds = config.getStringList("ConfigValues.blacklistedWorlds");
 
         loadConfigVariables();
@@ -80,6 +86,10 @@ public class Config {
 
         armorMaterials = config.getStringList("RareItems.materials.armorMaterial");
         weaponMaterials = config.getStringList("RareItems.materials.weaponMaterial");
+
+        socketTitle = config.getString("RareItems.socketted.socketTitle").replace("&", "§");
+        socketSlot = config.getString("RareItems.socketted.socketSlot").replace("&", "§");
+        unidentifiedLore = config.getString("RareItems.unidentified.lore").replace("&", "§");
 
         prefixes = RareProperties.prefixesConfig.getStringList("Prefixes");
         suffixes = RareProperties.suffixesConfig.getStringList("Suffixes");
@@ -123,5 +133,16 @@ public class Config {
             ItemRarity itemRarity = new ItemRarity(maxEnchants, minEnchants, maxEnchantLevel, maxProperties, color, weight);
             itemRarities.add(itemRarity);
         }
+    }
+
+    public ItemRarity getRarityFromName(String rarity) {
+        int weight = config.getInt("Rarities.Items." + rarity + ".weight");
+        int maxEnchants = config.getInt("Rarities.Items." + rarity + ".maxEnchants");
+        int minEnchants = config.getInt("Rarities.Items." + rarity + ".minEnchants");
+        int maxEnchantLevel = config.getInt("Rarities.Items." + rarity + ".maxEnchantLevel");
+        int maxProperties = config.getInt("Rarities.Items." + rarity + ".maxProperties");
+        String color = config.getString("Rarities.Items." + rarity + ".color");
+        ItemRarity itemRarity = new ItemRarity(maxEnchants, minEnchants, maxEnchantLevel, maxProperties, color, weight);
+        return itemRarity;
     }
 }

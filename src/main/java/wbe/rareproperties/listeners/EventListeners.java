@@ -2,7 +2,6 @@ package wbe.rareproperties.listeners;
 
 import org.bukkit.plugin.PluginManager;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.config.Messages;
 
 public class EventListeners {
 
@@ -21,5 +20,6 @@ public class EventListeners {
         pluginManager.registerEvents(new PlayerItemDamageListeners(plugin), plugin);
         pluginManager.registerEvents(new PlayerMoveListeners(plugin), plugin);
         pluginManager.registerEvents(new EntityDamageByEntityListeners(plugin), plugin);
+        pluginManager.registerEvents(new CreatureSpawnListeners(plugin), plugin);
     }
 }

@@ -1,6 +1,7 @@
 package wbe.rareproperties.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,6 +12,8 @@ import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.items.ItemManager;
 import wbe.rareproperties.util.Utilities;
+
+import java.util.Random;
 
 public class CommandListener implements CommandExecutor {
 
@@ -138,18 +141,45 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 p.sendMessage(p.getInventory().getItemInMainHand().toString());
-            } else if(args[0].equalsIgnoreCase("getItemArmor")) {
+            } else if(args[0].equalsIgnoreCase("getItem")) {
                 if(!sender.hasPermission("rareproperties.command.getItem")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                p.getInventory().addItem(new ItemStack[]{RareProperties.itemManager.generateRandomItem(true)});
-            } else if(args[0].equalsIgnoreCase("getItemWeapon")) {
-                if(!sender.hasPermission("rareproperties.command.showItem")) {
-                    sender.sendMessage(RareProperties.messages.noPermission);
-                    return false;
+                ItemStack item = new ItemStack(Material.AIR);
+                if(args.length == 3) {
+                    String material = args[1];
+                    String type = args[2];
+                    boolean armor = false;
+                    if(material.equalsIgnoreCase("armor")) {
+                        armor = true;
+                    }
+
+                    if(type.equalsIgnoreCase("socketted")) {
+                        item = RareProperties.itemManager.generateSockettedItem(armor);
+                    } else if(type.equalsIgnoreCase("unidentified")) {
+                        item = RareProperties.itemManager.generateUnidentifiedItem(armor);
+                    } else {
+                        item = RareProperties.itemManager.generateRandomItem(armor, type);
+                    }
+                } else if(args.length == 2) {
+                    String material = args[1];
+                    boolean armor = false;
+                    if(material.equalsIgnoreCase("armor")) {
+                        armor = true;
+                    }
+                    item = RareProperties.itemManager.generateRandomItem(armor);
+                } else {
+                    Random random = new Random();
+                    if(random.nextInt(2) > 0) {
+                        item = RareProperties.itemManager.generateItem(true);
+                    } else {
+                        item = RareProperties.itemManager.generateItem(false);
+                    }
+
                 }
-                p.getInventory().addItem(new ItemStack[]{RareProperties.itemManager.generateRandomItem(false)});
+                p.sendMessage(RareProperties.messages.itemGiven);
+                p.getInventory().addItem(new ItemStack[]{item});
             }
         }
         return true;

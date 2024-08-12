@@ -1,6 +1,5 @@
 package wbe.rareproperties.listeners;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,11 +12,8 @@ public class EntityDeathListeners implements Listener {
 
     private RareProperties plugin;
 
-    private FileConfiguration config;
-
     public EntityDeathListeners(RareProperties plugin) {
         this.plugin = plugin;
-        this.config = this.plugin.getConfig();
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

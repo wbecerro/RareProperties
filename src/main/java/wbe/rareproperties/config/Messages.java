@@ -31,6 +31,7 @@ public class Messages {
     public String socketGiven;
     public String tomeGiven;
     public String limited;
+    public String itemGiven;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -57,5 +58,6 @@ public class Messages {
         socketGiven = config.getString("Messages.socketGiven").replace("&", "§");
         tomeGiven = config.getString("Messages.tomeGiven").replace("&", "§");
         limited = config.getString("Messages.limited").replace("&", "§");
+        itemGiven = config.getString("Messages.itemGiven").replace("&", "§");
     }
 }

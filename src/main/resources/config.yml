@@ -38,6 +38,7 @@ Messages:
   socketGiven: '&b[&cPropiedades&b] &eHas conseguido una Runa Valknut.'
   tomeGiven: '&b[&cPropiedades&b] &eHas conseguido un &5Libro de runas&e.'
   limited: '&b[&cPropiedades&b] &eHas llegado al límite de propiedades en este objeto %permission%/%limit%.'
+  itemGiven: '&b[&cPropiedades&b] &eTe han dado un objeto raro.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
@@ -49,6 +50,7 @@ Messages:
     - "&b/rareproperties socket [color] &eDa una Runa Valknut."
     - "&b/rareproperties tome &eDa un &5Libro de runas&e."
     - "&b/rareproperties showItem &eComando de debug para ver el objeto de la mano."
+    - "&b/rareproperties getItem [armor/weapon] [socketted/unidentified/rareza] &eDa un objeto raro."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
     - "&b"
     - "&eLeyenda: <> Obligatorio  [] Opcional"
@@ -146,6 +148,11 @@ RareItems:
       - SHIELD
       - BOW
       - CROSSBOW
+  socketted:
+    socketTitle: "&7&m-=-&7 Runas &7&m-=-"
+    socketSlot: "[💥]"
+  unidentified:
+    lore: "&7Objeto perdido en el tiempo."
 
 ################
 ### PERMISOS ###
@@ -167,6 +174,7 @@ ConfigValues:
   sockettedItemChance: 10
   maxSockets: 3
   unidentifiedChance: 2
+  blockSpawnerSpawns: false
   blacklistedWorlds:
     - Halloween
 

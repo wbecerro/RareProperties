@@ -1,7 +1,6 @@
 package wbe.rareproperties.listeners;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,11 +14,8 @@ public class PlayerInteractListeners implements Listener {
 
     private RareProperties plugin;
 
-    private FileConfiguration config;
-
     public PlayerInteractListeners(RareProperties plugin) {
         this.plugin = plugin;
-        this.config = this.plugin.getConfig();
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
