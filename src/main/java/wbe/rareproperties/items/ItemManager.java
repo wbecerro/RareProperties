@@ -81,6 +81,9 @@ public class ItemManager {
         meta.getPersistentDataContainer().set(colorsKey, PersistentDataType.STRING,
                 colors.toString().substring(0, colors.toString().length() - 1));
         meta.setLore(lore);
+
+        NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
+        meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, socketSlots);
         baseItem.setItemMeta(meta);
 
         Damageable damageable = (Damageable) baseItem.getItemMeta();
