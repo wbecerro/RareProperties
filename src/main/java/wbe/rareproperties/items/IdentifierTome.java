@@ -32,8 +32,8 @@ public class IdentifierTome extends ItemStack {
 
         meta.setLore(lore);
 
-        NamespacedKey colorKey = new NamespacedKey(plugin, "IdentifierTome");
-        meta.getPersistentDataContainer().set(colorKey, PersistentDataType.BOOLEAN, true);
+        NamespacedKey key = new NamespacedKey(plugin, "IdentifierTome");
+        meta.getPersistentDataContainer().set(key, PersistentDataType.BOOLEAN, true);
         setItemMeta(meta);
 
         BookMeta bookMeta = (BookMeta) getItemMeta();

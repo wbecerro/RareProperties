@@ -164,6 +164,45 @@ public class ItemManager {
         return baseItem;
     }
 
+    public ItemStack generateRandomItem(Material material) {
+        ItemStack baseItem = generateBaseItem(material);
+        ItemRarity rarity = utilities.calculateItemRarity();
+        String prefix = utilities.getRandomPrefix();
+        String suffix = utilities.getRandomSuffix();
+        Random random = new Random();
+
+        // Cálculo de propiedades
+        int maxProperties = random.nextInt(rarity.getMaxProperties() + 1);
+        if(maxProperties != 0) {
+            for(int i=0;i<maxProperties;i++) {
+                PropertyRarity propertyRarity = utilities.calculatePropertyRarity();
+                String property = propertyRarity.getProperties().get(
+                        random.nextInt(propertyRarity.getProperties().size()));
+                utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor());
+            }
+        }
+
+        // Cálculo de encantamientos
+        int maxEnchantments = random.nextInt(rarity.getMaxEnchants() - rarity.getMinEnchants())
+                + rarity.getMinEnchants();
+        for(int i=0;i<maxEnchantments;i++) {
+            Enchantment enchantment = utilities.getRandomEnchantment();
+            int level = random.nextInt(rarity.getMaxEnchantLevel()) + 1;
+            baseItem.addUnsafeEnchantment(enchantment, level);
+        }
+
+        ItemMeta meta = baseItem.getItemMeta();
+        meta.setDisplayName((rarity.getColor() + prefix + " " + suffix).replace("&", "§"));
+        baseItem.setItemMeta(meta);
+
+        Damageable damageable = (Damageable) baseItem.getItemMeta();
+        int maxDurability = baseItem.getType().getMaxDurability();
+        damageable.setDamage(random.nextInt(maxDurability) + 1);
+        baseItem.setItemMeta(damageable);
+
+        return baseItem;
+    }
+
     public ItemStack generateRandomItem(boolean armor, String rarityString) {
         ItemStack baseItem = generateBaseItem(armor);
         ItemRarity rarity = RareProperties.config.getRarityFromName(rarityString);
@@ -214,6 +253,16 @@ public class ItemManager {
                     random.nextInt(RareProperties.config.weaponMaterials.size())));
         }
 
+        ItemStack baseItem = new ItemStack(material);
+
+        if(!baseItem.hasItemMeta()) {
+            baseItem.setItemMeta(Bukkit.getItemFactory().getItemMeta(material));
+        }
+
+        return baseItem;
+    }
+
+    private ItemStack generateBaseItem(Material material) {
         ItemStack baseItem = new ItemStack(material);
 
         if(!baseItem.hasItemMeta()) {

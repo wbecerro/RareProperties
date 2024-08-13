@@ -1,14 +1,18 @@
 package wbe.rareproperties.listeners;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.mythic.*;
+
 
 public class PlayerInteractListeners implements Listener {
 
@@ -94,5 +98,70 @@ public class PlayerInteractListeners implements Listener {
         if(adrenalineProperty) {
             adrenaline.applyEffect(player, event);
         }
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void useTomeOnInteract(PlayerInteractEvent event) {
+        if(!event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+
+        ItemStack tome = player.getInventory().getItemInMainHand();
+        if(tome.getType() == Material.AIR) {
+            return;
+        } else if(tome.getItemMeta() == null) {
+            return;
+        }
+
+        NamespacedKey key = new NamespacedKey(plugin, "IdentifierTome");
+        if(!tome.getItemMeta().getPersistentDataContainer().has(key)) {
+            return;
+        }
+
+        PlayerInventory inventory = player.getInventory();
+        NamespacedKey itemKey = new NamespacedKey(plugin, "rarepropertiesunidentified");
+        ItemStack inventoryItem = new ItemStack(Material.AIR);
+        for(ItemStack item : inventory) {
+            if(item == null) {
+                continue;
+            }
+
+            if(item.getType() == Material.AIR) {
+                continue;
+            }
+
+            if(item.getItemMeta() == null) {
+                continue;
+            }
+
+            if(item.getItemMeta().getPersistentDataContainer().has(itemKey)) {
+                inventoryItem = item;
+                break;
+            }
+        }
+
+        if(inventoryItem.getType().equals(Material.AIR)) {
+            player.sendMessage(RareProperties.messages.noItemsToIdentify);
+            event.setCancelled(true);
+            return;
+        }
+
+        inventory.remove(inventoryItem);
+
+        ItemStack item = RareProperties.itemManager.generateRandomItem(inventoryItem.getType());
+
+        player.sendMessage(RareProperties.messages.itemIdentified);
+        if(tome.getAmount() - 1 == 0) {
+            inventory.setItemInMainHand(null);
+        } else {
+            tome.setAmount(tome.getAmount() - 1);
+            inventory.setItemInMainHand(tome);
+        }
+
+        inventory.addItem(item);
+        player.updateInventory();
+        event.setCancelled(true);
     }
 }

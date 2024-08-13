@@ -39,6 +39,8 @@ Messages:
   tomeGiven: '&b[&cPropiedades&b] &eHas conseguido un &5Libro de runas&e.'
   limited: '&b[&cPropiedades&b] &eHas llegado al límite de propiedades en este objeto %permission%/%limit%.'
   itemGiven: '&b[&cPropiedades&b] &eTe han dado un objeto raro.'
+  itemIdentified: '&b[&cPropiedades&b] &eHas usado el &5&lLibro de runas &epara identificar un objeto perdido en el tiempo.'
+  noItemsToIdentify: '&b[&cPropiedades&b] &eNo tienes ningún objeto perdido en el tiempo para identificar.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."

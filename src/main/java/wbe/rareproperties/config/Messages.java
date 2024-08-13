@@ -32,6 +32,8 @@ public class Messages {
     public String tomeGiven;
     public String limited;
     public String itemGiven;
+    public String itemIdentified;
+    public String noItemsToIdentify;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -59,5 +61,7 @@ public class Messages {
         tomeGiven = config.getString("Messages.tomeGiven").replace("&", "§");
         limited = config.getString("Messages.limited").replace("&", "§");
         itemGiven = config.getString("Messages.itemGiven").replace("&", "§");
+        itemIdentified = config.getString("Messages.itemIdentified").replace("&", "§");
+        noItemsToIdentify = config.getString("Messages.noItemsToIdentify").replace("&", "§");
     }
 }
