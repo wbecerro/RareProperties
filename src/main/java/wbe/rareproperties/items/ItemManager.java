@@ -139,7 +139,8 @@ public class ItemManager {
                 PropertyRarity propertyRarity = utilities.calculatePropertyRarity();
                 String property = propertyRarity.getProperties().get(
                         random.nextInt(propertyRarity.getProperties().size()));
-                utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor());
+                utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor(),
+                        false);
             }
         }
 
@@ -178,7 +179,8 @@ public class ItemManager {
                 PropertyRarity propertyRarity = utilities.calculatePropertyRarity();
                 String property = propertyRarity.getProperties().get(
                         random.nextInt(propertyRarity.getProperties().size()));
-                utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor());
+                utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor(),
+                        false);
             }
         }
 
@@ -217,7 +219,8 @@ public class ItemManager {
                 PropertyRarity propertyRarity = utilities.calculatePropertyRarity();
                 String property = propertyRarity.getProperties().get(
                         random.nextInt(propertyRarity.getProperties().size()));
-                utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor());
+                utilities.addProperty(baseItem, property, random.nextInt(5) + 1, propertyRarity.getColor(),
+                        false);
             }
         }
 

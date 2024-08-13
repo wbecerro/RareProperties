@@ -1,5 +1,7 @@
 package wbe.rareproperties.util;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
@@ -108,7 +110,7 @@ public class Utilities {
         return true;
     }
 
-    public void addProperty(ItemStack item, String property, int level, String color) {
+    public void addProperty(ItemStack item, String property, int level, String color, boolean noLimit) {
         ItemMeta meta = item.getItemMeta();
         List<String> lore;
 
@@ -147,12 +149,14 @@ public class Utilities {
         lore.add(propertyLine);
         meta.setLore(lore);
 
-        NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
-        if(!meta.getPersistentDataContainer().has(limitKey)) {
-            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, 1);
-        } else {
-            int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER) + 1;
-            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, limit);
+        if(!noLimit) {
+            NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
+            if(!meta.getPersistentDataContainer().has(limitKey)) {
+                meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, 1);
+            } else {
+                int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER) + 1;
+                meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, limit);
+            }
         }
 
         NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
@@ -333,5 +337,77 @@ public class Utilities {
             }
         }
         return null;
+    }
+
+    public boolean applySocket(ItemStack item, String color, String colors) {
+        // Sacamos la línea que tiene los sockets
+        int index = findLine(item, RareProperties.config.socketSlot);
+        List<String> lore = item.getItemMeta().getLore();
+        String[] sockets = colors.split("\\.");
+
+        // Sacamos el socket que coincide con el color
+        int socketSlot = findColorSocket(sockets, color);
+        if(socketSlot == -1) {
+            return false;
+        }
+
+        // Comprobamos si quedan más sockets
+        NamespacedKey colorsKey = new NamespacedKey(plugin, "rarepropertiessocketslots");
+        ItemMeta meta = item.getItemMeta();
+        if(sockets.length - 1 == 0) {
+            // Si no quedan eliminados las líneas de los sockets.
+            int size = lore.size();
+            for(int i=index;i>0;i--) {
+                lore.remove(i);
+            }
+            meta.getPersistentDataContainer().remove(colorsKey);
+        } else {
+            // Si quedan, eliminamos el socket que coincide
+            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder keyString =  new StringBuilder();
+            int size = sockets.length;
+            for(int i=0;i<size;i++) {
+                if(i != socketSlot) {
+                    stringBuilder.append(ChatColor.valueOf(sockets[i]) + RareProperties.config.socketSlot + " ");
+                    keyString.append(sockets[i] + ".");
+                }
+            }
+            lore.set(index, stringBuilder.toString());
+            meta.getPersistentDataContainer().set(colorsKey, PersistentDataType.STRING,
+                    keyString.toString().substring(0, keyString.toString().length() - 1));
+        }
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+
+        // Aplicamos la propiedad
+        PropertyRarity rarity = calculatePropertyRarity();
+        Random random = new Random();
+        String property = rarity.getProperties().get(
+                random.nextInt(rarity.getProperties().size()));
+        addProperty(item, property, random.nextInt(5) + 1, rarity.getColor(), true);
+        return true;
+    }
+
+    private int findColorSocket(String[] colors, String color) {
+        int size = colors.length;
+        for(int i=0;i<size;i++) {
+            if(colors[i].equalsIgnoreCase(color)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private int findLine(ItemStack item, String line) {
+        List<String> lore = item.getItemMeta().getLore();
+        int size = lore.size();
+        for(int i=0;i<size;i++) {
+            if(lore.get(i).contains(line)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

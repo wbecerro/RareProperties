@@ -1,5 +1,6 @@
 package wbe.rareproperties.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -77,5 +78,61 @@ public class InventoryClickListeners implements Listener {
         p.setItemOnCursor(null);
         e.setCancelled(true);
         p.updateInventory();
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void addSocketOnClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        if(event.getAction() != InventoryAction.SWAP_WITH_CURSOR) {
+            return;
+        }
+
+        NamespacedKey colorsKey = new NamespacedKey(plugin, "rarepropertiessocketslots");
+        NamespacedKey socketKey = new NamespacedKey(plugin, "Socket");
+
+        ItemStack handItem = event.getCursor();
+        ItemStack inventoryItem = event.getCurrentItem();
+
+        // Comprobaciones de los objetos.
+        if(handItem == null || inventoryItem == null) {
+            return;
+        }
+
+        if(handItem.getType().equals(Material.AIR) || inventoryItem.getType().equals(Material.AIR)) {
+            return;
+        }
+
+        ItemMeta handItemMeta = handItem.getItemMeta();
+        ItemMeta inventoryItemMeta = inventoryItem.getItemMeta();
+        if(handItemMeta == null || inventoryItemMeta == null) {
+            return;
+        }
+
+        if(!handItemMeta.getPersistentDataContainer().has(socketKey)) {
+            return;
+        }
+
+        if(!inventoryItemMeta.getPersistentDataContainer().has(colorsKey)) {
+            return;
+        }
+
+        ItemStack newItem = new ItemStack(inventoryItem.getType());
+        newItem.setItemMeta(inventoryItemMeta);
+        newItem.getItemMeta().setLore(inventoryItemMeta.getLore());
+        boolean applied = utilities.applySocket(newItem,
+                handItemMeta.getPersistentDataContainer().get(socketKey, PersistentDataType.STRING),
+                inventoryItemMeta.getPersistentDataContainer().get(colorsKey, PersistentDataType.STRING));
+
+        if(!applied) {
+            player.sendMessage(RareProperties.messages.socketNoColor);
+            return;
+        }
+
+        handItem.setAmount(handItem.getAmount() - 1);
+        player.sendMessage(RareProperties.messages.socketApplied);
+        event.setCurrentItem(newItem);
+        player.setItemOnCursor(handItem);
+        event.setCancelled(true);
+        player.updateInventory();
     }
 }
