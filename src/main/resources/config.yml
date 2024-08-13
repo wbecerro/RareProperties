@@ -43,6 +43,7 @@ Messages:
   noItemsToIdentify: '&b[&cPropiedades&b] &eNo tienes ningún objeto perdido en el tiempo para identificar.'
   socketNoColor: '&b[&cPropiedades&b] &eNo hay ninguna runa de ese color en este objeto.'
   socketApplied: '&b[&cPropiedades&b] &eHas aplicado una runa a este objeto revelando una propiedad.'
+  socketSlotAdded: '&b[&cPropiedades&b] &eSe ha añadido un hueco de runa al objeto.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
@@ -55,9 +56,10 @@ Messages:
     - "&b/rareproperties tome &eDa un &5Libro de runas&e."
     - "&b/rareproperties showItem &eComando de debug para ver el objeto de la mano."
     - "&b/rareproperties getItem [armor/weapon] [socketted/unidentified/rareza] &eDa un objeto raro."
+    - "&b/rareproperties addSocket [color] &eAñade un hueco de runa a un objeto."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
     - "&b"
-    - "&eLeyenda: <> Obligatorio  [] Opcional"
+    - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
 
 ###############
 ### OBJETOS ###

@@ -180,6 +180,24 @@ public class CommandListener implements CommandExecutor {
                 }
                 p.sendMessage(RareProperties.messages.itemGiven);
                 p.getInventory().addItem(new ItemStack[]{item});
+            } else if(args[0].equalsIgnoreCase("addSocket")) {
+                if(!sender.hasPermission("rareproperties.command.addSocket")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+                ItemStack item = p.getInventory().getItemInMainHand();
+                ItemStack newItem;
+
+                if(args.length == 2) {
+                    newItem = utilities.addSocket(item, args[1].toUpperCase());
+                } else {
+                    Random random = new Random();
+                    String color = RareProperties.config.socketColors.get(random.nextInt(RareProperties.config.socketColors.size()));
+                    newItem = utilities.addSocket(item, color);
+                }
+
+                p.getInventory().setItemInMainHand(newItem);
+                p.sendMessage(RareProperties.messages.socketSlotAdded);
             }
         }
         return true;

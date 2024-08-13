@@ -36,6 +36,7 @@ public class Messages {
     public String noItemsToIdentify;
     public String socketNoColor;
     public String socketApplied;
+    public String socketSlotAdded;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -67,5 +68,6 @@ public class Messages {
         noItemsToIdentify = config.getString("Messages.noItemsToIdentify").replace("&", "§");
         socketNoColor = config.getString("Messages.socketNoColor").replace("&", "§");
         socketApplied = config.getString("Messages.socketApplied").replace("&", "§");
+        socketSlotAdded = config.getString("Messages.socketSlotAdded").replace("&", "§");
     }
 }

@@ -339,6 +339,41 @@ public class Utilities {
         return null;
     }
 
+    public ItemStack addSocket(ItemStack item, String color) {
+        NamespacedKey colorsKey = new NamespacedKey(plugin, "rarepropertiessocketslots");
+        NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
+
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = meta.getLore();
+        if(lore == null) {
+            lore = new ArrayList<>();
+        }
+
+        if(meta.getPersistentDataContainer().has(colorsKey)) {
+            int index = findLine(item, RareProperties.config.socketSlot);
+            lore.set(index, lore.get(index) + ChatColor.valueOf(color) + RareProperties.config.socketSlot + " ");
+            meta.setLore(lore);
+            String colors = meta.getPersistentDataContainer().get(colorsKey, PersistentDataType.STRING);
+            meta.getPersistentDataContainer().set(colorsKey, PersistentDataType.STRING, colors + "." + color);
+        } else {
+            lore.add("");
+            lore.add(RareProperties.config.socketTitle);
+            lore.add(ChatColor.valueOf(color) + RareProperties.config.socketSlot + " ");
+            meta.setLore(lore);
+            meta.getPersistentDataContainer().set(colorsKey, PersistentDataType.STRING, color);
+        }
+
+        if(meta.getPersistentDataContainer().has(limitKey)) {
+            int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER);
+            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, limit + 1);
+        } else {
+            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, 1);
+        }
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
     public boolean applySocket(ItemStack item, String color, String colors) {
         // Sacamos la línea que tiene los sockets
         int index = findLine(item, RareProperties.config.socketSlot);
@@ -356,7 +391,6 @@ public class Utilities {
         ItemMeta meta = item.getItemMeta();
         if(sockets.length - 1 == 0) {
             // Si no quedan eliminados las líneas de los sockets.
-            int size = lore.size();
             for(int i=index;i>0;i--) {
                 lore.remove(i);
             }
