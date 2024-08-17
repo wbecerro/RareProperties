@@ -124,8 +124,10 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
 
-                if(args.length > 1) {
-                    utilities.giveSocket(p, args[1]);
+                if(args.length == 3) {
+                    utilities.giveSocket(Bukkit.getPlayer(args[1]), args[2]);
+                } else if(args.length == 2) {
+                    utilities.giveSocket(Bukkit.getPlayer(args[1]), null);
                 } else {
                     utilities.giveSocket(p, null);
                 }
@@ -134,22 +136,27 @@ public class CommandListener implements CommandExecutor {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                utilities.giveTome(p);
+
+                if(args.length == 2) {
+                    utilities.giveTome(Bukkit.getPlayer(args[1]));
+                } else {
+                    utilities.giveTome(p);
+                }
             } else if(args[0].equalsIgnoreCase("showItem")) {
                 if(!sender.hasPermission("rareproperties.command.showItem")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 p.sendMessage(p.getInventory().getItemInMainHand().toString());
-            } else if(args[0].equalsIgnoreCase("getItem")) {
-                if(!sender.hasPermission("rareproperties.command.getItem")) {
+            } else if(args[0].equalsIgnoreCase("item")) {
+                if(!sender.hasPermission("rareproperties.command.item")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 ItemStack item = new ItemStack(Material.AIR);
-                if(args.length == 3) {
-                    String material = args[1];
-                    String type = args[2];
+                if(args.length == 4) {
+                    String material = args[2];
+                    String type = args[3];
                     boolean armor = false;
                     if(material.equalsIgnoreCase("armor")) {
                         armor = true;
@@ -162,8 +169,8 @@ public class CommandListener implements CommandExecutor {
                     } else {
                         item = RareProperties.itemManager.generateRandomItem(armor, type);
                     }
-                } else if(args.length == 2) {
-                    String material = args[1];
+                } else if(args.length == 3) {
+                    String material = args[2];
                     boolean armor = false;
                     if(material.equalsIgnoreCase("armor")) {
                         armor = true;
@@ -178,8 +185,13 @@ public class CommandListener implements CommandExecutor {
                     }
 
                 }
-                p.sendMessage(RareProperties.messages.itemGiven);
-                p.getInventory().addItem(new ItemStack[]{item});
+                if(args.length > 1) {
+                    Bukkit.getPlayer(args[1]).sendMessage(RareProperties.messages.itemGiven);
+                    Bukkit.getPlayer(args[1]).getInventory().addItem(new ItemStack[]{item});
+                } else {
+                    p.sendMessage(RareProperties.messages.itemGiven);
+                    p.getInventory().addItem(new ItemStack[]{item});
+                }
             } else if(args[0].equalsIgnoreCase("addSocket")) {
                 if(!sender.hasPermission("rareproperties.command.addSocket")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
