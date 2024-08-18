@@ -216,7 +216,7 @@ Rarities:
       properties:
         - "Solem"
         - "Noctis"
-        - "Armadura"
+        - "Armadura"q
     Epic:
       name: "Épico"
       color: "&5"

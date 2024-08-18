@@ -114,9 +114,7 @@ public class CommandListener implements CommandExecutor {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                plugin.saveDefaultConfig();
-                plugin.reloadConfig();
-                RareProperties.reloadConfiguration(config);
+                plugin.reloadConfiguration();
                 sender.sendMessage(RareProperties.messages.reload);
             } else if(args[0].equalsIgnoreCase("socket")) {
                 if(!sender.hasPermission("rareproperties.command.socket")) {

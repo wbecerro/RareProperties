@@ -64,10 +64,9 @@ public class RareProperties extends JavaPlugin {
         createPrefixFile();
         createSuffixFile();
         getLogger().info("RareProperties enabled correctly");
-        configuration = getConfig();
+        reloadConfiguration();
         recipeLoader = new RecipeLoader(this);
         itemManager = new ItemManager(this);
-        reloadConfiguration(configuration);
 
         recipeLoader.loadRecipes();
         getCommand("rareproperties").setExecutor(this.commandListener);
@@ -86,7 +85,12 @@ public class RareProperties extends JavaPlugin {
         return properties;
     }
 
-    public static void reloadConfiguration(FileConfiguration configuration) {
+    public void reloadConfiguration() {
+        if(!new File(getDataFolder(), "config.yml").exists()) {
+            saveDefaultConfig();
+        }
+        reloadConfig();
+        configuration = getConfig();
         messages = new Messages(configuration);
         config = new Config(configuration);
     }
