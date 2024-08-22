@@ -54,7 +54,7 @@ public class RareProperties extends JavaPlugin {
 
     public static ItemManager itemManager;
 
-    private final ArrayList<RareProperty> properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
+    private ArrayList<RareProperty> properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
             new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
             new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),
             new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this),
@@ -95,6 +95,12 @@ public class RareProperties extends JavaPlugin {
         configuration = getConfig();
         messages = new Messages(configuration);
         config = new Config(configuration);
+        properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
+                new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
+                new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),
+                new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this),
+                new Fire(this), new Freezee(this), new Explosion(this), new Shrink(this), new Enlarge(this), new Adrenaline(this),
+                new Swarm(this)));
     }
 
     private void createPrefixFile() {

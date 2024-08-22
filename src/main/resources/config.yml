@@ -449,7 +449,7 @@ Properties:
       - "&7daño hasta la medianoche."
       - "&7&oSolo funciona en arma."
   Armor:
-    reductionPercent: 0.025
+    reductionPercent: 0.020
     description:
       - "&7"
       - "&7&nDescripción:"
