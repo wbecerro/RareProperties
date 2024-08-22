@@ -14,33 +14,29 @@ import java.util.ArrayList;
 public class Fire extends RareProperty {
 
     public Fire(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "fire", "Ígneo");
-        setDescription(getConfig().getStringList("Properties.Fire.description"));
+        super(plugin, new ArrayList<>(), "fire", RareProperties.propertyConfig.fireName);
+        setDescription(RareProperties.propertyConfig.fireDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
-        damaged.setFireTicks(20 * (getLevel() * getConfig().getInt("Properties.Fire.timePerLevel")));
+        damaged.setFireTicks(20 * (getLevel() * RareProperties.propertyConfig.fireTime));
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.fire")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Ígneo")) {
+        if(!utilities.hasProperty(player.getInventory().getItemInMainHand(), getExternalName())) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Ígneo");
+        level = checkProperty(item, getExternalName());
 
-        if (level < 0) {
+        if(level < 0) {
             return false;
         }
 

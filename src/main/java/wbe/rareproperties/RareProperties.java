@@ -6,26 +6,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import wbe.rareproperties.commands.CommandListener;
 import wbe.rareproperties.config.Config;
 import wbe.rareproperties.config.Messages;
+import wbe.rareproperties.config.Properties;
 import wbe.rareproperties.items.ItemManager;
 import wbe.rareproperties.listeners.EventListeners;
 import wbe.rareproperties.properties.RareProperty;
-import wbe.rareproperties.properties.common.Enlarge;
-import wbe.rareproperties.properties.common.Explosion;
-import wbe.rareproperties.properties.common.Shrink;
-import wbe.rareproperties.properties.epic.Backstab;
-import wbe.rareproperties.properties.epic.Critic;
-import wbe.rareproperties.properties.epic.Vampirism;
-import wbe.rareproperties.properties.legendary.Armor;
-import wbe.rareproperties.properties.legendary.Noctis;
-import wbe.rareproperties.properties.legendary.Solem;
-import wbe.rareproperties.properties.legendary.Swarm;
+import wbe.rareproperties.properties.common.*;
+import wbe.rareproperties.properties.epic.*;
+import wbe.rareproperties.properties.legendary.*;
 import wbe.rareproperties.properties.mythic.*;
-import wbe.rareproperties.properties.rare.Cut;
-import wbe.rareproperties.properties.rare.Electro;
-import wbe.rareproperties.properties.rare.Poison;
-import wbe.rareproperties.properties.rare.Wither;
-import wbe.rareproperties.properties.uncommon.Fire;
-import wbe.rareproperties.properties.uncommon.Freezee;
+import wbe.rareproperties.properties.rare.*;
+import wbe.rareproperties.properties.uncommon.*;
 import wbe.rareproperties.recipes.RecipeLoader;
 import wbe.rareproperties.util.Scheduler;
 
@@ -49,6 +39,8 @@ public class RareProperties extends JavaPlugin {
     public static Messages messages;
 
     public static Config config;
+
+    public static Properties propertyConfig;
 
     private RecipeLoader recipeLoader;
 
@@ -95,6 +87,7 @@ public class RareProperties extends JavaPlugin {
         configuration = getConfig();
         messages = new Messages(configuration);
         config = new Config(configuration);
+        propertyConfig = new Properties(configuration);
         properties = new ArrayList<>(Arrays.asList(new Fly(this), new Repair(this), new Burst(this),
                 new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
                 new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),

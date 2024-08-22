@@ -14,19 +14,19 @@ import java.util.ArrayList;
 public class Repair extends RareProperty {
 
     public Repair(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "repair", "Reparación");
-        setDescription(getConfig().getStringList("Properties.Repair.description"));
+        super(plugin, new ArrayList<>(), "repair", RareProperties.propertyConfig.repairName);
+        setDescription(RareProperties.propertyConfig.repairDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         PlayerInventory in = player.getInventory();
 
-        int cost = getConfig().getInt("Properties.Repair.baseCost") - getLevel();
+        int cost = RareProperties.propertyConfig.repairCost - getLevel();
         ItemStack firstObject = in.getItem(0);
         Damageable meta = (Damageable) firstObject.getItemMeta();
         if (player.getFoodLevel() > cost && firstObject.getType() != Material.AIR && meta.getDamage() > 0) {
-            int amount = Math.round(firstObject.getType().getMaxDurability() / 100 * getConfig().getInt("Properties.Repair.repairPercentage") * getLevel());
+            int amount = Math.round(firstObject.getType().getMaxDurability() / 100 * RareProperties.propertyConfig.repairPercent * getLevel());
             int durability = (meta.getDamage() - amount);
 
             if (durability < 0) {
@@ -43,29 +43,11 @@ public class Repair extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean repair = false;
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.repair")) {
-            return false;
-        }
+        level = checkHands(player.getInventory(), getExternalName());
 
-        PlayerInventory in = player.getInventory();
-        if (!repair) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Reparación");
-            if(level > 0) {
-                repair = true;
-            } else {
-                ItemStack offHand = in.getItemInOffHand();
-                level = checkProperty(offHand, "Reparación");
-                if(level > 0) {
-                    repair = true;
-                }
-            }
-        }
-
-        if(!repair) {
+        if(level < 0) {
             return false;
         }
 

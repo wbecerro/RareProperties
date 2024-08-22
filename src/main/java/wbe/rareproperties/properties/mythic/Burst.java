@@ -15,13 +15,13 @@ import java.util.List;
 public class Burst extends RareProperty {
 
     public Burst(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "burst", "Andanada");
-        setDescription(getConfig().getStringList("Properties.Burst.description"));
+        super(plugin, new ArrayList<>(), "burst", RareProperties.propertyConfig.burstName);
+        setDescription(RareProperties.propertyConfig.burstDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        int cost = getConfig().getInt("Properties.Burst.baseCost") - getLevel();
+        int cost = RareProperties.propertyConfig.burstCost - getLevel();
 
         if(player.getFoodLevel() < cost) {
             return;
@@ -34,7 +34,7 @@ public class Burst extends RareProperty {
         for(Entity ent : nearbyEntities) {
             Vector unitVector = ent.getLocation().toVector().subtract(vPlayer).normalize();
             unitVector.setY(0.55 / getLevel());
-            ent.setVelocity(unitVector.multiply(getLevel() * getConfig().getInt("Properties.Burst.baseVelocity")));
+            ent.setVelocity(unitVector.multiply(RareProperties.propertyConfig.burstVelocity));
         }
 
         player.setFoodLevel(player.getFoodLevel() - cost);
@@ -44,16 +44,12 @@ public class Burst extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(getConfig().getStringList("Messages.blacklistedWorlds").contains(player.getWorld().getName())) {
-            return false;
-        }
-
-        if(!player.hasPermission("rareproperties.use.burst")) {
+        if(RareProperties.config.blacklistedWorlds.contains(player.getWorld().getName())) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
-        level = checkHands(inventory, "Andanada");
+        level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
             return false;

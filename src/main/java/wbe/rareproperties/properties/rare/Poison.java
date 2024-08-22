@@ -17,8 +17,8 @@ import java.util.Random;
 public class Poison extends RareProperty {
 
     public Poison(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "poison", "Putrefacción");
-        setDescription(getConfig().getStringList("Properties.Poison.description"));
+        super(plugin, new ArrayList<>(), "poison", RareProperties.propertyConfig.poisonName);
+        setDescription(RareProperties.propertyConfig.poisonDescription);
     }
 
     @Override
@@ -26,13 +26,14 @@ public class Poison extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * getConfig().getInt("Properties.Poison.chancePerLevel")) {
+        if (random > getLevel() * RareProperties.propertyConfig.poisonChance) {
             return;
         }
 
         LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
-        PotionEffect potion = new PotionEffect(PotionEffectType.POISON, getConfig().getInt("Properties.Poison.duration") * 20,
-                getConfig().getInt("Properties.Poison.modifierPerLevel") - 1);
+        PotionEffect potion = new PotionEffect(PotionEffectType.POISON,
+                RareProperties.propertyConfig.poisonDuration * 20,
+                RareProperties.propertyConfig.poisonModifier - 1);
         damaged.addPotionEffect(potion);
     }
 
@@ -40,19 +41,15 @@ public class Poison extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.poison")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Putrefacción")) {
+        if(!utilities.hasProperty(player.getInventory().getItemInMainHand(), getExternalName())) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Putrefacción");
+        level = checkProperty(item, getExternalName());
 
-        if (level < 0) {
+        if(level < 0) {
             return false;
         }
 

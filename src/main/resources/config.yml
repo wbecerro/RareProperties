@@ -314,6 +314,7 @@ Rarities:
 
 Properties:
   Fly:
+    name: "Vuelo"
     baseCost: 8
     time: 5
     description:
@@ -324,6 +325,7 @@ Properties:
       - "&7&oen la mano primaria o secundaria."
       - "&7&oPuede ser aplicado a todo."
   Repair:
+    name: "Reparación"
     baseCost: 10
     repairPercentage: 10
     description:
@@ -333,6 +335,7 @@ Properties:
       - "&7objeto de la primera posición."
       - "&7&oEs un consumible (clic derecho)."
   Burst:
+    name: "Andanada"
     baseCost: 11
     baseVelocity: 2
     description:
@@ -342,6 +345,7 @@ Properties:
       - "&7a volar a las entidades cercanas."
       - "&7&oEs un consumible (clic derecho)."
   Teleport:
+    name: "Teletransporte"
     baseCost: 1
     extraBlocksPerLevel: 2
     description:
@@ -351,6 +355,7 @@ Properties:
       - "&7hacia donde estés mirando."
       - "&7&oEs un consumible (clic derecho)."
   Capture:
+    name: "Captura"
     maxProbability: 10000
     description:
       - "&7"
@@ -359,6 +364,7 @@ Properties:
       - "&7al matarlas con una pequeña posibilidad."
       - "&7&oSolo funciona en arma."
   Reinforced:
+    name: "Reforzado"
     baseProbability: 5
     description:
       - "&7"
@@ -367,6 +373,7 @@ Properties:
       - "&7que se pone con una probabilidad."
       - "&7&oPuede ser aplicado a todo."
   Aegis:
+    name: "Égida"
     resistanceLevel: 2
     absortionLevel: 2
     sizeMultiplier: 1.5
@@ -379,6 +386,7 @@ Properties:
       - "&7absorción y un aumento de tamaño."
       - "&7&oEs un consumible (clic derecho)."
   Demolition:
+    name: "Demolición"
     baseDamage: 15
     baseRange: 4
     foodCost: 5
@@ -389,6 +397,7 @@ Properties:
       - "&7en área de gran poder que además empuja."
       - "&7&oEs un consumible (clic derecho)."
   Promptness:
+    name: "Presteza"
     speedLevel: 1
     sizeMultiplier: 0.6
     effectsDuration: 60
@@ -400,6 +409,7 @@ Properties:
       - "&7y una disminución de tamaño."
       - "&7&oEs un consumible (clic derecho)."
   Propulsion:
+    name: "Propulsión"
     baseImpulse: 2
     foodCost: 10
     description:
@@ -409,6 +419,7 @@ Properties:
       - "&7en el aire como un cohete."
       - "&7&oEs un consumible (clic derecho)."
   Healing:
+    name: "Sanación"
     foodCost: 14
     healthPercent: 5
     description:
@@ -418,13 +429,14 @@ Properties:
       - "&7un porcentaje de tu vida."
       - "&7&oEs un consumible (clic derecho)."
   Adrenaline:
+    name: "Adrenalina"
     strengthLevel: 6
     poisonLevel: 2
     sizePerLevel: 0.1
     durationPerLevelStrength: 12
     durationPerLevelPoison: 6
-    sound: "ENTITY_WOLF_GROWL"
-    soundOff: "ENTITY_WOLF_PANT"
+    sound: ENTITY_WOLF_GROWL
+    soundOff: ENTITY_WOLF_PANT
     healthCost: 5
     description:
       - "&7"
@@ -433,6 +445,7 @@ Properties:
       - "&7veneno y un aumento de tamaño."
       - "&7&oEs un consumible (clic derecho)."
   Solem:
+    name: "Solem"
     damagePercent: 0.2
     description:
       - "&7"
@@ -441,6 +454,7 @@ Properties:
       - "&7daño hasta el mediodía."
       - "&7&oSolo funciona en arma."
   Noctis:
+    name: "Noctis"
     damagePercent: 0.2
     description:
       - "&7"
@@ -449,6 +463,7 @@ Properties:
       - "&7daño hasta la medianoche."
       - "&7&oSolo funciona en arma."
   Armor:
+    name: "Armadura"
     reductionPercent: 0.020
     description:
       - "&7"
@@ -456,6 +471,7 @@ Properties:
       - "&7Otorga mitigación de daño al ser golpeado."
       - "&7&oSolo funciona en armadura."
   Swarm:
+    name: "Enjambre"
     maxPercentPerLevel: 10
     maxEntities: 10
     distance: 20
@@ -466,6 +482,7 @@ Properties:
       - "&7cercanas a ti."
       - "&7&oSolo funciona en arma."
   Vampirism:
+    name: "Vampirismo"
     healthSteal: 0.01
     description:
       - "&7"
@@ -473,6 +490,7 @@ Properties:
       - "&7Al golpear te curarás una parte del daño."
       - "&7&oSolo funciona en arma."
   Backstab:
+    name: "Puñalada"
     extraDamage: 0.1
     description:
       - "&7"
@@ -480,18 +498,20 @@ Properties:
       - "&7Al golpear por la espalda harás más daño."
       - "&7&oSolo funciona en arma."
   Critic:
+    name: "Crítico"
     extraDamage: 0.2
     chancePerLevel: 1
-    sound: "ENTITY_ZOMBIE_ATTACK_IRON_DOOR"
+    sound: ENTITY_ZOMBIE_ATTACK_IRON_DOOR
     description:
       - "&7"
       - "&7&nDescripción:"
       - "&7Probabilidad de hacer daño extra."
       - "&7&oSolo funciona en arma."
   Electro:
+    name: "Electro"
     damagePerLevel: 2
     chancePerLevel: 7
-    sound: "ITEM_TRIDENT_THUNDER"
+    sound: ITEM_TRIDENT_THUNDER
     description:
       - "&7"
       - "&7&nDescripción:"
@@ -499,6 +519,7 @@ Properties:
       - "&7no destruye objeto y hace daño."
       - "&7&oSolo funciona en arma."
   Cut:
+    name: "Corte"
     damagePerLevel: 1
     description:
       - "&7"
@@ -506,6 +527,7 @@ Properties:
       - "&7Añadirá daño extra a tus ataques."
       - "&7&oSolo funciona en arma."
   Wither:
+    name: "Descomposición"
     modifierPerLevel: 1
     duration: 5
     chancePerLevel: 5
@@ -515,6 +537,7 @@ Properties:
       - "&7Probabilidad de infligir wither al golpear."
       - "&7&oSolo funciona en arma."
   Poison:
+    name: "Putrefacción"
     modifierPerLevel: 1
     duration: 5
     chancePerLevel: 6
@@ -524,6 +547,7 @@ Properties:
       - "&7Probabilidad de infligir veneno al golpear."
       - "&7&oSolo funciona en arma."
   Fire:
+    name: "Ígneo"
     timePerLevel: 2
     description:
       - "&7"
@@ -531,6 +555,7 @@ Properties:
       - "&7Incendiará a los enemigos al golpearlos."
       - "&7&oSolo funciona en arma."
   Freezee:
+    name: "Gélido"
     chancePerLevel: 7
     damage: 3
     description:
@@ -540,6 +565,7 @@ Properties:
       - "&7y les hará un poco de daño."
       - "&7&oSolo funciona en arma."
   Explosion:
+    name: "Explosión"
     chancePerLevel: 5
     damage: 2
     description:
@@ -549,9 +575,10 @@ Properties:
       - "&7poco de daño e invocará un cohete."
       - "&7&oSolo funciona en arma."
   Shrink:
+    name: "Encogimiento"
     chancePerLevel: 1
     durationPerLevel: 3
-    sound: "BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM"
+    sound: BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM
     description:
       - "&7"
       - "&7&nDescripción:"
@@ -560,9 +587,10 @@ Properties:
       - "&7más pequeños por un tiempo."
       - "&7&oSolo funciona en arma."
   Enlarge:
+    name: "Agrandamiento"
     chancePerLevel: 1
     durationPerLevel: 3
-    sound: "BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM"
+    sound: BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM
     description:
       - "&7"
       - "&7&nDescripción:"

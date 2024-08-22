@@ -13,16 +13,16 @@ import java.util.ArrayList;
 public class Propulsion extends RareProperty {
 
     public Propulsion(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "propulsion", "Propulsión");
-        setDescription(getConfig().getStringList("Properties.Propulsion.description"));
+        super(plugin, new ArrayList<>(), "propulsion", RareProperties.propertyConfig.propulsionName);
+        setDescription(RareProperties.propertyConfig.propulsionDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        int cost = getConfig().getInt("Properties.Propulsion.foodCost");
+        int cost = RareProperties.propertyConfig.propulsionCost;
 
         player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
-        player.setVelocity(new Vector(0, getConfig().getInt("Properties.Propulsion.baseImpulse") * getLevel(), 0));
+        player.setVelocity(new Vector(0, RareProperties.propertyConfig.propulsionImpulse * getLevel(), 0));
 
         player.setFoodLevel(player.getFoodLevel() - cost);
     }
@@ -31,16 +31,12 @@ public class Propulsion extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.propulsion")) {
-            return false;
-        }
-
-        if(player.getFoodLevel() < getConfig().getInt("Properties.Propulsion.foodCost")) {
+        if(player.getFoodLevel() < RareProperties.propertyConfig.propulsionCost) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
-        level = checkHands(inventory, "Propulsión");
+        level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
             return false;

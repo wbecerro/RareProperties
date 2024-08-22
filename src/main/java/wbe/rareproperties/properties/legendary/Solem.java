@@ -1,27 +1,22 @@
 package wbe.rareproperties.properties.legendary;
 
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Solem extends RareProperty {
 
     public static double power = 0.0;
 
     public Solem(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "solem", "Solem");
-        setDescription(getConfig().getStringList("Properties.Solem.description"));
+        super(plugin, new ArrayList<>(), "solem", RareProperties.propertyConfig.solemName);
+        setDescription(RareProperties.propertyConfig.solemDescription);
     }
 
     @Override
@@ -35,19 +30,11 @@ public class Solem extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.solem")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Solem")) {
-            return false;
-        }
-
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Solem");
+        level = checkProperty(item, getExternalName());
 
-        if (level < 0) {
+        if(level < 0) {
             return false;
         }
 

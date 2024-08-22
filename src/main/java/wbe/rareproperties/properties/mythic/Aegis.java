@@ -9,7 +9,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
@@ -17,20 +16,20 @@ import java.util.ArrayList;
 public class Aegis extends RareProperty {
 
     public Aegis(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "aegis", "Égida");
-        setDescription(getConfig().getStringList("Properties.Aegis.description"));
+        super(plugin, new ArrayList<>(), "aegis", RareProperties.propertyConfig.aegisName);
+        setDescription(RareProperties.propertyConfig.aegisDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        player.setHealth(player.getHealth() - getConfig().getInt("Properties.Aegis.healthCost"));
-        PotionEffect potion = new PotionEffect(PotionEffectType.RESISTANCE, getConfig().getInt("Properties.Aegis.effectsDuration") * 20,
-                getConfig().getInt("Properties.Aegis.resistanceLevel") - 1);
+        player.setHealth(player.getHealth() - RareProperties.propertyConfig.aegisHealth);
+        PotionEffect potion = new PotionEffect(PotionEffectType.RESISTANCE, RareProperties.propertyConfig.aegisDuration * 20,
+                RareProperties.propertyConfig.aegisResistance - 1);
         player.addPotionEffect(potion);
-        potion = new PotionEffect(PotionEffectType.ABSORPTION, getConfig().getInt("Properties.Aegis.effectsDuration") * 20,
-                getConfig().getInt("Properties.Aegis.absortionLevel") * getLevel() - 1);
+        potion = new PotionEffect(PotionEffectType.ABSORPTION, RareProperties.propertyConfig.aegisDuration * 20,
+                RareProperties.propertyConfig.aegisAbsortion * getLevel() - 1);
         player.addPotionEffect(potion);
-        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(getConfig().getDouble("Properties.Aegis.sizeMultiplier"));
+        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(RareProperties.propertyConfig.aegisSize);
         player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 1F, 0.01F);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
@@ -38,23 +37,20 @@ public class Aegis extends RareProperty {
                 player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
                 player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DAMAGE, 1F, 0.01F);
             }
-        }, getConfig().getInt("Properties.Aegis.effectsDuration") * 20L);
+        }, RareProperties.propertyConfig.aegisDuration * 20L);
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.aegis")) {
+        if(player.getHealth() <= RareProperties.propertyConfig.aegisHealth) {
+            player.sendMessage(RareProperties.messages.notEnoughHealth);
             return false;
         }
 
-        if(player.getHealth() <= getConfig().getInt("Properties.Aegis.healthCost")) {
-            player.sendMessage(RareProperties.messages.notEnoughHealth);
-        }
-
         PlayerInventory inventory = player.getInventory();
-        level = checkHands(inventory, "Égida");
+        level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
             return false;

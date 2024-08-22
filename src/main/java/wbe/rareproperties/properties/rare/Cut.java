@@ -1,6 +1,5 @@
 package wbe.rareproperties.properties.rare;
 
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -10,19 +9,18 @@ import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Cut extends RareProperty {
 
     public Cut(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "cut", "Corte");
-        setDescription(getConfig().getStringList("Properties.Cut.description"));
+        super(plugin, new ArrayList<>(), "cut", RareProperties.propertyConfig.cutName);
+        setDescription(RareProperties.propertyConfig.cutDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         double damage = ((EntityDamageByEntityEvent) event).getDamage();
-        damage = damage + getConfig().getDouble("Properties.Cut.damagePerLevel") * getLevel();
+        damage = damage + RareProperties.propertyConfig.cutDamage * getLevel();
         ((EntityDamageByEntityEvent) event).setDamage(damage);
     }
 
@@ -30,19 +28,15 @@ public class Cut extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.cut")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Corte")) {
+        if(!utilities.hasProperty(player.getInventory().getItemInMainHand(), getExternalName())) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Corte");
+        level = checkProperty(item, getExternalName());
 
-        if (level < 0) {
+        if(level < 0) {
             return false;
         }
 

@@ -4,11 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
@@ -16,19 +13,19 @@ import java.util.ArrayList;
 public class Teleport extends RareProperty {
 
     public Teleport(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "teleport", "Teletransporte");
-        setDescription(getConfig().getStringList("Properties.Teleport.description"));
+        super(plugin, new ArrayList<>(), "teleport", RareProperties.propertyConfig.teleportName);
+        setDescription(RareProperties.propertyConfig.teleportDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        int cost = getConfig().getInt("Properties.Teleport.baseCost");
+        int cost = RareProperties.propertyConfig.teleportCost;
 
         if(player.getFoodLevel() < cost) {
             return;
         }
 
-        int distance = 2 + getConfig().getInt("Properties.Teleport.extraBlocksPerLevel") * getLevel();
+        int distance = 2 + RareProperties.propertyConfig.teleportBlocks * getLevel();
 
         Location playerLocation = player.getLocation();
         Vector direction = playerLocation.getDirection();
@@ -50,33 +47,15 @@ public class Teleport extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        boolean tp = false;
         int level = 0;
 
-        if(getConfig().getStringList("Messages.blacklistedWorlds").contains(player.getWorld().getName())) {
+        if(RareProperties.config.blacklistedWorlds.contains(player.getWorld().getName())) {
             return false;
         }
 
-        if(!player.hasPermission("rareproperties.use.burst")) {
-            return false;
-        }
+        level = checkHands(player.getInventory(), getExternalName());
 
-        PlayerInventory in = player.getInventory();
-        if (!tp) {
-            ItemStack hand = in.getItemInMainHand();
-            level = checkProperty(hand, "Teletransporte");
-            if(level > 0) {
-                tp = true;
-            } else {
-                ItemStack offHand = in.getItemInOffHand();
-                level = checkProperty(offHand, "Teletransporte");
-                if(level > 0) {
-                    tp = true;
-                }
-            }
-        }
-
-        if(!tp) {
+        if(level < 0) {
             return false;
         }
 

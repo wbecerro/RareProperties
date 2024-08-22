@@ -13,15 +13,15 @@ import java.util.Random;
 public class Reinforced extends RareProperty {
 
     public Reinforced(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "reinforced", "Reforzado");
-        setDescription(getConfig().getStringList("Properties.Reinforced.description"));
+        super(plugin, new ArrayList<>(), "reinforced", RareProperties.propertyConfig.reinforcedName);
+        setDescription(RareProperties.propertyConfig.reinforcedDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         Random random = new Random();
         int prob = random.nextInt(100);
-        if (getLevel() * getConfig().getInt("Properties.Reinforced.baseProbability") > prob) {
+        if (getLevel() * RareProperties.propertyConfig.reinforcedChance > prob) {
             ((PlayerItemDamageEvent) event).setCancelled(true);
         }
     }
@@ -30,12 +30,8 @@ public class Reinforced extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.reinforced")) {
-            return false;
-        }
-
         ItemStack item = ((PlayerItemDamageEvent) event).getItem();
-        level = checkProperty(item, "Reforzado");
+        level = checkProperty(item, getExternalName());
 
         if(level < 0) {
             return false;

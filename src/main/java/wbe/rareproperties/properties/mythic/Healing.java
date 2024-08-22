@@ -12,15 +12,15 @@ import java.util.ArrayList;
 public class Healing extends RareProperty {
 
     public Healing(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "healing", "Sanación");
-        setDescription(getConfig().getStringList("Properties.Healing.description"));
+        super(plugin, new ArrayList<>(), "healing", RareProperties.propertyConfig.healingName);
+        setDescription(RareProperties.propertyConfig.healingDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        int cost = getConfig().getInt("Properties.Healing.foodCost");
+        int cost = RareProperties.propertyConfig.healingCost;
 
-        double newHealth = player.getHealth() * (1 + getConfig().getDouble("Properties.Healing.healthPercent") / 100);
+        double newHealth = player.getHealth() * (1 + RareProperties.propertyConfig.healingPercent / 100);
         double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         if(newHealth > maxHealth) {
             newHealth = maxHealth;
@@ -34,11 +34,7 @@ public class Healing extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.healing")) {
-            return false;
-        }
-
-        if(player.getFoodLevel() < getConfig().getInt("Properties.Healing.foodCost")) {
+        if(player.getFoodLevel() < RareProperties.propertyConfig.healingCost) {
             return false;
         }
 
@@ -47,7 +43,7 @@ public class Healing extends RareProperty {
         }
 
         PlayerInventory inventory = player.getInventory();
-        level = checkHands(inventory, "Sanación");
+        level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
             return false;

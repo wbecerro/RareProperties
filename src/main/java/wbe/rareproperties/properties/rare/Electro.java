@@ -15,8 +15,8 @@ import java.util.Random;
 public class Electro extends RareProperty {
 
     public Electro(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "electro", "Electro");
-        setDescription(getConfig().getStringList("Properties.Electro.description"));
+        super(plugin, new ArrayList<>(), "electro", RareProperties.propertyConfig.electroName);
+        setDescription(RareProperties.propertyConfig.electroDescription);
     }
 
     @Override
@@ -26,32 +26,28 @@ public class Electro extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * getConfig().getInt("Properties.Electro.chancePerLevel")) {
+        if (random > getLevel() * RareProperties.propertyConfig.electroChance) {
             return;
         }
 
-        damage = damage + getLevel() * getConfig().getDouble("Properties.Electro.damagePerLevel");
+        damage = damage + getLevel() * RareProperties.propertyConfig.electroDamage;
         ((EntityDamageByEntityEvent) event).setDamage(damage);
-        player.playSound(player.getLocation(), Sound.valueOf(getConfig().getString("Properties.Electro.sound")), 1.0F, 1.0F);
+        player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.electroSound), 1.0F, 1.0F);
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.electro")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Electro")) {
+        if(!utilities.hasProperty(player.getInventory().getItemInMainHand(), getExternalName())) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Electro");
+        level = checkProperty(item, getExternalName());
 
-        if (level < 0) {
+        if(level < 0) {
             return false;
         }
 

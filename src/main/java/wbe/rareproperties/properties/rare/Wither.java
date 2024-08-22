@@ -17,8 +17,8 @@ import java.util.Random;
 public class Wither extends RareProperty {
 
     public Wither(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "wither", "Descomposición");
-        setDescription(getConfig().getStringList("Properties.Wither.description"));
+        super(plugin, new ArrayList<>(), "wither", RareProperties.propertyConfig.witherName);
+        setDescription(RareProperties.propertyConfig.witherDescription);
     }
 
     @Override
@@ -26,13 +26,14 @@ public class Wither extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * getConfig().getInt("Properties.Wither.chancePerLevel")) {
+        if (random > getLevel() * RareProperties.propertyConfig.witherChance) {
             return;
         }
 
         LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
-        PotionEffect potion = new PotionEffect(PotionEffectType.WITHER, getConfig().getInt("Properties.Wither.duration") * 20,
-                getConfig().getInt("Properties.Wither.modifierPerLevel") - 1);
+        PotionEffect potion = new PotionEffect(PotionEffectType.WITHER,
+                RareProperties.propertyConfig.witherDuration * 20,
+                RareProperties.propertyConfig.witherModifier - 1);
         damaged.addPotionEffect(potion);
     }
 
@@ -40,19 +41,15 @@ public class Wither extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.wither")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Descomposición")) {
+        if(!utilities.hasProperty(player.getInventory().getItemInMainHand(), getExternalName())) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Descomposición");
+        level = checkProperty(item, getExternalName());
 
-        if (level < 0) {
+        if(level < 0) {
             return false;
         }
 

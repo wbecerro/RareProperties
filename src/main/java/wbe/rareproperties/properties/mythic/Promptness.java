@@ -9,7 +9,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
@@ -17,17 +16,17 @@ import java.util.ArrayList;
 public class Promptness extends RareProperty {
 
     public Promptness(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "promptness", "Presteza");
-        setDescription(getConfig().getStringList("Properties.Promptness.description"));
+        super(plugin, new ArrayList<>(), "promptness", RareProperties.propertyConfig.promptnessName);
+        setDescription(RareProperties.propertyConfig.promptnessDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        player.setHealth(player.getHealth() - getConfig().getInt("Properties.Promptness.healthCost"));
-        PotionEffect potion = new PotionEffect(PotionEffectType.SPEED, getConfig().getInt("Properties.Promptness.effectsDuration") * 20,
-                getConfig().getInt("Properties.Promptness.speedLevel") * getLevel() - 1);
+        player.setHealth(player.getHealth() - RareProperties.propertyConfig.promptnessHealth);
+        PotionEffect potion = new PotionEffect(PotionEffectType.SPEED, RareProperties.propertyConfig.promptnessDuration * 20,
+                RareProperties.propertyConfig.promptnessSpeed * getLevel() - 1);
         player.addPotionEffect(potion);
-        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(getConfig().getDouble("Properties.Promptness.sizeMultiplier"));
+        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(RareProperties.propertyConfig.promptnessSize);
         player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_IDLE_AIR, 1F, 0.01F);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
@@ -35,23 +34,19 @@ public class Promptness extends RareProperty {
                 player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
                 player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_IDLE_GROUND, 1F, 0.01F);
             }
-        }, getConfig().getInt("Properties.Promptness.effectsDuration") * 20L);
+        }, RareProperties.propertyConfig.promptnessDuration * 20L);
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.promptness")) {
-            return false;
-        }
-
-        if(player.getHealth() <= getConfig().getInt("Properties.Promptness.healthCost")) {
+        if(player.getHealth() <= RareProperties.propertyConfig.promptnessHealth) {
             player.sendMessage(RareProperties.messages.notEnoughHealth);
         }
 
         PlayerInventory inventory = player.getInventory();
-        level = checkHands(inventory, "Presteza");
+        level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
             return false;

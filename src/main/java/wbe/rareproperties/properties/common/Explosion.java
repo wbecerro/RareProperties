@@ -16,8 +16,8 @@ import java.util.Random;
 public class Explosion extends RareProperty {
 
     public Explosion(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "explosion", "Explosión");
-        setDescription(getConfig().getStringList("Properties.Explosion.description"));
+        super(plugin, new ArrayList<>(), "explosion", RareProperties.propertyConfig.explosionName);
+        setDescription(RareProperties.propertyConfig.explosionDescription);
     }
 
     @Override
@@ -25,12 +25,12 @@ public class Explosion extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * getConfig().getInt("Properties.Explosion.chancePerLevel")) {
+        if (random > getLevel() * RareProperties.propertyConfig.explosionChance) {
             return;
         }
 
         LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
-        damaged.damage(getConfig().getInt("Properties.Explosion.damage"));
+        damaged.damage(RareProperties.propertyConfig.explosionDamage);
         damaged.getWorld().spawnEntity(damaged.getLocation(), EntityType.FIREWORK_ROCKET);
     }
 
@@ -38,19 +38,15 @@ public class Explosion extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.explosion")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Explosión")) {
+        if(!utilities.hasProperty(player.getInventory().getItemInMainHand(), getExternalName())) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Explosión");
+        level = checkProperty(item, getExternalName());
 
-        if (level < 0) {
+        if(level < 0) {
             return false;
         }
 

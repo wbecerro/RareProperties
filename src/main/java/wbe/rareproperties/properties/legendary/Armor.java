@@ -15,14 +15,14 @@ public class Armor extends RareProperty {
     private int armorAmount = 0;
 
     public Armor(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "armor", "Armadura");
-        setDescription(getConfig().getStringList("Properties.Armor.description"));
+        super(plugin, new ArrayList<>(), "armor", RareProperties.propertyConfig.armorName);
+        setDescription(RareProperties.propertyConfig.armorDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         double damage = ((EntityDamageEvent) event).getDamage();
-        damage = damage * (1 - getConfig().getDouble("Properties.Armor.reductionPercent") * armorAmount);
+        damage = damage * (1 - RareProperties.propertyConfig.armorPercent * armorAmount);
         ((EntityDamageEvent) event).setDamage(damage);
     }
 
@@ -30,12 +30,8 @@ public class Armor extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.armor")) {
-            return false;
-        }
-
         PlayerInventory inventory = player.getInventory();
-        level = checkArmor(inventory, "Armadura");
+        level = checkArmor(inventory, getExternalName());
 
         if(level < 0) {
             return false;

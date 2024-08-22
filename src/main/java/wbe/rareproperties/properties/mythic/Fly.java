@@ -15,13 +15,13 @@ public class Fly extends RareProperty {
     public static HashMap<Player, Integer> playersFlying = new HashMap<Player, Integer>();
 
     public Fly(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "fly", "Vuelo");
-        setDescription(getConfig().getStringList("Properties.Fly.description"));
+        super(plugin, new ArrayList<>(), "fly", RareProperties.propertyConfig.flyName);
+        setDescription(RareProperties.propertyConfig.flyDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        if (player.getFoodLevel() <= 0) {
+        if(player.getFoodLevel() <= 0) {
             player.setAllowFlight(false);
         } else {
             player.setAllowFlight(true);
@@ -35,21 +35,16 @@ public class Fly extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
-            Fly.playersFlying.remove(player);
-            return false;
-        }
-
-        if(!player.hasPermission("rareproperties.use.fly")) {
+        if(player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
             Fly.playersFlying.remove(player);
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
-        level = checkArmor(inventory, "Vuelo");
+        level = checkArmor(inventory, getExternalName());
 
         if(level < 0) {
-            level = checkHands(inventory, "Vuelo");
+            level = checkHands(inventory, getExternalName());
         }
 
         if(level < 0) {

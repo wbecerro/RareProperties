@@ -18,16 +18,14 @@ import java.util.List;
 public class Demolition extends RareProperty {
 
     public Demolition(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "demolition", "Demolición");
-        setDescription(getConfig().getStringList("Properties.Demolition.description"));
+        super(plugin, new ArrayList<>(), "demolition", RareProperties.propertyConfig.demolitionName);
+        setDescription(RareProperties.propertyConfig.demolitionDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        int cost = getConfig().getInt("Properties.Demolition.foodCost");
-
-        int radius = getConfig().getInt("Properties.Demolition.baseRange") + getLevel();
-        int damage = getConfig().getInt("Properties.Demolition.baseDamage") + 2 * getLevel();
+        int radius = RareProperties.propertyConfig.demolitionRange + getLevel();
+        double damage = RareProperties.propertyConfig.demolitionDamage + 2 * getLevel();
 
         for(Location loc : getCircle(player.getLocation(),2,(2*((int)(Math.PI*2))))){
             Block block = loc.clone().subtract(0, 1, 0).getBlock();
@@ -67,23 +65,19 @@ public class Demolition extends RareProperty {
         }
 
         player.playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 1F, 0.7F);
-        player.setFoodLevel(player.getFoodLevel() - cost);
+        player.setFoodLevel(player.getFoodLevel() - RareProperties.propertyConfig.demolitionCost);
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(!player.hasPermission("rareproperties.use.demolition")) {
-            return false;
-        }
-
-        if(player.getFoodLevel() < getConfig().getInt("Properties.Demolition.foodCost")) {
+        if(player.getFoodLevel() < RareProperties.propertyConfig.demolitionCost) {
             return false;
         }
 
         PlayerInventory inventory = player.getInventory();
-        level = checkHands(inventory, "Demolición");
+        level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
             return false;

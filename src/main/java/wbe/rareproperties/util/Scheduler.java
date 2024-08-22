@@ -27,7 +27,7 @@ public class Scheduler {
                 for(Player player : keys) {
                     if(player.isFlying()) {
                         int level = Fly.playersFlying.get(player);
-                        int rest = (int)(config.getDouble("Properties.Fly.baseCost") - level);
+                        int rest = RareProperties.propertyConfig.flyCost - level;
                         final int food = rest;
                         player.setFoodLevel(player.getFoodLevel() - food);
                     }
@@ -37,12 +37,12 @@ public class Scheduler {
                     }
                 }
             }
-        }, 10L, config.getLong("Properties.Fly.time") * 20);
+        }, 10L, RareProperties.propertyConfig.flyTime * 20L);
     }
 
     private static void startSunTimeChecking(FileConfiguration config, RareProperties plugin) {
         World world = Bukkit.getServer().getWorld("world");
-        double maxDamage = config.getDouble("Properties.Solem.damagePercent");
+        double maxDamage = RareProperties.propertyConfig.solemDamage;
 
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override
@@ -77,7 +77,7 @@ public class Scheduler {
 
     private static void startMoonTimeChecking(FileConfiguration config, RareProperties plugin) {
         World world = Bukkit.getServer().getWorld("world");
-        double maxDamage = config.getDouble("Properties.Noctis.damagePercent");
+        double maxDamage = RareProperties.propertyConfig.noctisDamage;
 
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override

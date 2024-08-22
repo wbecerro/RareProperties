@@ -16,22 +16,22 @@ import java.util.List;
 public class Swarm extends RareProperty {
 
     public Swarm(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "swarm", "Enjambre");
-        setDescription(getConfig().getStringList("Properties.Swarm.description"));
+        super(plugin, new ArrayList<>(), "swarm", RareProperties.propertyConfig.swarmName);
+        setDescription(RareProperties.propertyConfig.swarmDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
         double damage = ((EntityDamageByEntityEvent) event).getDamage();
-        int distance = getConfig().getInt("Properties.Swarm.distance");
+        int distance = RareProperties.propertyConfig.swarmDistance;
         List<Entity> entites = player.getNearbyEntities(distance, distance, distance);
         entites.removeIf(e -> !(e instanceof LivingEntity));
 
         int size = entites.size();
-        int maxEntities = getConfig().getInt("Properties.Swarm.maxEntities");
+        int maxEntities = RareProperties.propertyConfig.swarmMaxEntities;
         int amount = Math.min(size, maxEntities);
 
-        int maxPercent = getConfig().getInt("Properties.Swarm.maxPercentPerLevel") * getLevel();
+        int maxPercent = RareProperties.propertyConfig.swarmPercent * getLevel();
         int damagePercentPerEntity = maxPercent / maxEntities;
         double currentPercent = (damagePercentPerEntity * amount) / 100.0;
         double modifier = 1 + currentPercent;
@@ -43,17 +43,9 @@ public class Swarm extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if (!player.hasPermission("rareproperties.use.swarm")) {
-            return false;
-        }
-
-        if (!utilities.hasProperty(player.getInventory().getItemInMainHand(), "Enjambre")) {
-            return false;
-        }
-
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, "Enjambre");
+        level = checkProperty(item, getExternalName());
 
         if(level < 0) {
             return false;
