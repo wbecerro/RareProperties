@@ -16,6 +16,7 @@ import wbe.rareproperties.properties.epic.Critic;
 import wbe.rareproperties.properties.epic.Vampirism;
 import wbe.rareproperties.properties.legendary.Noctis;
 import wbe.rareproperties.properties.legendary.Solem;
+import wbe.rareproperties.properties.legendary.Swarm;
 import wbe.rareproperties.properties.rare.Cut;
 import wbe.rareproperties.properties.rare.Electro;
 import wbe.rareproperties.properties.rare.Poison;
@@ -67,6 +68,13 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean noctisProperty = noctis.checkUse(player, event);
         if(noctisProperty) {
             noctis.applyEffect(player, event);
+        }
+
+        // Comprobación de Enjambre
+        Swarm swarm = new Swarm(plugin);
+        boolean swarmProperty = swarm.checkUse(player, event);
+        if(swarmProperty) {
+            swarm.applyEffect(player, event);
         }
 
         // Comprobación de Vampirismo

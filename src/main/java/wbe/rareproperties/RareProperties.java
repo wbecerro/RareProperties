@@ -18,6 +18,7 @@ import wbe.rareproperties.properties.epic.Vampirism;
 import wbe.rareproperties.properties.legendary.Armor;
 import wbe.rareproperties.properties.legendary.Noctis;
 import wbe.rareproperties.properties.legendary.Solem;
+import wbe.rareproperties.properties.legendary.Swarm;
 import wbe.rareproperties.properties.mythic.*;
 import wbe.rareproperties.properties.rare.Cut;
 import wbe.rareproperties.properties.rare.Electro;
@@ -57,7 +58,8 @@ public class RareProperties extends JavaPlugin {
             new Capture(this), new Teleport(this), new Reinforced(this), new Aegis(this), new Demolition(this), new Promptness(this),
             new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),
             new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this),
-            new Fire(this), new Freezee(this), new Explosion(this), new Shrink(this), new Enlarge(this), new Adrenaline(this)));
+            new Fire(this), new Freezee(this), new Explosion(this), new Shrink(this), new Enlarge(this), new Adrenaline(this),
+            new Swarm(this)));
 
     public void onEnable() {
         saveDefaultConfig();

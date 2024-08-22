@@ -203,7 +203,7 @@ Rarities:
         - "Demolición"
         - "Vuelo"
         - "Presteza"
-        - "Propulsion"
+        - "Propulsión"
         - "Reforzado"
         - "Reparación"
         - "Teletransporte"
@@ -216,7 +216,8 @@ Rarities:
       properties:
         - "Solem"
         - "Noctis"
-        - "Armadura"q
+        - "Armadura"
+        - "Enjambre"
     Epic:
       name: "Épico"
       color: "&5"
@@ -321,6 +322,7 @@ Properties:
       - "&7Gasta comida permitiendo volar."
       - "&7&oSolo funciona en armadura o un objeto"
       - "&7&oen la mano primaria o secundaria."
+      - "&7&oPuede ser aplicado a todo."
   Repair:
     baseCost: 10
     repairPercentage: 10
@@ -329,6 +331,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo reparar el"
       - "&7objeto de la primera posición."
+      - "&7&oEs un consumible (clic derecho)."
   Burst:
     baseCost: 11
     baseVelocity: 2
@@ -337,6 +340,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo enviar"
       - "&7a volar a las entidades cercanas."
+      - "&7&oEs un consumible (clic derecho)."
   Teleport:
     baseCost: 1
     extraBlocksPerLevel: 2
@@ -345,6 +349,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo teletransportarte"
       - "&7hacia donde estés mirando."
+      - "&7&oEs un consumible (clic derecho)."
   Capture:
     maxProbability: 10000
     description:
@@ -352,6 +357,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Permite conseguir huevos de entidades"
       - "&7al matarlas con una pequeña posibilidad."
+      - "&7&oSolo funciona en arma."
   Reinforced:
     baseProbability: 5
     description:
@@ -359,6 +365,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Permite no gastar usos al objeto al"
       - "&7que se pone con una probabilidad."
+      - "&7&oPuede ser aplicado a todo."
   Aegis:
     resistanceLevel: 2
     absortionLevel: 2
@@ -370,6 +377,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Sacrifica vida obteniendo resistencia,"
       - "&7absorción y un aumento de tamaño."
+      - "&7&oEs un consumible (clic derecho)."
   Demolition:
     baseDamage: 15
     baseRange: 4
@@ -379,6 +387,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo hacer un golpe"
       - "&7en área de gran poder que además empuja."
+      - "&7&oEs un consumible (clic derecho)."
   Promptness:
     speedLevel: 1
     sizeMultiplier: 0.6
@@ -389,6 +398,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Sacrifica vida obteniendo velocidad"
       - "&7y una disminución de tamaño."
+      - "&7&oEs un consumible (clic derecho)."
   Propulsion:
     baseImpulse: 2
     foodCost: 10
@@ -397,6 +407,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo elevarte"
       - "&7en el aire como un cohete."
+      - "&7&oEs un consumible (clic derecho)."
   Healing:
     foodCost: 14
     healthPercent: 5
@@ -405,6 +416,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Gasta comida permitiendo curarte"
       - "&7un porcentaje de tu vida."
+      - "&7&oEs un consumible (clic derecho)."
   Adrenaline:
     strengthLevel: 6
     poisonLevel: 2
@@ -419,6 +431,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Sacrifica vida obteniendo fuerza,"
       - "&7veneno y un aumento de tamaño."
+      - "&7&oEs un consumible (clic derecho)."
   Solem:
     damagePercent: 0.2
     description:
@@ -426,6 +439,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Si es de día harás cada vez más"
       - "&7daño hasta el mediodía."
+      - "&7&oSolo funciona en arma."
   Noctis:
     damagePercent: 0.2
     description:
@@ -433,6 +447,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Si es de noche harás cada vez más"
       - "&7daño hasta la medianoche."
+      - "&7&oSolo funciona en arma."
   Armor:
     reductionPercent: 0.025
     description:
@@ -440,18 +455,30 @@ Properties:
       - "&7&nDescripción:"
       - "&7Otorga mitigación de daño al ser golpeado."
       - "&7&oSolo funciona en armadura."
+  Swarm:
+    maxPercentPerLevel: 10
+    maxEntities: 10
+    distance: 20
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Obtén poder por las entidades"
+      - "&7cercanas a ti."
+      - "&7&oSolo funciona en arma."
   Vampirism:
     healthSteal: 0.01
     description:
       - "&7"
       - "&7&nDescripción:"
       - "&7Al golpear te curarás una parte del daño."
+      - "&7&oSolo funciona en arma."
   Backstab:
     extraDamage: 0.1
     description:
       - "&7"
       - "&7&nDescripción:"
       - "&7Al golpear por la espalda harás más daño."
+      - "&7&oSolo funciona en arma."
   Critic:
     extraDamage: 0.2
     chancePerLevel: 1
@@ -460,6 +487,7 @@ Properties:
       - "&7"
       - "&7&nDescripción:"
       - "&7Probabilidad de hacer daño extra."
+      - "&7&oSolo funciona en arma."
   Electro:
     damagePerLevel: 2
     chancePerLevel: 7
@@ -469,12 +497,14 @@ Properties:
       - "&7&nDescripción:"
       - "&7Probabilidad de lanzar un rayo que"
       - "&7no destruye objeto y hace daño."
+      - "&7&oSolo funciona en arma."
   Cut:
     damagePerLevel: 1
     description:
       - "&7"
       - "&7&nDescripción:"
       - "&7Añadirá daño extra a tus ataques."
+      - "&7&oSolo funciona en arma."
   Wither:
     modifierPerLevel: 1
     duration: 5
@@ -483,6 +513,7 @@ Properties:
       - "&7"
       - "&7&nDescripción:"
       - "&7Probabilidad de infligir wither al golpear."
+      - "&7&oSolo funciona en arma."
   Poison:
     modifierPerLevel: 1
     duration: 5
@@ -491,12 +522,14 @@ Properties:
       - "&7"
       - "&7&nDescripción:"
       - "&7Probabilidad de infligir veneno al golpear."
+      - "&7&oSolo funciona en arma."
   Fire:
     timePerLevel: 2
     description:
       - "&7"
       - "&7&nDescripción:"
       - "&7Incendiará a los enemigos al golpearlos."
+      - "&7&oSolo funciona en arma."
   Freezee:
     chancePerLevel: 7
     damage: 3
@@ -505,6 +538,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Congelará a los enemigos al golpearlos"
       - "&7y les hará un poco de daño."
+      - "&7&oSolo funciona en arma."
   Explosion:
     chancePerLevel: 5
     damage: 2
@@ -513,6 +547,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Al golpear a los enemigos les hará un"
       - "&7poco de daño e invocará un cohete."
+      - "&7&oSolo funciona en arma."
   Shrink:
     chancePerLevel: 1
     durationPerLevel: 3
@@ -523,6 +558,7 @@ Properties:
       - "&7Al golpear a los enemigos tendrá la"
       - "&7posibilidad de hacer a los enemigos"
       - "&7más pequeños por un tiempo."
+      - "&7&oSolo funciona en arma."
   Enlarge:
     chancePerLevel: 1
     durationPerLevel: 3
@@ -533,3 +569,4 @@ Properties:
       - "&7Al golpear a los enemigos tendrá la"
       - "&7posibilidad de hacer a los enemigos"
       - "&7más grandes por un tiempo."
+      - "&7&oSolo funciona en arma."
