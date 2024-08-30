@@ -19,17 +19,14 @@ public class CommandListener implements CommandExecutor {
 
     private RareProperties plugin;
 
-    private FileConfiguration config;
-
     private Utilities utilities;
 
     public CommandListener(RareProperties plugin) {
         this.plugin = plugin;
-        this.config = this.plugin.getConfig();
         this.utilities = new Utilities(plugin);
     }
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("RareProperties")) {
+        if(cmd.getName().equalsIgnoreCase("RareProperties")) {
             Player p = null;
             if(sender instanceof Player) {
                 p = (Player) sender;
