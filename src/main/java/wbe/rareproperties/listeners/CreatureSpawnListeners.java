@@ -41,26 +41,32 @@ public class CreatureSpawnListeners implements Listener {
             return;
         }
 
-        ItemStack item = new ItemStack(Material.AIR);
-        if(random.nextInt(2) > 0) {
-            item = RareProperties.itemManager.generateItem(true);
-            if(EnchantmentTarget.ARMOR_HEAD.includes(item)) {
-                entity.getEquipment().setHelmet(item);
-                entity.getEquipment().setHelmetDropChance(100F);
-            } else if(EnchantmentTarget.ARMOR_TORSO.includes(item)) {
-                entity.getEquipment().setChestplate(item);
-                entity.getEquipment().setChestplateDropChance(100F);
-            } else if(EnchantmentTarget.ARMOR_LEGS.includes(item)) {
-                entity.getEquipment().setLeggings(item);
-                entity.getEquipment().setLeggingsDropChance(100F);
-            } else if(EnchantmentTarget.ARMOR_FEET.includes(item)) {
-                entity.getEquipment().setBoots(item);
-                entity.getEquipment().setBootsDropChance(100F);
+        ItemStack item;
+        for(int i=0;i<5;i++) {
+            if(random.nextInt(100) > RareProperties.config.itemSlotChance) {
+                continue;
             }
-        } else {
-            item = RareProperties.itemManager.generateItem(false);
-            entity.getEquipment().setItemInMainHand(item);
-            entity.getEquipment().setItemInMainHandDropChance(100F);
+
+            if(random.nextInt(2) > 0) {
+                item = RareProperties.itemManager.generateItem(true);
+                if(EnchantmentTarget.ARMOR_HEAD.includes(item)) {
+                    entity.getEquipment().setHelmet(item);
+                    entity.getEquipment().setHelmetDropChance(100F);
+                } else if(EnchantmentTarget.ARMOR_TORSO.includes(item)) {
+                    entity.getEquipment().setChestplate(item);
+                    entity.getEquipment().setChestplateDropChance(100F);
+                } else if(EnchantmentTarget.ARMOR_LEGS.includes(item)) {
+                    entity.getEquipment().setLeggings(item);
+                    entity.getEquipment().setLeggingsDropChance(100F);
+                } else if(EnchantmentTarget.ARMOR_FEET.includes(item)) {
+                    entity.getEquipment().setBoots(item);
+                    entity.getEquipment().setBootsDropChance(100F);
+                }
+            } else {
+                item = RareProperties.itemManager.generateItem(false);
+                entity.getEquipment().setItemInMainHand(item);
+                entity.getEquipment().setItemInMainHandDropChance(100F);
+            }
         }
     }
 }

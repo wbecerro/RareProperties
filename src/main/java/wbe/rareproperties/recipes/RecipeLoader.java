@@ -6,15 +6,17 @@ import org.bukkit.inventory.ShapelessRecipe;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.items.IdentifierTome;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RecipeLoader {
 
-    RareProperties plugin;
+    private RareProperties plugin;
 
-    NamespacedKey identifierTome;
+    private List<NamespacedKey> keys = new ArrayList<>();
 
     public RecipeLoader(RareProperties plugin) {
         this.plugin = plugin;
-        identifierTome = new NamespacedKey(plugin, "IdentifierTome");
     }
 
     public void loadRecipes() {
@@ -22,13 +24,17 @@ public class RecipeLoader {
     }
 
     public void unloadRecipes() {
-        plugin.getServer().removeRecipe(identifierTome);
+        for(NamespacedKey key : keys) {
+            plugin.getServer().removeRecipe(key);
+        }
     }
 
     private void loadTomeRecipe() {
-        ShapelessRecipe recipe = new ShapelessRecipe(identifierTome, new IdentifierTome(plugin));
+        NamespacedKey key = new NamespacedKey(plugin, "IdentifierTome");
+        ShapelessRecipe recipe = new ShapelessRecipe(key, new IdentifierTome(plugin));
         recipe.addIngredient(3, Material.BOOK);
         recipe.addIngredient(1, Material.ENDER_EYE);
         plugin.getServer().addRecipe(recipe);
+        keys.add(key);
     }
 }

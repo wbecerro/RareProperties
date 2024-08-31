@@ -183,6 +183,7 @@ ConfigValues:
   socketChance: 2
   tomeChance: 6
   blockSpawnerSpawns: false
+  itemSlotChance: 40
   blacklistedWorlds:
     - Halloween
 

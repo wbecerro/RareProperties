@@ -1,5 +1,6 @@
 package wbe.rareproperties.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -44,7 +45,7 @@ public class EntityDeathListeners implements Listener {
             return;
         }
 
-        Player killer = event.getEntity().getKiller();
+        LivingEntity killer = event.getEntity().getKiller();
         if(killer == null) {
             return;
         }
@@ -54,11 +55,11 @@ public class EntityDeathListeners implements Listener {
             return;
         }
 
-        if(random.nextInt(100) > RareProperties.config.socketChance) {
+        if(random.nextInt(100) < RareProperties.config.socketChance) {
             event.getDrops().add(new Socket(plugin));
         }
 
-        if(random.nextInt(100) > RareProperties.config.tomeChance + RareProperties.config.socketChance) {
+        if(random.nextInt(100) < RareProperties.config.tomeChance) {
             event.getDrops().add(new IdentifierTome(plugin));
         }
     }
