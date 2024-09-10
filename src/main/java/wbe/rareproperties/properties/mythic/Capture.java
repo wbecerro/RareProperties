@@ -27,7 +27,7 @@ public class Capture extends RareProperty {
 
         Random random = new Random();
         int prob = random.nextInt(RareProperties.propertyConfig.captureChance);
-        if (getLevel() < prob) {
+        if(getLevel() < prob) {
             return;
         }
 

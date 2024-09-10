@@ -40,7 +40,7 @@ public class Enlarge extends RareProperty {
             public void run() {
                 damaged.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
             }
-        }, RareProperties.propertyConfig.enlargeDuration * 20L);
+        }, getLevel() * RareProperties.propertyConfig.enlargeDuration * 20L);
     }
 
     @Override

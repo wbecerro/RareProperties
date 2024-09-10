@@ -40,7 +40,7 @@ public class Shrink extends RareProperty {
             public void run() {
                 damaged.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
             }
-        }, RareProperties.propertyConfig.shrinkDuration * 20L);
+        }, getLevel() * RareProperties.propertyConfig.shrinkDuration * 20L);
     }
 
     @Override

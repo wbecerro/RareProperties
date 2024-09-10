@@ -25,11 +25,11 @@ public class Repair extends RareProperty {
         int cost = RareProperties.propertyConfig.repairCost - getLevel();
         ItemStack firstObject = in.getItem(0);
         Damageable meta = (Damageable) firstObject.getItemMeta();
-        if (player.getFoodLevel() > cost && firstObject.getType() != Material.AIR && meta.getDamage() > 0) {
+        if(player.getFoodLevel() > cost && firstObject.getType() != Material.AIR && meta.getDamage() > 0) {
             int amount = Math.round(firstObject.getType().getMaxDurability() / 100 * RareProperties.propertyConfig.repairPercent * getLevel());
             int durability = (meta.getDamage() - amount);
 
-            if (durability < 0) {
+            if(durability < 0) {
                 durability = 0;
             }
 

@@ -26,7 +26,7 @@ public class Electro extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * RareProperties.propertyConfig.electroChance) {
+        if(random > getLevel() * RareProperties.propertyConfig.electroChance) {
             return;
         }
 

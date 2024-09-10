@@ -421,8 +421,8 @@ Properties:
       - "&7&oEs un consumible (clic derecho)."
   Healing:
     name: "Sanación"
-    foodCost: 14
-    healthPercent: 5
+    foodCost: 8
+    healthPercent: 6
     description:
       - "&7"
       - "&7&nDescripción:"
@@ -500,7 +500,7 @@ Properties:
       - "&7&oSolo funciona en arma."
   Critic:
     name: "Crítico"
-    extraDamage: 0.2
+    extraDamage: 0.3
     chancePerLevel: 1
     sound: ENTITY_ZOMBIE_ATTACK_IRON_DOOR
     description:

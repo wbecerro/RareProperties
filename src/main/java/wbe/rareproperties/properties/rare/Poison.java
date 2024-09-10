@@ -26,14 +26,14 @@ public class Poison extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * RareProperties.propertyConfig.poisonChance) {
+        if(random > getLevel() * RareProperties.propertyConfig.poisonChance) {
             return;
         }
 
         LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
         PotionEffect potion = new PotionEffect(PotionEffectType.POISON,
-                RareProperties.propertyConfig.poisonDuration * 20,
-                RareProperties.propertyConfig.poisonModifier - 1);
+                getLevel() * RareProperties.propertyConfig.poisonDuration * 20,
+                getLevel() * RareProperties.propertyConfig.poisonModifier - 1);
         damaged.addPotionEffect(potion);
     }
 

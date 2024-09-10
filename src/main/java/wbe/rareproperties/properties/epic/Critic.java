@@ -26,7 +26,7 @@ public class Critic extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * RareProperties.propertyConfig.criticChance) {
+        if(random > getLevel() * RareProperties.propertyConfig.criticChance) {
             return;
         }
 

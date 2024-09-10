@@ -26,14 +26,14 @@ public class Wither extends RareProperty {
         Random rand = new Random();
         int random = rand.nextInt(100);
 
-        if (random > getLevel() * RareProperties.propertyConfig.witherChance) {
+        if(random > getLevel() * RareProperties.propertyConfig.witherChance) {
             return;
         }
 
         LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
         PotionEffect potion = new PotionEffect(PotionEffectType.WITHER,
-                RareProperties.propertyConfig.witherDuration * 20,
-                RareProperties.propertyConfig.witherModifier - 1);
+                getLevel() * RareProperties.propertyConfig.witherDuration * 20,
+                getLevel() * RareProperties.propertyConfig.witherModifier - 1);
         damaged.addPotionEffect(potion);
     }
 

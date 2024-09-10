@@ -21,7 +21,7 @@ public class Reinforced extends RareProperty {
     public void applyEffect(Player player, Event event) {
         Random random = new Random();
         int prob = random.nextInt(100);
-        if (getLevel() * RareProperties.propertyConfig.reinforcedChance > prob) {
+        if(getLevel() * RareProperties.propertyConfig.reinforcedChance > prob) {
             ((PlayerItemDamageEvent) event).setCancelled(true);
         }
     }
