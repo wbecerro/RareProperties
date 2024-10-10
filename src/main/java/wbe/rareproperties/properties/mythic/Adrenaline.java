@@ -51,15 +51,15 @@ public class Adrenaline extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(player.getHealth() <= RareProperties.propertyConfig.adrenalineHealth) {
-            player.sendMessage(RareProperties.messages.notEnoughHealth);
-            return false;
-        }
-
         PlayerInventory inventory = player.getInventory();
         level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
+            return false;
+        }
+
+        if(player.getHealth() <= RareProperties.propertyConfig.adrenalineHealth) {
+            player.sendMessage(RareProperties.messages.notEnoughHealth);
             return false;
         }
 

@@ -58,6 +58,7 @@ public class Messages {
         giveRandomParams = config.getString("Messages.giveRandomParams").replace("&", "§");
         cannotTeleport = config.getString("Messages.cannotTeleport").replace("&", "§");
         captureSuccess = config.getString("Messages.captureSuccess").replace("&", "§");
+        notEnoughHealth = config.getString("Messages.notEnoughHealth").replace("&", "§");
         help = config.getStringList("Messages.help");
         reload = config.getString("Messages.reload").replace("&", "§");
         socketGiven = config.getString("Messages.socketGiven").replace("&", "§");

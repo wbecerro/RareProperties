@@ -34,6 +34,9 @@ public class InventoryClickListeners implements Listener {
 
         ItemStack playerItem = e.getCursor();
         ItemMeta meta = playerItem.getItemMeta();
+        if(meta == null) {
+            return;
+        }
 
         NamespacedKey propertyKey = new NamespacedKey(plugin, "SindrisFavourProperty");
         NamespacedKey levelKey = new NamespacedKey(plugin, "SindrisFavourLevel");

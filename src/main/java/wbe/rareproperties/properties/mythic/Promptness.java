@@ -41,14 +41,15 @@ public class Promptness extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(player.getHealth() <= RareProperties.propertyConfig.promptnessHealth) {
-            player.sendMessage(RareProperties.messages.notEnoughHealth);
-        }
-
         PlayerInventory inventory = player.getInventory();
         level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
+            return false;
+        }
+
+        if(player.getHealth() <= RareProperties.propertyConfig.promptnessHealth) {
+            player.sendMessage(RareProperties.messages.notEnoughHealth);
             return false;
         }
 
