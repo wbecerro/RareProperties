@@ -182,10 +182,19 @@ public class CommandListener implements CommandExecutor {
                 }
                 if(args.length > 1) {
                     Bukkit.getPlayer(args[1]).sendMessage(RareProperties.messages.itemGiven);
-                    Bukkit.getPlayer(args[1]).getInventory().addItem(new ItemStack[]{item});
+                    p = Bukkit.getPlayer(args[1]);
+                    if(p.getInventory().firstEmpty() == -1) {
+                        p.getWorld().dropItem(p.getLocation(), item);
+                    } else {
+                        p.getInventory().addItem(item);
+                    }
                 } else {
                     p.sendMessage(RareProperties.messages.itemGiven);
-                    p.getInventory().addItem(new ItemStack[]{item});
+                    if(p.getInventory().firstEmpty() == -1) {
+                        p.getWorld().dropItem(p.getLocation(), item);
+                    } else {
+                        p.getInventory().addItem(item);
+                    }
                 }
             } else if(args[0].equalsIgnoreCase("addSocket")) {
                 if(!sender.hasPermission("rareproperties.command.addSocket")) {

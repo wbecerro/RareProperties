@@ -1,5 +1,6 @@
 package wbe.rareproperties.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -210,7 +211,11 @@ public class Utilities {
     public void giveProperty(String property, String level, Player p) {
         SindrisFavour sindrisFavour = new SindrisFavour();
         sindrisFavour.setProperty(getProperty(property), level, plugin);
-        p.getInventory().addItem(new ItemStack[] { sindrisFavour });
+        if(p.getInventory().firstEmpty() == -1) {
+            p.getWorld().dropItem(p.getLocation(), sindrisFavour);
+        } else {
+            p.getInventory().addItem(sindrisFavour);
+        }
         p.sendMessage(RareProperties.messages.propertyGiven.replace("%property%", property).replace("%level%", level));
         p.updateInventory();
     }
@@ -222,7 +227,11 @@ public class Utilities {
 
         SindrisFavour sindrisFavour = new SindrisFavour();
         sindrisFavour.setProperty(getProperty(property), level, plugin);
-        p.getInventory().addItem(new ItemStack[] { sindrisFavour });
+        if(p.getInventory().firstEmpty() == -1) {
+            p.getWorld().dropItem(p.getLocation(), sindrisFavour);
+        } else {
+            p.getInventory().addItem(sindrisFavour);
+        }
         p.updateInventory();
     }
 
@@ -231,14 +240,23 @@ public class Utilities {
         if(color != null) {
             socket = new Socket(plugin, color.toUpperCase());
         }
-        player.getInventory().addItem(new ItemStack[]{socket});
+
+        if(player.getInventory().firstEmpty() == -1) {
+            player.getWorld().dropItem(player.getLocation(), socket);
+        } else {
+            player.getInventory().addItem(socket);
+        }
         player.sendMessage(RareProperties.messages.socketGiven);
         player.updateInventory();
     }
 
     public void giveTome(Player player) {
         IdentifierTome tome = new IdentifierTome(plugin);
-        player.getInventory().addItem(new ItemStack[]{tome});
+        if(player.getInventory().firstEmpty() == -1) {
+            player.getWorld().dropItem(player.getLocation(), tome);
+        } else {
+            player.getInventory().addItem(tome);
+        }
         player.sendMessage(RareProperties.messages.tomeGiven);
         player.updateInventory();
     }
