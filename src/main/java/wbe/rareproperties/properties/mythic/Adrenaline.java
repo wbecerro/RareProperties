@@ -49,7 +49,7 @@ public class Adrenaline extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        int level = 0;
+        int level = 1;
 
         PlayerInventory inventory = player.getInventory();
         level = checkHands(inventory, getExternalName());

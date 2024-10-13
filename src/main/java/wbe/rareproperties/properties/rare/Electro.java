@@ -1,6 +1,7 @@
 package wbe.rareproperties.properties.rare;
 
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -32,6 +33,8 @@ public class Electro extends RareProperty {
 
         damage = damage + getLevel() * RareProperties.propertyConfig.electroDamage;
         ((EntityDamageByEntityEvent) event).setDamage(damage);
+        Entity entity = ((EntityDamageByEntityEvent) event).getEntity();
+        entity.getWorld().strikeLightningEffect(entity.getLocation());
         player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.electroSound), 1.0F, 1.0F);
     }
 

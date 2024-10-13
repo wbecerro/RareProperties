@@ -104,7 +104,7 @@ public abstract class RareProperty {
 
     public int checkProperty(ItemStack is, String property) {
         ItemMeta meta = is.getItemMeta();
-        int level = 0;
+        int level = -1;
 
         NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
         if(meta == null) {

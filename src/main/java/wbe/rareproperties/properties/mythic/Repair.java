@@ -6,6 +6,7 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.RareProperty;
 
@@ -24,7 +25,15 @@ public class Repair extends RareProperty {
 
         int cost = RareProperties.propertyConfig.repairCost - getLevel();
         ItemStack firstObject = in.getItem(0);
-        Damageable meta = (Damageable) firstObject.getItemMeta();
+        if(firstObject == null || firstObject.getType().equals(Material.AIR)) {
+            return;
+        }
+        ItemMeta firstObjectMeta = firstObject.getItemMeta();
+        if(firstObjectMeta == null) {
+            return;
+        }
+        Damageable meta = (Damageable) firstObjectMeta;
+
         if(player.getFoodLevel() > cost && firstObject.getType() != Material.AIR && meta.getDamage() > 0) {
             int amount = Math.round(firstObject.getType().getMaxDurability() / 100 * RareProperties.propertyConfig.repairPercent * getLevel());
             int durability = (meta.getDamage() - amount);
@@ -43,7 +52,7 @@ public class Repair extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        int level = 0;
+        int level = -1;
 
         level = checkHands(player.getInventory(), getExternalName());
 

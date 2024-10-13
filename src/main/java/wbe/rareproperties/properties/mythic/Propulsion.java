@@ -29,7 +29,7 @@ public class Propulsion extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        int level = 0;
+        int level = -1;
 
         if(player.getFoodLevel() < RareProperties.propertyConfig.propulsionCost) {
             return false;

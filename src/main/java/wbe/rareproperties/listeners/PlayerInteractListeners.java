@@ -23,6 +23,36 @@ public class PlayerInteractListeners implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
+    public void onUsingFirework(PlayerInteractEvent event) {
+        if(!event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                return;
+            }
+        }
+
+        Player player = event.getPlayer();
+        if(!player.isGliding()) {
+            return;
+        }
+
+        ItemStack item = event.getItem();
+        if(item == null || item.getType().equals(Material.AIR)) {
+            return;
+        }
+
+        if(!item.getType().equals(Material.FIREWORK_ROCKET)) {
+            return;
+        }
+
+        // Comprobación de Cohetería
+        Rocketry rocketry = new Rocketry(plugin);
+        boolean rocketryProperty = rocketry.checkUse(player, event);
+        if(rocketryProperty) {
+            rocketry.applyEffect(player, event);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onInteractRareItem(PlayerInteractEvent event) {
         if(!event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             return;
@@ -103,7 +133,9 @@ public class PlayerInteractListeners implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void useTomeOnInteract(PlayerInteractEvent event) {
         if(!event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
-            return;
+            if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                return;
+            }
         }
 
         Player player = event.getPlayer();

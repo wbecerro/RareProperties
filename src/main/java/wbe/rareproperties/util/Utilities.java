@@ -1,9 +1,7 @@
 package wbe.rareproperties.util;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -20,7 +18,6 @@ import wbe.rareproperties.rarities.PropertyRarity;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -180,6 +177,11 @@ public class Utilities {
         if(meta.hasLore()) {
             List<String> lore = meta.getLore();
             int line = getLine(lore, property);
+
+            if(line == -1) {
+                p.sendMessage(RareProperties.messages.propertyNotPresent);
+                return;
+            }
 
             lore.remove(line);
             meta.getPersistentDataContainer().remove(key);

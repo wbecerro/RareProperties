@@ -28,7 +28,7 @@ public class Reinforced extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        int level = 0;
+        int level = -1;
 
         ItemStack item = ((PlayerItemDamageEvent) event).getItem();
         level = checkProperty(item, getExternalName());

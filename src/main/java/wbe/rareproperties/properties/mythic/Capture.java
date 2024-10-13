@@ -1,5 +1,6 @@
 package wbe.rareproperties.properties.mythic;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -50,7 +51,7 @@ public class Capture extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        int level = 0;
+        int level = -1;
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();

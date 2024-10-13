@@ -445,6 +445,15 @@ Properties:
       - "&7Sacrifica vida obteniendo fuerza,"
       - "&7veneno y un aumento de tamaño."
       - "&7&oEs un consumible (clic derecho)."
+  Rocketry:
+    name: "Cohetería"
+    chancePerLevel: 10
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Permite no gastar cohetes al"
+      - "&7usar la elytra."
+      - "&7&oSolo funciona en elytra."
   Solem:
     name: "Solem"
     damagePercent: 0.2

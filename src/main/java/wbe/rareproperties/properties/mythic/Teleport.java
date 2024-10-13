@@ -47,7 +47,7 @@ public class Teleport extends RareProperty {
 
     @Override
     public boolean checkUse(Player player, Event event) {
-        int level = 0;
+        int level = -1;
 
         if(RareProperties.config.blacklistedWorlds.contains(player.getWorld().getName())) {
             return false;
