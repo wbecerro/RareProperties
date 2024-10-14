@@ -39,7 +39,7 @@ public class Utilities {
         return validProperties;
     }
 
-    public boolean addProperty(ItemStack item, String property, String level, String color, Player p) {
+    public boolean addProperty(ItemStack item, String property, String level, String color, Player player) {
         ItemMeta meta = item.getItemMeta();
         List<String> lore;
 
@@ -67,7 +67,7 @@ public class Utilities {
             lore.set(index, propertyLine);
             meta.setLore(lore);
             item.setItemMeta(meta);
-            p.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
+            player.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
             return true;
         }
 
@@ -76,17 +76,17 @@ public class Utilities {
             meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, 1);
         } else {
             int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER);
-            String permission = checkPermissions(p);
+            String permission = checkPermissions(player);
             if(permission != null) {
                 int permissionLimit = Integer.parseInt(permission.split("\\.")[2]);
                 if(limit >= permissionLimit) {
-                    p.sendMessage(RareProperties.messages.limited
+                    player.sendMessage(RareProperties.messages.limited
                             .replace("%limit%", String.valueOf(limit))
                             .replace("%permission%", String.valueOf(permissionLimit)));
                     return false;
                 }
             } else {
-                p.sendMessage(RareProperties.messages.limited
+                player.sendMessage(RareProperties.messages.limited
                         .replace("%limit%", String.valueOf(limit))
                         .replace("%permission%", "0"));
                 return false;
@@ -104,7 +104,7 @@ public class Utilities {
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, propertyLevel);
 
         item.setItemMeta(meta);
-        p.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
+        player.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
         return true;
     }
 
@@ -164,12 +164,24 @@ public class Utilities {
         item.setItemMeta(meta);
     }
 
-    public void removeProperty(ItemStack item, String property, Player p) {
+    public boolean removeAllProperties(ItemStack item, Player player) {
+        boolean found = false;
+        for(RareProperty property : plugin.getProperties()) {
+            if(hasProperty(item, property.getExternalName())) {
+                removeProperty(item, property.getExternalName(), player);
+                found = true;
+            }
+        }
+
+        return found;
+    }
+
+    public void removeProperty(ItemStack item, String property, Player player) {
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
 
         if(!hasProperty(item, property)) {
-            p.sendMessage(RareProperties.messages.propertyNotPresent);
+            player.sendMessage(RareProperties.messages.propertyNotPresent);
             return;
         }
 
@@ -180,7 +192,7 @@ public class Utilities {
             int line = getLine(lore, property);
 
             if(line == -1) {
-                p.sendMessage(RareProperties.messages.propertyNotPresent);
+                player.sendMessage(RareProperties.messages.propertyNotPresent);
                 return;
             }
 
@@ -203,36 +215,36 @@ public class Utilities {
         item.setItemMeta(meta);
 
         if(getProperty(property) != null) {
-            giveProperty(property, DecimalToRoman.intToRoman(level), p);
+            giveProperty(property, DecimalToRoman.intToRoman(level), player);
         }
-        p.sendMessage(RareProperties.messages.propertyRemoved.replace("%property%", property));
+        player.sendMessage(RareProperties.messages.propertyRemoved.replace("%property%", property));
     }
 
-    public void giveProperty(String property, String level, Player p) {
+    public void giveProperty(String property, String level, Player player) {
         SindrisFavour sindrisFavour = new SindrisFavour();
         sindrisFavour.setProperty(getProperty(property), level, plugin);
-        if(p.getInventory().firstEmpty() == -1) {
-            p.getWorld().dropItem(p.getLocation(), sindrisFavour);
+        if(player.getInventory().firstEmpty() == -1) {
+            player.getWorld().dropItem(player.getLocation(), sindrisFavour);
         } else {
-            p.getInventory().addItem(sindrisFavour);
+            player.getInventory().addItem(sindrisFavour);
         }
-        p.sendMessage(RareProperties.messages.propertyGiven.replace("%property%", property).replace("%level%", level));
-        p.updateInventory();
+        player.sendMessage(RareProperties.messages.propertyGiven.replace("%property%", property).replace("%level%", level));
+        player.updateInventory();
     }
 
-    public void giveRandomProperty(String property, Player p) {
+    public void giveRandomProperty(String property, Player player) {
         Random random = new Random();
         int lvl = random.nextInt(5) + 1;
         String level = DecimalToRoman.intToRoman(lvl);
 
         SindrisFavour sindrisFavour = new SindrisFavour();
         sindrisFavour.setProperty(getProperty(property), level, plugin);
-        if(p.getInventory().firstEmpty() == -1) {
-            p.getWorld().dropItem(p.getLocation(), sindrisFavour);
+        if(player.getInventory().firstEmpty() == -1) {
+            player.getWorld().dropItem(player.getLocation(), sindrisFavour);
         } else {
-            p.getInventory().addItem(sindrisFavour);
+            player.getInventory().addItem(sindrisFavour);
         }
-        p.updateInventory();
+        player.updateInventory();
     }
 
     public void giveSocket(Player player, String color) {

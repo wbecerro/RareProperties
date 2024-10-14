@@ -69,7 +69,17 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
                 ItemStack item = p.getInventory().getItemInMainHand();
-                utilities.removeProperty(item, args[1], p);
+                String property = args[1];
+                if(property.equalsIgnoreCase("all")) {
+                    boolean found = utilities.removeAllProperties(item, p);
+                    if(found) {
+                        p.sendMessage(RareProperties.messages.removedAllProperties);
+                    } else {
+                        p.sendMessage(RareProperties.messages.noPropertiesPresent);
+                    }
+                } else {
+                    utilities.removeProperty(item, property, p);
+                }
                 p.updateInventory();
             } else if(args[0].equalsIgnoreCase("get")) {
                 if(!p.hasPermission("rareproperties.command.get")) {

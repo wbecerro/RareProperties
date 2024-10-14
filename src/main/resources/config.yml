@@ -44,6 +44,8 @@ Messages:
   socketNoColor: '&b[&cPropiedades&b] &eNo hay ninguna runa de ese color en este objeto.'
   socketApplied: '&b[&cPropiedades&b] &eHas aplicado una runa a este objeto revelando una propiedad.'
   socketSlotAdded: '&b[&cPropiedades&b] &eSe ha añadido un hueco de runa al objeto.'
+  removedAllProperties: '&b[&cPropiedades&b] &eSe han eliminado todas las propiedades de este objeto.'
+  noPropertiesPresent: '&b[&cPropiedades&b] &eEste objeto no tiene propiedades presentes.'
   help:
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."

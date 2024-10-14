@@ -37,6 +37,8 @@ public class Messages {
     public String socketNoColor;
     public String socketApplied;
     public String socketSlotAdded;
+    public String removedAllProperties;
+    public String noPropertiesPresent;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -70,5 +72,7 @@ public class Messages {
         socketNoColor = config.getString("Messages.socketNoColor").replace("&", "§");
         socketApplied = config.getString("Messages.socketApplied").replace("&", "§");
         socketSlotAdded = config.getString("Messages.socketSlotAdded").replace("&", "§");
+        removedAllProperties = config.getString("Messages.removedAllProperties").replace("&", "§");
+        noPropertiesPresent = config.getString("Messages.noPropertiesPresent").replace("&", "§");
     }
 }
