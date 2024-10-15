@@ -18,6 +18,9 @@ public class PlayerItemDamageListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onDurabilityLost(PlayerItemDamageEvent event) {
+        if(event.isCancelled()) {
+            return;
+        }
         Player player = event.getPlayer();
 
         // Comprobación de Reforzado

@@ -19,6 +19,10 @@ public class EntityDamageListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onDamaged(EntityDamageEvent event) {
+        if(event.isCancelled()) {
+            return;
+        }
+
         if(!(event.getEntity() instanceof Player)) {
             return;
         }
