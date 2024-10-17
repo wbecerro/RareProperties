@@ -1,6 +1,5 @@
 package wbe.rareproperties.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -51,10 +50,6 @@ public class EntityDeathListeners implements Listener {
         }
 
         Random random = new Random();
-        if(random.nextInt(100) > RareProperties.config.specialMobChance) {
-            return;
-        }
-
         if(random.nextInt(100) < RareProperties.config.socketChance) {
             event.getDrops().add(new Socket(plugin));
         }
