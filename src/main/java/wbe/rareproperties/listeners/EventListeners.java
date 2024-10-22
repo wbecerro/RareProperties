@@ -21,5 +21,6 @@ public class EventListeners {
         pluginManager.registerEvents(new PlayerMoveListeners(plugin), plugin);
         pluginManager.registerEvents(new EntityDamageByEntityListeners(plugin), plugin);
         pluginManager.registerEvents(new CreatureSpawnListeners(plugin), plugin);
+        pluginManager.registerEvents(new PlayerQuitListeners(), plugin);
     }
 }

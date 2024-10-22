@@ -31,6 +31,7 @@ public class Aegis extends RareProperty {
         player.addPotionEffect(potion);
         player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(RareProperties.propertyConfig.aegisSize);
         player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 1F, 0.01F);
+        RareProperty.scaleModified.put(player, true);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
             public void run() {

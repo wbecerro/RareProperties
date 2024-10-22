@@ -13,6 +13,7 @@ import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.util.Utilities;
 
 import java.text.Normalizer;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class RareProperty {
@@ -30,6 +31,8 @@ public abstract class RareProperty {
     private FileConfiguration config;
 
     public Utilities utilities;
+
+    public static HashMap<Player, Boolean> scaleModified = new HashMap<>();
 
     public RareProperty(RareProperties plugin, List<String> description, String name, String externalName) {
         this.name = name;

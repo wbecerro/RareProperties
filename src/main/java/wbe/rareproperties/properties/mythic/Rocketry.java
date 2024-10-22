@@ -24,7 +24,6 @@ public class Rocketry extends RareProperty {
     public void applyEffect(Player player, Event event) {
         Random random = new Random();
         int randomChance = random.nextInt(100) + 1;
-        Bukkit.broadcast(randomChance + " - " + RareProperties.propertyConfig.rocketryChance, "*");
         if(RareProperties.propertyConfig.rocketryChance * getLevel() > randomChance) {
             ItemStack firework = ((PlayerInteractEvent) event).getItem();
             firework.setAmount(firework.getAmount() + 1);

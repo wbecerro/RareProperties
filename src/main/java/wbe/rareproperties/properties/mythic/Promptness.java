@@ -28,6 +28,7 @@ public class Promptness extends RareProperty {
         player.addPotionEffect(potion);
         player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(RareProperties.propertyConfig.promptnessSize);
         player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_IDLE_AIR, 1F, 0.01F);
+        RareProperty.scaleModified.put(player, true);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
             public void run() {

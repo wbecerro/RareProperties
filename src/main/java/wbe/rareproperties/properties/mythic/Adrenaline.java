@@ -34,6 +34,7 @@ public class Adrenaline extends RareProperty {
 
         player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(
                 RareProperties.propertyConfig.adrenalineSize * getLevel() + 1);
+        RareProperty.scaleModified.put(player, true);
         player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.adrenalineSoundOn),
                 1F, 1F);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
