@@ -184,6 +184,7 @@ ConfigValues:
   unidentifiedChance: 2
   socketChance: 2
   tomeChance: 6
+  lootingExtraChance: 0.5
   blockSpawnerSpawns: false
   itemSlotChance: 40
   blacklistedWorlds:

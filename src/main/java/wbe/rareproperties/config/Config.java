@@ -22,6 +22,7 @@ public class Config {
     public int maxSockets;
     public int socketChance;
     public int tomeChance;
+    public double lootingExtraChance;
     public boolean blockSpawnerSpawns;
     public int itemSlotChance;
     public List<String> blacklistedWorlds = new ArrayList<>();
@@ -69,6 +70,7 @@ public class Config {
         maxSockets = config.getInt("ConfigValues.maxSockets");
         socketChance = config.getInt("ConfigValues.socketChance");
         tomeChance = config.getInt("ConfigValues.tomeChance");
+        lootingExtraChance = config.getDouble("ConfigValues.lootingExtraChance");
         blockSpawnerSpawns = config.getBoolean("ConfigValues.blockSpawnerSpawns");
         itemSlotChance = config.getInt("ConfigValues.itemSlotChance");
         blacklistedWorlds = config.getStringList("ConfigValues.blacklistedWorlds");

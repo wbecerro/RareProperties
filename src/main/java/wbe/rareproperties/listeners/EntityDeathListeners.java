@@ -1,5 +1,7 @@
 package wbe.rareproperties.listeners;
 
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -7,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.items.IdentifierTome;
 import wbe.rareproperties.items.Socket;
@@ -49,12 +52,21 @@ public class EntityDeathListeners implements Listener {
             return;
         }
 
+        ItemStack weapon = killer.getEquipment().getItemInMainHand();
+        int lootingLevel = 0;
+        if(!weapon.getType().equals(Material.AIR)) {
+            lootingLevel = weapon.getEnchantments().getOrDefault(Enchantment.LOOTING, 0);
+        }
+
+        double socketChance = RareProperties.config.socketChance + RareProperties.config.lootingExtraChance * lootingLevel;
+        double tomeChance = RareProperties.config.tomeChance + RareProperties.config.lootingExtraChance * lootingLevel;
+
         Random random = new Random();
-        if(random.nextInt(100) < RareProperties.config.socketChance) {
+        if(random.nextDouble(100) < socketChance) {
             event.getDrops().add(new Socket(plugin));
         }
 
-        if(random.nextInt(100) < RareProperties.config.tomeChance) {
+        if(random.nextDouble(100) < tomeChance) {
             event.getDrops().add(new IdentifierTome(plugin));
         }
     }
