@@ -126,7 +126,7 @@ public class Utilities {
 
             NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
             int limit = meta.getPersistentDataContainer().get(limitKey, PersistentDataType.INTEGER) - 1;
-            meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, limit);
+            meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, limit);
 
             int index = 0;
             for(String line : lore) {
