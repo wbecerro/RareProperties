@@ -2,6 +2,8 @@ package wbe.rareproperties.rarities;
 
 public class ItemRarity {
 
+    private String id;
+
     private int maxEnchants;
 
     private int minEnchants;
@@ -14,13 +16,22 @@ public class ItemRarity {
 
     private int weight;
 
-    public ItemRarity(int maxEnchants, int minEnchants, int maxEnchantLevel, int maxProperties, String color, int weight) {
+    public ItemRarity(String id, int maxEnchants, int minEnchants, int maxEnchantLevel, int maxProperties, String color, int weight) {
+        this.id = id;
         this.maxEnchants = maxEnchants;
         this.minEnchants = minEnchants;
         this.maxEnchantLevel = maxEnchantLevel;
         this.maxProperties = maxProperties;
         this.color = color;
         this.weight = weight;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getMaxEnchants() {

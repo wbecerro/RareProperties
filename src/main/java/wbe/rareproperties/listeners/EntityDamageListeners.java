@@ -12,7 +12,6 @@ public class EntityDamageListeners implements Listener {
 
     private RareProperties plugin;
 
-
     public EntityDamageListeners(RareProperties plugin) {
         this.plugin = plugin;
     }

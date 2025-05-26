@@ -47,6 +47,7 @@ Messages:
   removedAllProperties: '&b[&cPropiedades&b] &eSe han eliminado todas las propiedades de este objeto.'
   noPropertiesPresent: '&b[&cPropiedades&b] &eEste objeto no tiene propiedades presentes.'
   help:
+    - "&d&m -===- &b[&cPropiedades&b] &d&m-===-"
     - "&b/rareproperties &eMuestra esta página."
     - "&b/rareproperties list &eMuestra todas las propiedades."
     - "&b/rareproperties add <Propiedad> <Nivel> <Código de color> &eAñade la propiedad al objeto en la mano."
@@ -54,14 +55,15 @@ Messages:
     - "&b/rareproperties get <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e."
     - "&b/rareproperties give <Jugador> <Propiedad> <Nivel> &eDa un &dFavor de Sindri&e a un jugador."
     - "&b/rareproperties giveRandom <Jugador> <Propiedad> &eDa un &dFavor de Sindri&e a un jugador."
-    - "&b/rareproperties socket [jugador] [color] &eDa una Runa Valknut."
-    - "&b/rareproperties tome [jugador] &eDa un &5Libro de runas&e."
+    - "&b/rareproperties socket [Jugador] [Color] &eDa una Runa Valknut."
+    - "&b/rareproperties tome [Jugador] &eDa un &5Libro de runas&e."
     - "&b/rareproperties showItem &eComando de debug para ver el objeto de la mano."
-    - "&b/rareproperties item [jugador] [armor/weapon] [socketted/unidentified/rareza] &eDa un objeto raro."
-    - "&b/rareproperties addSocket [color] &eAñade un hueco de runa a un objeto."
+    - "&b/rareproperties item [Jugador] [Armor/Weapon] [Socketted/Unidentified/Rareza] &eDa un objeto raro."
+    - "&b/rareproperties addSocket [Color] &eAñade un hueco de runa a un objeto."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
+    - "&d&m -===- &b[&cPropiedades&b] &d&m-===-"
 
 ###############
 ### OBJETOS ###

@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import wbe.rareproperties.commands.CommandListener;
+import wbe.rareproperties.commands.TabListener;
 import wbe.rareproperties.config.Config;
 import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.config.Properties;
@@ -36,6 +37,8 @@ public class RareProperties extends JavaPlugin {
 
     private final EventListeners eventListeners = new EventListeners(this);
 
+    private final TabListener tabListener = new TabListener();
+
     public static Messages messages;
 
     public static Config config;
@@ -46,7 +49,7 @@ public class RareProperties extends JavaPlugin {
 
     public static ItemManager itemManager;
 
-    private ArrayList<RareProperty> properties;
+    public static ArrayList<RareProperty> properties;
 
     public void onEnable() {
         saveDefaultConfig();
@@ -59,6 +62,7 @@ public class RareProperties extends JavaPlugin {
 
         recipeLoader.loadRecipes();
         getCommand("rareproperties").setExecutor(this.commandListener);
+        getCommand("rareproperties").setTabCompleter(this.tabListener);
         this.eventListeners.initializeListeners();
         Scheduler.startSchedulers(configuration, this);
     }
