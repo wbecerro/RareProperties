@@ -215,6 +215,7 @@ Rarities:
         - "Teletransporte"
         - "Sanación"
         - "Adrenalina"
+        - "Pureza"
     Legendary:
       name: "Legendario"
       color: "&6"
@@ -248,6 +249,7 @@ Rarities:
       properties:
         - "Ígneo"
         - "Gélido"
+        - "Inestabilidad"
     Common:
       name: "Común"
       color: "&f"
@@ -613,3 +615,22 @@ Properties:
       - "&7posibilidad de hacer a los enemigos"
       - "&7más grandes por un tiempo."
       - "&7&oSolo funciona en arma."
+  Purity:
+    name: "Pureza"
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Elimina los efectos de poción"
+      - "&7negativos que se te aplican."
+      - "&7&oSolo funciona en armadura."
+  Instability:
+    name: "Inestabilidad"
+    chancePerLevel: 20
+    effectLevel: 2
+    durationPerLevel: 4
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Las flechas disparadas tendrán"
+      - "&7efectos de poción aleatorios."
+      - "&7&oSolo funciona en arcos y ballestas."

@@ -34,12 +34,20 @@ public class TabListener implements TabCompleter {
         if(args.length == 2) {
             switch(args[0].toLowerCase()) {
                 case "remove":
-                    completions.add("all");
+                    if(args[1].isEmpty()) {
+                        completions.add("all");
+                    } else if("all".startsWith(args[1])) {
+                        completions.add("all");
+                    }
                 case "add":
                 case "get":
                     List<String> properties = new ArrayList<>();
                     RareProperties.properties.forEach((property -> {
-                        properties.add(property.getExternalName());
+                        if(args[1].isEmpty()) {
+                            properties.add(property.getExternalName());
+                        } else if(property.getExternalName().toLowerCase().startsWith(args[1])) {
+                            properties.add(property.getExternalName());
+                        }
                     }));
                     completions.addAll(properties);
                     break;
@@ -49,7 +57,11 @@ public class TabListener implements TabCompleter {
                 case "tome":
                 case "item":
                     for(Player player : Bukkit.getOnlinePlayers()) {
-                        completions.add(player.getName());
+                        if(args[1].isEmpty()) {
+                            completions.add(player.getName());
+                        } else if(player.getName().startsWith(args[1])) {
+                            completions.add(player.getName());
+                        }
                     }
                     break;
                 case "addsocket":
@@ -70,7 +82,11 @@ public class TabListener implements TabCompleter {
                 case "giverandom":
                     List<String> properties = new ArrayList<>();
                     RareProperties.properties.forEach((property -> {
-                        properties.add(property.getExternalName());
+                        if(args[2].isEmpty()) {
+                            properties.add(property.getExternalName());
+                        } else if(property.getExternalName().toLowerCase().startsWith(args[2])) {
+                            properties.add(property.getExternalName());
+                        }
                     }));
                     completions.addAll(properties);
                     break;
@@ -99,7 +115,11 @@ public class TabListener implements TabCompleter {
                     completions.add("unidentified");
                     List<String> rarities = new ArrayList<>();
                     RareProperties.config.itemRarities.forEach((rarity -> {
-                        rarities.add(rarity.getId());
+                        if(args[3].isEmpty()) {
+                            rarities.add(rarity.getId());
+                        } else if(rarity.getId().startsWith(args[3])) {
+                            rarities.add(rarity.getId());
+                        }
                     }));
                     completions.addAll(rarities);
             }

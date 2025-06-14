@@ -27,10 +27,10 @@ public class Adrenaline extends RareProperty {
                 RareProperties.propertyConfig.adrenalineStrengthDuration * 20 * getLevel(),
                 RareProperties.propertyConfig.adrenalineStrength - 1);
         player.addPotionEffect(potion);
-        potion = new PotionEffect(PotionEffectType.POISON,
+        PotionEffect poison = new PotionEffect(PotionEffectType.POISON,
                 RareProperties.propertyConfig.adrenalinePoisonDuration * 20 * getLevel(),
                 RareProperties.propertyConfig.adrenalinePoison - 1);
-        player.addPotionEffect(potion);
+        player.addPotionEffect(poison);
 
         player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(
                 RareProperties.propertyConfig.adrenalineSize * getLevel() + 1);

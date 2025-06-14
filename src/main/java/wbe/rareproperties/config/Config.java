@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.rarities.ItemRarity;
 import wbe.rareproperties.rarities.PropertyRarity;
@@ -60,6 +61,7 @@ public class Config {
     public List<String> suffixes;
 
     public List<Enchantment> enchantments = new ArrayList<>();
+    public List<PotionEffectType> potionEffectTypes = new ArrayList<>();
 
     public Config(FileConfiguration config) {
         this.config = config;
@@ -103,6 +105,7 @@ public class Config {
         suffixes = RareProperties.suffixesConfig.getStringList("Suffixes");
 
         Registry.ENCHANTMENT.iterator().forEachRemaining(enchantments::add);
+        Registry.EFFECT.iterator().forEachRemaining(potionEffectTypes::add);
     }
 
     private void loadConfigVariables() {

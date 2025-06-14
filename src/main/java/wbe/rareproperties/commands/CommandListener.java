@@ -27,79 +27,79 @@ public class CommandListener implements CommandExecutor {
     }
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(cmd.getName().equalsIgnoreCase("RareProperties")) {
-            Player p = null;
+            Player player = null;
             if(sender instanceof Player) {
-                p = (Player) sender;
+                player = (Player) sender;
             }
             if(args.length == 0 || args[0].equalsIgnoreCase("help")) {
-                if(!p.hasPermission("rareproperties.command.help")) {
-                    p.sendMessage(RareProperties.messages.noPermission);
+                if(!sender.hasPermission("rareproperties.command.help")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 for(String line : RareProperties.messages.help) {
-                    p.sendMessage(line.replace("&", "§"));
+                    sender.sendMessage(line.replace("&", "§"));
                 }
             } else if(args[0].equalsIgnoreCase("list")) {
-                if(!p.hasPermission("rareproperties.command.list")) {
-                    p.sendMessage(RareProperties.messages.noPermission);
+                if(!sender.hasPermission("rareproperties.command.list")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                p.sendMessage(RareProperties.messages.listMessage + "\n" + String.valueOf(utilities.getValid()));
+                sender.sendMessage(RareProperties.messages.listMessage + "\n" + String.valueOf(utilities.getValid()));
             } else if(args[0].equalsIgnoreCase("add")) {
-                if(!p.hasPermission("rareproperties.command.add")) {
-                    p.sendMessage(RareProperties.messages.noPermission);
+                if(!sender.hasPermission("rareproperties.command.add")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if(args.length != 4) {
-                    p.sendMessage(RareProperties.messages.notEnoughArgs);
-                    p.sendMessage(RareProperties.messages.addParams);
+                    sender.sendMessage(RareProperties.messages.notEnoughArgs);
+                    sender.sendMessage(RareProperties.messages.addParams);
                     return false;
                 }
-                ItemStack item = p.getInventory().getItemInMainHand();
-                utilities.addProperty(item, args[1], args[2], args[3], p);
-                p.updateInventory();
+                ItemStack item = player.getInventory().getItemInMainHand();
+                utilities.addProperty(item, args[1], args[2], args[3], player);
+                player.updateInventory();
             } else if(args[0].equalsIgnoreCase("remove")) {
-                if(!p.hasPermission("rareproperties.command.remove")) {
-                    p.sendMessage(RareProperties.messages.noPermission);
+                if(!sender.hasPermission("rareproperties.command.remove")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if(args.length != 2) {
-                    p.sendMessage(RareProperties.messages.notEnoughArgs);
-                    p.sendMessage(RareProperties.messages.removeParams);
+                    sender.sendMessage(RareProperties.messages.notEnoughArgs);
+                    sender.sendMessage(RareProperties.messages.removeParams);
                     return false;
                 }
-                ItemStack item = p.getInventory().getItemInMainHand();
+                ItemStack item = player.getInventory().getItemInMainHand();
                 String property = args[1];
                 if(property.equalsIgnoreCase("all")) {
-                    boolean found = utilities.removeAllProperties(item, p);
+                    boolean found = utilities.removeAllProperties(item, player);
                     if(found) {
-                        p.sendMessage(RareProperties.messages.removedAllProperties);
+                        sender.sendMessage(RareProperties.messages.removedAllProperties);
                     } else {
-                        p.sendMessage(RareProperties.messages.noPropertiesPresent);
+                        sender.sendMessage(RareProperties.messages.noPropertiesPresent);
                     }
                 } else {
-                    utilities.removeProperty(item, property, p);
+                    utilities.removeProperty(item, property, player);
                 }
-                p.updateInventory();
+                player.updateInventory();
             } else if(args[0].equalsIgnoreCase("get")) {
-                if(!p.hasPermission("rareproperties.command.get")) {
-                    p.sendMessage(RareProperties.messages.noPermission);
+                if(!sender.hasPermission("rareproperties.command.get")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if(args.length != 3) {
-                    p.sendMessage(RareProperties.messages.notEnoughArgs);
-                    p.sendMessage(RareProperties.messages.getParams);
+                    sender.sendMessage(RareProperties.messages.notEnoughArgs);
+                    sender.sendMessage(RareProperties.messages.getParams);
                     return false;
                 }
-                utilities.giveProperty(args[1], args[2], p);
+                utilities.giveProperty(args[1], args[2], player);
             } else if(args[0].equalsIgnoreCase("give")) {
-                if(!p.hasPermission("rareproperties.command.give")) {
-                    p.sendMessage(RareProperties.messages.noPermission);
+                if(!sender.hasPermission("rareproperties.command.give")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 if(args.length != 4) {
-                    p.sendMessage(RareProperties.messages.notEnoughArgs);
-                    p.sendMessage(RareProperties.messages.giveParams);
+                    sender.sendMessage(RareProperties.messages.notEnoughArgs);
+                    sender.sendMessage(RareProperties.messages.giveParams);
                     return false;
                 }
                 Player otherPlayer = Bukkit.getServer().getPlayer(args[1]);
@@ -134,7 +134,7 @@ public class CommandListener implements CommandExecutor {
                 } else if(args.length == 2) {
                     utilities.giveSocket(Bukkit.getPlayer(args[1]), null);
                 } else {
-                    utilities.giveSocket(p, null);
+                    utilities.giveSocket(player, null);
                 }
             } else if(args[0].equalsIgnoreCase("tome")) {
                 if(!sender.hasPermission("rareproperties.command.tome")) {
@@ -145,14 +145,14 @@ public class CommandListener implements CommandExecutor {
                 if(args.length == 2) {
                     utilities.giveTome(Bukkit.getPlayer(args[1]));
                 } else {
-                    utilities.giveTome(p);
+                    utilities.giveTome(player);
                 }
             } else if(args[0].equalsIgnoreCase("showItem")) {
                 if(!sender.hasPermission("rareproperties.command.showItem")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                p.sendMessage(p.getInventory().getItemInMainHand().toString());
+                sender.sendMessage(player.getInventory().getItemInMainHand().toString());
             } else if(args[0].equalsIgnoreCase("item")) {
                 if(!sender.hasPermission("rareproperties.command.item")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
@@ -192,18 +192,18 @@ public class CommandListener implements CommandExecutor {
                 }
                 if(args.length > 1) {
                     Bukkit.getPlayer(args[1]).sendMessage(RareProperties.messages.itemGiven);
-                    p = Bukkit.getPlayer(args[1]);
-                    if(p.getInventory().firstEmpty() == -1) {
-                        p.getWorld().dropItem(p.getLocation(), item);
+                    player = Bukkit.getPlayer(args[1]);
+                    if(player.getInventory().firstEmpty() == -1) {
+                        player.getWorld().dropItem(player.getLocation(), item);
                     } else {
-                        p.getInventory().addItem(item);
+                        player.getInventory().addItem(item);
                     }
                 } else {
-                    p.sendMessage(RareProperties.messages.itemGiven);
-                    if(p.getInventory().firstEmpty() == -1) {
-                        p.getWorld().dropItem(p.getLocation(), item);
+                    sender.sendMessage(RareProperties.messages.itemGiven);
+                    if(player.getInventory().firstEmpty() == -1) {
+                        player.getWorld().dropItem(player.getLocation(), item);
                     } else {
-                        p.getInventory().addItem(item);
+                        player.getInventory().addItem(item);
                     }
                 }
             } else if(args[0].equalsIgnoreCase("addSocket")) {
@@ -211,7 +211,7 @@ public class CommandListener implements CommandExecutor {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
-                ItemStack item = p.getInventory().getItemInMainHand();
+                ItemStack item = player.getInventory().getItemInMainHand();
                 ItemStack newItem;
 
                 if(args.length == 2) {
@@ -222,8 +222,8 @@ public class CommandListener implements CommandExecutor {
                     newItem = utilities.addSocket(item, color);
                 }
 
-                p.getInventory().setItemInMainHand(newItem);
-                p.sendMessage(RareProperties.messages.socketSlotAdded);
+                player.getInventory().setItemInMainHand(newItem);
+                sender.sendMessage(RareProperties.messages.socketSlotAdded);
             }
         }
         return true;

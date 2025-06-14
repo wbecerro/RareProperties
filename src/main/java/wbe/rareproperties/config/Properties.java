@@ -22,6 +22,7 @@ public class Properties {
     public String healingName;
     public String adrenalineName;
     public String rocketryName;
+    public String purityName;
     public String solemName;
     public String noctisName;
     public String armorName;
@@ -35,6 +36,7 @@ public class Properties {
     public String poisonName;
     public String fireName;
     public String freezeeName;
+    public String instabilityName;
     public String explosionName;
     public String shrinkName;
     public String enlargeName;
@@ -52,6 +54,7 @@ public class Properties {
     public List<String> healingDescription = new ArrayList<>();
     public List<String> adrenalineDescription = new ArrayList<>();
     public List<String> rocketryDescription = new ArrayList<>();
+    public List<String> purityDescription = new ArrayList<>();
     public List<String> solemDescription = new ArrayList<>();
     public List<String> noctisDescription = new ArrayList<>();
     public List<String> armorDescription = new ArrayList<>();
@@ -65,6 +68,7 @@ public class Properties {
     public List<String> poisonDescription = new ArrayList<>();
     public List<String> fireDescription = new ArrayList<>();
     public List<String> freezeeDescription = new ArrayList<>();
+    public List<String> instabilityDescription = new ArrayList<>();
     public List<String> explosionDescription = new ArrayList<>();
     public List<String> shrinkDescription = new ArrayList<>();
     public List<String> enlargeDescription = new ArrayList<>();
@@ -154,6 +158,10 @@ public class Properties {
     public int freezeeChance;
     public double freezeeDamage;
 
+    public int instabilityChance;
+    public int instabilityModifier;
+    public int instabilityDuration;
+
     public int explosionChance;
     public double explosionDamage;
 
@@ -181,6 +189,7 @@ public class Properties {
         healingName = config.getString("Properties.Healing.name").replace("&", "§");
         adrenalineName = config.getString("Properties.Adrenaline.name").replace("&", "§");
         rocketryName = config.getString("Properties.Rocketry.name").replace("&", "§");
+        purityName = config.getString("Properties.Purity.name").replace("&", "§");
         solemName = config.getString("Properties.Solem.name").replace("&", "§");
         noctisName = config.getString("Properties.Noctis.name").replace("&", "§");
         armorName = config.getString("Properties.Armor.name").replace("&", "§");
@@ -194,6 +203,7 @@ public class Properties {
         poisonName = config.getString("Properties.Poison.name").replace("&", "§");
         fireName = config.getString("Properties.Fire.name").replace("&", "§");
         freezeeName = config.getString("Properties.Freezee.name").replace("&", "§");
+        instabilityName = config.getString("Properties.Instability.name").replace("&", "§");
         explosionName = config.getString("Properties.Explosion.name").replace("&", "§");
         shrinkName = config.getString("Properties.Shrink.name").replace("&", "§");
         enlargeName = config.getString("Properties.Enlarge.name").replace("&", "§");
@@ -211,6 +221,7 @@ public class Properties {
         healingDescription = config.getStringList("Properties.Healing.description");
         adrenalineDescription = config.getStringList("Properties.Adrenaline.description");
         rocketryDescription = config.getStringList("Properties.Rocketry.description");
+        purityDescription = config.getStringList("Properties.Purity.description");
         solemDescription = config.getStringList("Properties.Solem.description");
         noctisDescription = config.getStringList("Properties.Noctis.description");
         armorDescription = config.getStringList("Properties.Armor.description");
@@ -224,6 +235,7 @@ public class Properties {
         poisonDescription = config.getStringList("Properties.Poison.description");
         fireDescription = config.getStringList("Properties.Fire.description");
         freezeeDescription = config.getStringList("Properties.Freezee.description");
+        instabilityDescription = config.getStringList("Properties.Instability.description");
         explosionDescription = config.getStringList("Properties.Explosion.description");
         shrinkDescription = config.getStringList("Properties.Shrink.description");
         enlargeDescription = config.getStringList("Properties.Enlarge.description");
@@ -258,7 +270,7 @@ public class Properties {
         adrenalinePoison = config.getInt("Properties.Adrenaline.poisonLevel");
         adrenalineSize = config.getDouble("Properties.Adrenaline.sizePerLevel");
         adrenalineStrengthDuration = config.getInt("Properties.Adrenaline.durationPerLevelStrength");
-        adrenalinePoisonDuration = config.getInt("Properties.AdrenalinedurationPerLevelPoison");
+        adrenalinePoisonDuration = config.getInt("Properties.Adrenaline.durationPerLevelPoison");
         adrenalineSoundOn = config.getString("Properties.Adrenaline.sound");
         adrenalineSoundOff = config.getString("Properties.Adrenaline.soundOff");
         adrenalineHealth = config.getInt("Properties.Adrenaline.healthCost");
@@ -287,6 +299,9 @@ public class Properties {
         fireTime = config.getInt("Properties.Fire.timePerLevel");
         freezeeChance = config.getInt("Properties.Freezee.chancePerLevel");
         freezeeDamage = config.getDouble("Properties.Freezee.damage");
+        instabilityChance = config.getInt("Properties.Instability.chancePerLevel");
+        instabilityModifier = config.getInt("Properties.Instability.effectLevel");
+        instabilityDuration = config.getInt("Properties.Instability.durationPerLevel");
         explosionChance = config.getInt("Properties.Explosion.chancePerLevel");
         explosionDamage = config.getDouble("Properties.Explosion.damage");
         shrinkChance = config.getInt("Properties.Shrink.chancePerLevel");

@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectType;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.items.IdentifierTome;
 import wbe.rareproperties.items.SindrisFavour;
@@ -360,6 +361,13 @@ public class Utilities {
         Enchantment enchantment = RareProperties.config.enchantments.get(
                 random.nextInt(RareProperties.config.enchantments.size()));
         return enchantment;
+    }
+
+    public PotionEffectType getRandomPotionEffect() {
+        Random random = new Random();
+        PotionEffectType potionEffectType = RareProperties.config.potionEffectTypes.get(
+                random.nextInt(RareProperties.config.potionEffectTypes.size()));
+        return potionEffectType;
     }
 
     public String checkPermissions(Player player) {
