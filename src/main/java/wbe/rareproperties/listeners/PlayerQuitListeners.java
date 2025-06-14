@@ -19,7 +19,7 @@ public class PlayerQuitListeners implements Listener {
         }
 
         if(RareProperty.scaleModified.get(player)) {
-            player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
+            player.getAttribute(Attribute.SCALE).setBaseValue(1);
             RareProperty.scaleModified.put(player, false);
         }
     }

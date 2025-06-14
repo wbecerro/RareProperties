@@ -2,24 +2,25 @@ package wbe.rareproperties.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.legendary.Noctis;
 import wbe.rareproperties.properties.legendary.Solem;
+import wbe.rareproperties.properties.mythic.Channeling;
 import wbe.rareproperties.properties.mythic.Fly;
 
 import java.util.Set;
 
 public class Scheduler {
 
-    public static void startSchedulers(FileConfiguration config, RareProperties plugin) {
-        startFlyCost(config, plugin);
-        startSunTimeChecking(config, plugin);
-        startMoonTimeChecking(config, plugin);
+    public static void startSchedulers(RareProperties plugin) {
+        startFlyCost( plugin);
+        startSunTimeChecking(plugin);
+        startMoonTimeChecking(plugin);
+        startChannelingRenew(plugin);
     }
 
-    private static void startFlyCost(FileConfiguration config, RareProperties plugin) {
+    private static void startFlyCost(RareProperties plugin) {
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override
             public void run() {
@@ -40,7 +41,20 @@ public class Scheduler {
         }, 10L, RareProperties.propertyConfig.flyTime * 20L);
     }
 
-    private static void startSunTimeChecking(FileConfiguration config, RareProperties plugin) {
+    private static void startChannelingRenew(RareProperties plugin) {
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+            @Override
+            public void run() {
+                Set<Player> keys = Channeling.playersChanneling.keySet();
+                for(Player player : keys) {
+                    player.setAbsorptionAmount(RareProperties.propertyConfig.channelingHalfHearts
+                            * Channeling.playersChanneling.get(player));
+                }
+            }
+        }, 0L, RareProperties.propertyConfig.channelingTime * 20L);
+    }
+
+    private static void startSunTimeChecking(RareProperties plugin) {
         World world = Bukkit.getServer().getWorld("world");
         double maxDamage = RareProperties.propertyConfig.solemDamage;
 
@@ -75,7 +89,7 @@ public class Scheduler {
         }, 10L, 20L * 20L);
     }
 
-    private static void startMoonTimeChecking(FileConfiguration config, RareProperties plugin) {
+    private static void startMoonTimeChecking(RareProperties plugin) {
         World world = Bukkit.getServer().getWorld("world");
         double maxDamage = RareProperties.propertyConfig.noctisDamage;
 

@@ -23,7 +23,7 @@ public class Vampirism extends RareProperty {
         double damage = ((EntityDamageByEntityEvent) event).getDamage();
         double healing = damage * (getLevel() * RareProperties.propertyConfig.vampirismHealth);
         double newHealth = player.getHealth() + healing;
-        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double maxHealth = player.getAttribute(Attribute.MAX_HEALTH).getValue();
 
         player.setHealth(Math.min(newHealth, maxHealth));
     }
@@ -32,7 +32,7 @@ public class Vampirism extends RareProperty {
     public boolean checkUse(Player player, Event event) {
         int level = 0;
 
-        if(player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+        if(player.getHealth() == player.getAttribute(Attribute.MAX_HEALTH).getValue()) {
             return false;
         }
 

@@ -26,13 +26,13 @@ public class Promptness extends RareProperty {
         PotionEffect potion = new PotionEffect(PotionEffectType.SPEED, RareProperties.propertyConfig.promptnessDuration * 20,
                 RareProperties.propertyConfig.promptnessSpeed * getLevel() - 1);
         player.addPotionEffect(potion);
-        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(RareProperties.propertyConfig.promptnessSize);
+        player.getAttribute(Attribute.SCALE).setBaseValue(RareProperties.propertyConfig.promptnessSize);
         player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_IDLE_AIR, 1F, 0.01F);
         RareProperty.scaleModified.put(player, true);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
             public void run() {
-                player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
+                player.getAttribute(Attribute.SCALE).setBaseValue(1);
                 player.playSound(player.getLocation(), Sound.ENTITY_BREEZE_IDLE_GROUND, 1F, 0.01F);
             }
         }, RareProperties.propertyConfig.promptnessDuration * 20L);

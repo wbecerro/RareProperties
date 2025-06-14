@@ -23,6 +23,7 @@ public class Properties {
     public String adrenalineName;
     public String rocketryName;
     public String purityName;
+    public String channelingName;
     public String solemName;
     public String noctisName;
     public String armorName;
@@ -55,6 +56,7 @@ public class Properties {
     public List<String> adrenalineDescription = new ArrayList<>();
     public List<String> rocketryDescription = new ArrayList<>();
     public List<String> purityDescription = new ArrayList<>();
+    public List<String> channelingDescription = new ArrayList<>();
     public List<String> solemDescription = new ArrayList<>();
     public List<String> noctisDescription = new ArrayList<>();
     public List<String> armorDescription = new ArrayList<>();
@@ -120,6 +122,9 @@ public class Properties {
     public int adrenalineHealth;
 
     public int rocketryChance;
+
+    public int channelingHalfHearts;
+    public int channelingTime;
 
     public double solemDamage;
 
@@ -190,6 +195,7 @@ public class Properties {
         adrenalineName = config.getString("Properties.Adrenaline.name").replace("&", "§");
         rocketryName = config.getString("Properties.Rocketry.name").replace("&", "§");
         purityName = config.getString("Properties.Purity.name").replace("&", "§");
+        channelingName = config.getString("Properties.Channeling.name").replace("&", "§");
         solemName = config.getString("Properties.Solem.name").replace("&", "§");
         noctisName = config.getString("Properties.Noctis.name").replace("&", "§");
         armorName = config.getString("Properties.Armor.name").replace("&", "§");
@@ -222,6 +228,7 @@ public class Properties {
         adrenalineDescription = config.getStringList("Properties.Adrenaline.description");
         rocketryDescription = config.getStringList("Properties.Rocketry.description");
         purityDescription = config.getStringList("Properties.Purity.description");
+        channelingDescription = config.getStringList("Properties.Channeling.description");
         solemDescription = config.getStringList("Properties.Solem.description");
         noctisDescription = config.getStringList("Properties.Noctis.description");
         armorDescription = config.getStringList("Properties.Armor.description");
@@ -275,6 +282,8 @@ public class Properties {
         adrenalineSoundOff = config.getString("Properties.Adrenaline.soundOff");
         adrenalineHealth = config.getInt("Properties.Adrenaline.healthCost");
         rocketryChance = config.getInt("Properties.Rocketry.chancePerLevel");
+        channelingHalfHearts = config.getInt("Properties.Channeling.halfHeartsPerLevel");
+        channelingTime = config.getInt("Properties.Channeling.rechargeTime");
         solemDamage = config.getDouble("Properties.Solem.damagePercent");
         noctisDamage = config.getDouble("Properties.Noctis.damagePercent");
         armorPercent = config.getDouble("Properties.Armor.reductionPercent");

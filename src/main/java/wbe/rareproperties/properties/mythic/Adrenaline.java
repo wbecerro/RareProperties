@@ -32,7 +32,7 @@ public class Adrenaline extends RareProperty {
                 RareProperties.propertyConfig.adrenalinePoison - 1);
         player.addPotionEffect(poison);
 
-        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(
+        player.getAttribute(Attribute.SCALE).setBaseValue(
                 RareProperties.propertyConfig.adrenalineSize * getLevel() + 1);
         RareProperty.scaleModified.put(player, true);
         player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.adrenalineSoundOn),
@@ -40,7 +40,7 @@ public class Adrenaline extends RareProperty {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
             public void run() {
-                player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
+                player.getAttribute(Attribute.SCALE).setBaseValue(1);
                 player.playSound(player.getLocation(),
                         Sound.valueOf(RareProperties.propertyConfig.adrenalineSoundOff),
                         1F, 0.7F);

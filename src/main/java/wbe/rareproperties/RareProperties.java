@@ -64,7 +64,7 @@ public class RareProperties extends JavaPlugin {
         getCommand("rareproperties").setExecutor(this.commandListener);
         getCommand("rareproperties").setTabCompleter(this.tabListener);
         this.eventListeners.initializeListeners();
-        Scheduler.startSchedulers(configuration, this);
+        Scheduler.startSchedulers(this);
     }
 
     public void onDisable() {
@@ -92,7 +92,7 @@ public class RareProperties extends JavaPlugin {
                 new Propulsion(this), new Healing(this), new Solem(this), new Noctis(this), new Armor(this), new Vampirism(this),
                 new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this),
                 new Fire(this), new Freezee(this), new Explosion(this), new Shrink(this), new Enlarge(this), new Adrenaline(this),
-                new Swarm(this), new Rocketry(this), new Purity(this), new Instability(this)));
+                new Swarm(this), new Rocketry(this), new Purity(this), new Instability(this), new Channeling(this)));
     }
 
     private void createPrefixFile() {

@@ -20,9 +20,9 @@ public class Healing extends RareProperty {
     public void applyEffect(Player player, Event event) {
         int cost = RareProperties.propertyConfig.healingCost;
 
-        double newHealth = player.getHealth() + (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() *
+        double newHealth = player.getHealth() + (player.getAttribute(Attribute.MAX_HEALTH).getValue() *
                 (RareProperties.propertyConfig.healingPercent * getLevel() / 100));
-        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double maxHealth = player.getAttribute(Attribute.MAX_HEALTH).getValue();
         if(newHealth > maxHealth) {
             newHealth = maxHealth;
         }
@@ -39,7 +39,7 @@ public class Healing extends RareProperty {
             return false;
         }
 
-        if(player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+        if(player.getHealth() == player.getAttribute(Attribute.MAX_HEALTH).getValue()) {
             return false;
         }
 

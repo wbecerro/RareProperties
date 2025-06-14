@@ -152,4 +152,21 @@ public abstract class RareProperty {
 
         return -1;
     }
+
+    public int checkArmorAccumulative(PlayerInventory inventory, String property) {
+        ItemStack[] armor = inventory.getArmorContents();
+        int level = 0;
+        int itemLevel = -1;
+        for(ItemStack item : armor) {
+            if(item == null) {
+                continue;
+            }
+            itemLevel = checkProperty(item, property);
+            if(itemLevel > 0) {
+                level += itemLevel;
+            }
+        }
+
+        return level > 0 ? level : -1;
+    }
 }

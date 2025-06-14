@@ -6,6 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.mythic.Channeling;
 import wbe.rareproperties.properties.mythic.Fly;
 
 public class PlayerMoveListeners implements Listener {
@@ -25,6 +26,13 @@ public class PlayerMoveListeners implements Listener {
         boolean flyProperty = fly.checkUse(player, event);
         if(flyProperty) {
             fly.applyEffect(player, event);
+        }
+
+        // Comprobación de Canalización
+        Channeling channeling = new Channeling(plugin);
+        boolean channelingProperty = channeling.checkUse(player, event);
+        if(channelingProperty) {
+            channeling.applyEffect(player, event);
         }
     }
 }

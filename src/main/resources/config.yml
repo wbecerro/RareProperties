@@ -216,6 +216,7 @@ Rarities:
         - "Sanación"
         - "Adrenalina"
         - "Pureza"
+        - "Canalización"
     Legendary:
       name: "Legendario"
       color: "&6"
@@ -634,3 +635,12 @@ Properties:
       - "&7Las flechas disparadas tendrán"
       - "&7efectos de poción aleatorios."
       - "&7&oSolo funciona en arcos y ballestas."
+  Channeling:
+    name: "Canalización"
+    halfHeartsPerLevel: 2
+    rechargeTime: 60
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Otorga corazones de absorción cada cierto tiempo."
+      - "&7&oSolo funciona en armadura."

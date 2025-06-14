@@ -29,13 +29,13 @@ public class Aegis extends RareProperty {
         potion = new PotionEffect(PotionEffectType.ABSORPTION, RareProperties.propertyConfig.aegisDuration * 20,
                 RareProperties.propertyConfig.aegisAbsortion * getLevel() - 1);
         player.addPotionEffect(potion);
-        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(RareProperties.propertyConfig.aegisSize);
+        player.getAttribute(Attribute.SCALE).setBaseValue(RareProperties.propertyConfig.aegisSize);
         player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 1F, 0.01F);
         RareProperty.scaleModified.put(player, true);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
             public void run() {
-                player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
+                player.getAttribute(Attribute.SCALE).setBaseValue(1);
                 player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DAMAGE, 1F, 0.01F);
             }
         }, RareProperties.propertyConfig.aegisDuration * 20L);

@@ -32,13 +32,13 @@ public class Shrink extends RareProperty {
         }
 
         LivingEntity damaged = (LivingEntity) ((EntityDamageByEntityEvent) event).getEntity();
-        damaged.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(0.5);
+        damaged.getAttribute(Attribute.SCALE).setBaseValue(0.5);
         player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.shrinkSound), 1F, 1F);
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
             public void run() {
-                damaged.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
+                damaged.getAttribute(Attribute.SCALE).setBaseValue(1);
             }
         }, getLevel() * RareProperties.propertyConfig.shrinkDuration * 20L);
     }
