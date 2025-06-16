@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.items.ItemManager;
+import wbe.rareproperties.items.SpecialCraftingItem;
 import wbe.rareproperties.util.Utilities;
 
 import java.util.Random;
@@ -224,6 +225,21 @@ public class CommandListener implements CommandExecutor {
 
                 player.getInventory().setItemInMainHand(newItem);
                 sender.sendMessage(RareProperties.messages.socketSlotAdded);
+            } else if(args[0].equalsIgnoreCase("specialItem")) {
+                if(!sender.hasPermission("rareproperties.command.specialItem")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                if(args.length == 2) {
+                    player = Bukkit.getPlayer(args[1]);
+                }
+
+                if(player.getInventory().firstEmpty() == -1) {
+                    player.getWorld().dropItem(player.getLocation(), new SpecialCraftingItem(plugin));
+                } else {
+                    player.getInventory().addItem(new SpecialCraftingItem(plugin));
+                }
             }
         }
         return true;

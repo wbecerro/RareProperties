@@ -215,9 +215,9 @@ public class Utilities {
 
         item.setItemMeta(meta);
 
-        if(getProperty(property) != null) {
+        /*if(getProperty(property) != null) {
             giveProperty(property, DecimalToRoman.intToRoman(level), player);
-        }
+        }*/
         player.sendMessage(RareProperties.messages.propertyRemoved.replace("%property%", property));
     }
 

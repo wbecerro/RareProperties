@@ -57,7 +57,7 @@ public class RareProperties extends JavaPlugin {
         createSuffixFile();
         getLogger().info("RareProperties enabled correctly");
         reloadConfiguration();
-        recipeLoader = new RecipeLoader(this);
+        recipeLoader = new RecipeLoader(this, configuration);
         itemManager = new ItemManager(this);
 
         recipeLoader.loadRecipes();

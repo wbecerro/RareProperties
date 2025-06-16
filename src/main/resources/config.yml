@@ -60,6 +60,7 @@ Messages:
     - "&b/rareproperties showItem &eComando de debug para ver el objeto de la mano."
     - "&b/rareproperties item [Jugador] [Armor/Weapon] [Socketted/Unidentified/Rareza] &eDa un objeto raro."
     - "&b/rareproperties addSocket [Color] &eAñade un hueco de runa a un objeto."
+    - "&b/rareproperties specialItem [Jugador] &eDa un &e&lLibro de Tot&e."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
@@ -101,6 +102,15 @@ IdentifierTome:
     - "&7de runas mágicas usadas por los"
     - "&7dioses para identificar objetos"
     - "&7perdidos en el tiempo."
+
+SpecialCraftingItem:
+  material: KNOWLEDGE_BOOK
+  name: "&e&lLibro de Tot"
+  lore:
+    - "&7"
+    - "&7Este libro contiene todos los secretos"
+    - "&7del mundo. Es posible utilizarlo para"
+    - "&7fabricar poderes extraños."
 
 RareItems:
   materials:
@@ -334,6 +344,20 @@ Properties:
       - "&7&oSolo funciona en armadura o un objeto"
       - "&7&oen la mano primaria o secundaria."
       - "&7&oPuede ser aplicado a todo."
+    recipe:
+      shape:
+        - "NWN"
+        - "WSW"
+        - "NDN"
+      ingredients:
+        N:
+          material: NETHERITE_INGOT
+        W:
+          material: WIND_CHARGE
+        S:
+          material: SPECIALITEM
+        D:
+          material: DRAGON_EGG
   Repair:
     name: "Reparación"
     baseCost: 10

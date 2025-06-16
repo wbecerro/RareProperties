@@ -12,14 +12,18 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.mythic.*;
+import wbe.rareproperties.util.Utilities;
 
 
 public class PlayerInteractListeners implements Listener {
 
     private RareProperties plugin;
 
+    private Utilities utilities;
+
     public PlayerInteractListeners(RareProperties plugin) {
         this.plugin = plugin;
+        utilities = new Utilities(plugin);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -194,6 +198,27 @@ public class PlayerInteractListeners implements Listener {
 
         inventory.addItem(item);
         player.updateInventory();
+        event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void cancelUse(PlayerInteractEvent event) {
+        if(!event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                return;
+            }
+        }
+
+        if(!event.hasItem()) {
+            return;
+        }
+
+        NamespacedKey key = new NamespacedKey(plugin, "SpecialCraftingItem");
+        ItemStack item = event.getItem();
+        if(!utilities.checkItem(item, key)) {
+            return;
+        }
+
         event.setCancelled(true);
     }
 }

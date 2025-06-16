@@ -25,5 +25,6 @@ public class EventListeners {
         pluginManager.registerEvents(new EntityPotionEffectListeners(plugin), plugin);
         pluginManager.registerEvents(new EntityShootBowListeners(plugin), plugin);
         pluginManager.registerEvents(new PrepareAnvilListeners(plugin), plugin);
+        pluginManager.registerEvents(new PlayerJoinListeners(), plugin);
     }
 }

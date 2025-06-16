@@ -51,6 +51,10 @@ public class Config {
     public String identifierAuthor;
     public List<String> identifierLore;
 
+    public Material specialCraftingItemMaterial;
+    public String specialCraftingItemName;
+    public List<String> specialCraftingItemLore;
+
     public List<String> armorMaterials;
     public List<String> weaponMaterials;
 
@@ -95,6 +99,10 @@ public class Config {
         identifierName = config.getString("IdentifierTome.name").replace("&", "§");
         identifierAuthor = config.getString("IdentifierTome.author");
         identifierLore = config.getStringList("IdentifierTome.lore");
+
+        specialCraftingItemMaterial = Material.valueOf(config.getString("SpecialCraftingItem.material"));
+        specialCraftingItemName = config.getString("SpecialCraftingItem.name").replace("&", "§");
+        specialCraftingItemLore = config.getStringList("SpecialCraftingItem.lore");
 
         armorMaterials = config.getStringList("RareItems.materials.armorMaterial");
         weaponMaterials = config.getStringList("RareItems.materials.weaponMaterial");
