@@ -189,6 +189,7 @@ ConfigValues:
   lootingExtraChance: 0.5
   blockSpawnerSpawns: false
   itemSlotChance: 40
+  maxUpgradeLevel: 5
   blacklistedWorlds:
     - Halloween
 

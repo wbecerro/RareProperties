@@ -39,8 +39,10 @@ public class Channeling extends RareProperty {
         level = checkArmorAccumulative(inventory, getExternalName());
 
         if(level < 0) {
-            Channeling.playersChanneling.remove(player);
-            player.setAbsorptionAmount(0);
+            Integer value = Channeling.playersChanneling.remove(player);
+            if(value != null) {
+                player.setAbsorptionAmount(0);
+            }
             return false;
         }
 

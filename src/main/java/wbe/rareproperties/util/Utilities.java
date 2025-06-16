@@ -1,7 +1,7 @@
 package wbe.rareproperties.util;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -459,6 +459,23 @@ public class Utilities {
         String property = rarity.getProperties().get(
                 random.nextInt(rarity.getProperties().size()));
         addProperty(item, property, random.nextInt(5) + 1, rarity.getColor(), true);
+        return true;
+    }
+
+    public boolean checkItem(ItemStack item, NamespacedKey key) {
+        if(item == null || item.getType().equals(Material.AIR)) {
+            return false;
+        }
+
+        ItemMeta meta = item.getItemMeta();
+        if(meta == null) {
+            return false;
+        }
+
+        if(!meta.getPersistentDataContainer().has(key)) {
+            return false;
+        }
+
         return true;
     }
 

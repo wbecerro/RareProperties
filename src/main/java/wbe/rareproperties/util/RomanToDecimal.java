@@ -46,8 +46,4 @@ public class RomanToDecimal {
             return lastDecimal - decimal;
         return lastDecimal + decimal;
     }
-
-    public static void main(String[] args) {
-        romanToDecimal("XIV");
-    }
 }

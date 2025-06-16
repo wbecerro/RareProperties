@@ -26,6 +26,7 @@ public class Config {
     public double lootingExtraChance;
     public boolean blockSpawnerSpawns;
     public int itemSlotChance;
+    public int maxUpgradeLevel;
     public List<String> blacklistedWorlds = new ArrayList<>();
 
     public List<String> permissions = new ArrayList<>();
@@ -75,6 +76,7 @@ public class Config {
         lootingExtraChance = config.getDouble("ConfigValues.lootingExtraChance");
         blockSpawnerSpawns = config.getBoolean("ConfigValues.blockSpawnerSpawns");
         itemSlotChance = config.getInt("ConfigValues.itemSlotChance");
+        maxUpgradeLevel = config.getInt("ConfigValues.maxUpgradeLevel");
         blacklistedWorlds = config.getStringList("ConfigValues.blacklistedWorlds");
 
         loadConfigVariables();
