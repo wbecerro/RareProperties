@@ -55,7 +55,10 @@ public class Utilities {
             String propertyLine = ("&" + color + property + " " + level).replace("&", "§");
             NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
                     Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+            NamespacedKey removable = new NamespacedKey(plugin, Normalizer.normalize("RemovableRareProperties" + property,
+                    Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
             meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, propertyLevel);
+            meta.getPersistentDataContainer().set(removable, PersistentDataType.BOOLEAN, true);
 
             int index = 0;
             for(String line : lore) {
@@ -103,6 +106,9 @@ public class Utilities {
         NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
                 Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, propertyLevel);
+        NamespacedKey removable = new NamespacedKey(plugin, Normalizer.normalize("RemovableRareProperties" + property,
+                Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+        meta.getPersistentDataContainer().set(removable, PersistentDataType.BOOLEAN, true);
 
         item.setItemMeta(meta);
         player.sendMessage(RareProperties.messages.propertyAdded.replace("%property%", property));
@@ -180,6 +186,8 @@ public class Utilities {
     public void removeProperty(ItemStack item, String property, Player player) {
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+        NamespacedKey removable = new NamespacedKey(plugin, Normalizer.normalize("RemovableRareProperties" + property,
+                Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
 
         if(!hasProperty(item, property)) {
             player.sendMessage(RareProperties.messages.propertyNotPresent);
@@ -215,9 +223,11 @@ public class Utilities {
 
         item.setItemMeta(meta);
 
-        /*if(getProperty(property) != null) {
+
+        if(getProperty(property) != null && meta.getPersistentDataContainer().has(removable)) {
             giveProperty(property, DecimalToRoman.intToRoman(level), player);
-        }*/
+            meta.getPersistentDataContainer().remove(removable);
+        }
         player.sendMessage(RareProperties.messages.propertyRemoved.replace("%property%", property));
     }
 
