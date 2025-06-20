@@ -441,9 +441,9 @@ public class Utilities {
         ItemMeta meta = item.getItemMeta();
         if(sockets.length - 1 == 0) {
             // Si no quedan eliminados las líneas de los sockets.
-            for(int i=index;i>0;i--) {
-                lore.remove(i);
-            }
+            lore.remove(index);
+            lore.remove(index - 1);
+            lore.remove(index - 2);
             meta.getPersistentDataContainer().remove(colorsKey);
         } else {
             // Si quedan, eliminamos el socket que coincide
