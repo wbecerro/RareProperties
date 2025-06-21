@@ -58,6 +58,8 @@ Messages:
     - "&b/rareproperties socket [Jugador] [Color] &eDa una Runa Valknut."
     - "&b/rareproperties tome [Jugador] &eDa un &5Libro de runas&e."
     - "&b/rareproperties showItem &eComando de debug para ver el objeto de la mano."
+    - "&b/rareproperties showPlayer &eComando de debug para ver un jugador."
+    - "&b/rareproperties removeAllKeys &eComando de debug para quitar todas las keys de un jugador."
     - "&b/rareproperties item [Jugador] [Armor/Weapon] [Socketted/Unidentified/Rareza] &eDa un objeto raro."
     - "&b/rareproperties addSocket [Color] &eAñade un hueco de runa a un objeto."
     - "&b/rareproperties specialItem [Jugador] &eDa un &e&lLibro de Tot&e."

@@ -2,6 +2,7 @@ package wbe.rareproperties.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -239,6 +240,24 @@ public class CommandListener implements CommandExecutor {
                     player.getWorld().dropItem(player.getLocation(), new SpecialCraftingItem(plugin));
                 } else {
                     player.getInventory().addItem(new SpecialCraftingItem(plugin));
+                }
+            } else if(args[0].equalsIgnoreCase("showPlayer")) {
+                if(!sender.hasPermission("rareproperties.command.showPlayer")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                for(NamespacedKey key : player.getPersistentDataContainer().getKeys()) {
+                    sender.sendMessage("Key -> " + key.getKey() + " - Namespace -> " + key.getNamespace());
+                }
+            } else if(args[0].equalsIgnoreCase("removeAllKeys")) {
+                if(!sender.hasPermission("rareproperties.command.removeAllKeys")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                for(NamespacedKey key : player.getPersistentDataContainer().getKeys()) {
+                    player.getPersistentDataContainer().remove(key);
                 }
             }
         }
