@@ -30,7 +30,8 @@ public class Scheduler {
                         int level = Fly.playersFlying.get(player);
                         int rest = RareProperties.propertyConfig.flyCost - level;
                         final int food = rest;
-                        player.setFoodLevel(player.getFoodLevel() - food);
+                        int foodLevel = Math.max(player.getFoodLevel() - food, 0);
+                        player.setFoodLevel(foodLevel);
                     }
 
                     if(player.getFoodLevel() <= 0) {
