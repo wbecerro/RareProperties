@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.items.ItemManager;
+import wbe.rareproperties.items.OrichalcumShard;
 import wbe.rareproperties.items.SpecialCraftingItem;
 import wbe.rareproperties.util.Utilities;
 
@@ -240,6 +241,21 @@ public class CommandListener implements CommandExecutor {
                     player.getWorld().dropItem(player.getLocation(), new SpecialCraftingItem(plugin));
                 } else {
                     player.getInventory().addItem(new SpecialCraftingItem(plugin));
+                }
+            } else if(args[0].equalsIgnoreCase("orichalcumShard")) {
+                if(!sender.hasPermission("rareproperties.command.orichalcumShard")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                if(args.length == 2) {
+                    player = Bukkit.getPlayer(args[1]);
+                }
+
+                if(player.getInventory().firstEmpty() == -1) {
+                    player.getWorld().dropItem(player.getLocation(), new OrichalcumShard(plugin));
+                } else {
+                    player.getInventory().addItem(new OrichalcumShard(plugin));
                 }
             } else if(args[0].equalsIgnoreCase("showPlayer")) {
                 if(!sender.hasPermission("rareproperties.command.showPlayer")) {

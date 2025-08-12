@@ -63,6 +63,7 @@ Messages:
     - "&b/rareproperties item [Jugador] [Armor/Weapon] [Socketted/Unidentified/Rareza] &eDa un objeto raro."
     - "&b/rareproperties addSocket [Color] &eAñade un hueco de runa a un objeto."
     - "&b/rareproperties specialItem [Jugador] &eDa un &e&lLibro de Tot&e."
+    - "&b/rareproperties orichalcumShard [Jugador] &eDa una &b&lPieza de oricalco&e."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
@@ -113,6 +114,19 @@ SpecialCraftingItem:
     - "&7Este libro contiene todos los secretos"
     - "&7del mundo. Es posible utilizarlo para"
     - "&7fabricar poderes extraños."
+
+OrichalcumShard:
+  material: PRISMARINE_SHARD
+  name: "&b&lPieza de oricalco"
+  lore:
+    - "&7"
+    - "&7Trozo del preciado y altamente resistente"
+    - "&7mineral atlante. Puede ser aplicado a las"
+    - "&7invenciones de Sindri para que sean aún"
+    - "&7más eficaces y poderosas."
+    - "&7"
+    - "&dSolo se puede aplicar siempre que el nuevo"
+    - "&dnivel no supere en más de 1 al máximo."
 
 RareItems:
   materials:
@@ -202,8 +216,11 @@ ConfigValues:
   blockSpawnerSpawns: false
   itemSlotChance: 40
   maxUpgradeLevel: 5
+  orichalcumShardChance: 0.05
   blacklistedWorlds:
     - Halloween
+  blacklistedWorldsItems:
+    - world_the_end
 
 ###############
 ### RAREZAS ###

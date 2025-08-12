@@ -34,8 +34,9 @@ public class Teleport extends RareProperty {
         direction.multiply(distance);
         playerLocation.add(direction);
 
-        if(playerLocation.getBlock().isEmpty() || playerLocation.getBlock().isPassable()) {
-            if(playerLocation.add(0, 1, 0).getBlock().isEmpty() || playerLocation.add(0, 1, 0).getBlock().isPassable()) {
+        Location copyLocation = playerLocation.clone();
+        if(copyLocation.getBlock().isEmpty() || copyLocation.getBlock().isPassable()) {
+            if(copyLocation.add(0, 1, 0).getBlock().isEmpty() || copyLocation.add(0, 1, 0).getBlock().isPassable()) {
                 player.teleport(playerLocation);
                 player.setFoodLevel(player.getFoodLevel() - cost);
                 player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F);

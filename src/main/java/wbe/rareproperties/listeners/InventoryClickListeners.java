@@ -200,4 +200,53 @@ public class InventoryClickListeners implements Listener {
 
         player.setItemOnCursor(sindrisFavour);
     }
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onOrichalcumUpgrade(InventoryClickEvent event) {
+        if(!(event.getInventory() instanceof AnvilInventory)) {
+            return;
+        }
+
+        if(event.getSlotType() != InventoryType.SlotType.RESULT) {
+            return;
+        }
+
+        ItemStack first = event.getInventory().getItem(0);
+        ItemStack second = event.getInventory().getItem(1);
+        NamespacedKey propertyKey = new NamespacedKey(plugin, "SindrisFavourProperty");
+        NamespacedKey levelKey = new NamespacedKey(plugin, "SindrisFavourLevel");
+        NamespacedKey key = new NamespacedKey(plugin, "OrichalcumShard");
+
+        if(!utilities.checkItem(first, propertyKey)) {
+            return;
+        }
+
+        if(!utilities.checkItem(second, key)) {
+            return;
+        }
+
+        ItemMeta firstMeta = first.getItemMeta();
+        int propertyLevel = RomanToDecimal.romanToDecimal(firstMeta.getPersistentDataContainer().get(levelKey, PersistentDataType.STRING));
+        if(propertyLevel > RareProperties.config.maxUpgradeLevel) {
+            return;
+        }
+
+        int newLevel = RomanToDecimal.romanToDecimal(firstMeta.getPersistentDataContainer().get(levelKey, PersistentDataType.STRING)) + 1;
+
+        SindrisFavour sindrisFavour = new SindrisFavour();
+        sindrisFavour.setProperty(utilities.getProperty(firstMeta.getPersistentDataContainer().get(propertyKey, PersistentDataType.STRING)),
+                DecimalToRoman.intToRoman(newLevel),
+                plugin);
+        Player player = (Player) event.getWhoClicked();
+        // Si el jugador tiene algo en la mano al coger la propiedad, ese objeto se suelta
+        if(!player.getItemOnCursor().getType().equals(Material.AIR)) {
+            player.getWorld().dropItem(player.getLocation(), player.getItemOnCursor());
+        }
+
+        event.setCancelled(true);
+        event.getInventory().setItem(0, null);
+        second.setAmount(second.getAmount() - 1);
+        event.getInventory().setItem(1, second);
+
+        player.setItemOnCursor(sindrisFavour);
+    }
 }

@@ -1,7 +1,5 @@
 package wbe.rareproperties.listeners;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
@@ -33,6 +31,8 @@ public class CreatureSpawnListeners implements Listener {
             if(event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.SPAWNER)) {
                 return;
             }
+        } else if(RareProperties.config.blacklistedWorldsItems.contains(event.getEntity().getWorld().getName())) {
+            return;
         }
 
         Random random = new Random();

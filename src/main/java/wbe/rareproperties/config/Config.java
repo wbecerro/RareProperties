@@ -27,7 +27,9 @@ public class Config {
     public boolean blockSpawnerSpawns;
     public int itemSlotChance;
     public int maxUpgradeLevel;
+    public double orichalcumShardChance;
     public List<String> blacklistedWorlds = new ArrayList<>();
+    public List<String> blacklistedWorldsItems = new ArrayList<>();
 
     public List<String> permissions = new ArrayList<>();
 
@@ -55,6 +57,10 @@ public class Config {
     public String specialCraftingItemName;
     public List<String> specialCraftingItemLore;
 
+    public Material orichalcumShardMaterial;
+    public String orichalcumShardName;
+    public List<String> orichalcumShardLore;
+
     public List<String> armorMaterials;
     public List<String> weaponMaterials;
 
@@ -81,7 +87,9 @@ public class Config {
         blockSpawnerSpawns = config.getBoolean("ConfigValues.blockSpawnerSpawns");
         itemSlotChance = config.getInt("ConfigValues.itemSlotChance");
         maxUpgradeLevel = config.getInt("ConfigValues.maxUpgradeLevel");
+        orichalcumShardChance = config.getDouble("ConfigValues.orichalcumShardChance");
         blacklistedWorlds = config.getStringList("ConfigValues.blacklistedWorlds");
+        blacklistedWorldsItems = config.getStringList("ConfigValues.blacklistedWorldsItems");
 
         loadConfigVariables();
 
@@ -103,6 +111,10 @@ public class Config {
         specialCraftingItemMaterial = Material.valueOf(config.getString("SpecialCraftingItem.material"));
         specialCraftingItemName = config.getString("SpecialCraftingItem.name").replace("&", "§");
         specialCraftingItemLore = config.getStringList("SpecialCraftingItem.lore");
+
+        orichalcumShardMaterial = Material.valueOf(config.getString("OrichalcumShard.material"));
+        orichalcumShardName = config.getString("OrichalcumShard.name").replace("&", "§");
+        orichalcumShardLore = config.getStringList("OrichalcumShard.lore");
 
         armorMaterials = config.getStringList("RareItems.materials.armorMaterial");
         weaponMaterials = config.getStringList("RareItems.materials.weaponMaterial");

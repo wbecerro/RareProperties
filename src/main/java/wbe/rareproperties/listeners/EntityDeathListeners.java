@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.items.IdentifierTome;
+import wbe.rareproperties.items.OrichalcumShard;
 import wbe.rareproperties.items.Socket;
 import wbe.rareproperties.properties.mythic.Capture;
 
@@ -42,6 +43,10 @@ public class EntityDeathListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void addSpecialDropsOnDeath(EntityDeathEvent event) {
+        if(RareProperties.config.blacklistedWorldsItems.contains(event.getEntity().getWorld().getName())) {
+            return;
+        }
+
         LivingEntity entity = event.getEntity();
         if(!(entity instanceof Monster)) {
             return;
@@ -60,6 +65,7 @@ public class EntityDeathListeners implements Listener {
 
         double socketChance = RareProperties.config.socketChance + RareProperties.config.lootingExtraChance * lootingLevel;
         double tomeChance = RareProperties.config.tomeChance + RareProperties.config.lootingExtraChance * lootingLevel;
+        double orichalcumChance = RareProperties.config.orichalcumShardChance;
 
         Random random = new Random();
         if(random.nextDouble(100) < socketChance) {
@@ -68,6 +74,10 @@ public class EntityDeathListeners implements Listener {
 
         if(random.nextDouble(100) < tomeChance) {
             event.getDrops().add(new IdentifierTome(plugin));
+        }
+
+        if(random.nextDouble(100) < orichalcumChance) {
+            event.getDrops().add(new OrichalcumShard(plugin));
         }
     }
 }
