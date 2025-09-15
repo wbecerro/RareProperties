@@ -34,7 +34,6 @@ public class RecipeLoader {
     }
 
     public void loadRecipes() {
-        loadTomeRecipe();
         loadConfigRecipes();
     }
 
@@ -42,15 +41,6 @@ public class RecipeLoader {
         for(NamespacedKey key : keys) {
             plugin.getServer().removeRecipe(key);
         }
-    }
-
-    private void loadTomeRecipe() {
-        NamespacedKey key = new NamespacedKey(plugin, "IdentifierTome");
-        ShapelessRecipe recipe = new ShapelessRecipe(key, new IdentifierTome(plugin));
-        recipe.addIngredient(3, Material.BOOK);
-        recipe.addIngredient(1, Material.ENDER_EYE);
-        plugin.getServer().addRecipe(recipe);
-        keys.add(key);
     }
 
     public void loadShapedRecipe(String id, String[] shape, HashMap<Character, String> ingredients) {
