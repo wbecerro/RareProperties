@@ -46,6 +46,7 @@ Messages:
   socketSlotAdded: '&b[&cPropiedades&b] &eSe ha añadido un hueco de runa al objeto.'
   removedAllProperties: '&b[&cPropiedades&b] &eSe han eliminado todas las propiedades de este objeto.'
   noPropertiesPresent: '&b[&cPropiedades&b] &eEste objeto no tiene propiedades presentes.'
+  notEnoughFood: '&b[&cPropiedades&b] &eNo tienes suficiente comida para sacrificar.'
   help:
     - "&d&m -===- &b[&cPropiedades&b] &d&m-===-"
     - "&b/rareproperties &eMuestra esta página."
@@ -206,6 +207,7 @@ Permissions:
 #####################
 
 ConfigValues:
+  checkSaturation: true
   specialMobChance: 4
   sockettedItemChance: 10
   maxSockets: 3

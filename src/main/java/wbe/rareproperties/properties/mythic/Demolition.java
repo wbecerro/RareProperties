@@ -27,6 +27,10 @@ public class Demolition extends RareProperty {
         int radius = RareProperties.propertyConfig.demolitionRange + getLevel();
         double damage = RareProperties.propertyConfig.demolitionDamage + 2 * getLevel();
 
+        if(!applyFoodCost(player, RareProperties.propertyConfig.demolitionCost)) {
+            return;
+        }
+
         for(Location loc : getCircle(player.getLocation(),2,(2*((int)(Math.PI*2))))){
             Block block = loc.clone().subtract(0, 1, 0).getBlock();
             if(block.getType() == Material.AIR) {
@@ -65,16 +69,11 @@ public class Demolition extends RareProperty {
         }
 
         player.playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 1F, 0.7F);
-        player.setFoodLevel(player.getFoodLevel() - RareProperties.propertyConfig.demolitionCost);
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = -1;
-
-        if(player.getFoodLevel() < RareProperties.propertyConfig.demolitionCost) {
-            return false;
-        }
 
         PlayerInventory inventory = player.getInventory();
         level = checkHands(inventory, getExternalName());

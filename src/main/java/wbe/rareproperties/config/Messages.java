@@ -39,6 +39,7 @@ public class Messages {
     public String socketSlotAdded;
     public String removedAllProperties;
     public String noPropertiesPresent;
+    public String notEnoughFood;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -74,5 +75,6 @@ public class Messages {
         socketSlotAdded = config.getString("Messages.socketSlotAdded").replace("&", "§");
         removedAllProperties = config.getString("Messages.removedAllProperties").replace("&", "§");
         noPropertiesPresent = config.getString("Messages.noPropertiesPresent").replace("&", "§");
+        notEnoughFood = config.getString("Messages.notEnoughFood").replace("&", "§");
     }
 }

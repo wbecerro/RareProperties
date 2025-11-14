@@ -17,6 +17,7 @@ public class Config {
 
     private FileConfiguration config;
 
+    public boolean checkSaturation;
     public int specialMobChance;
     public int sockettedItemChance;
     public int unidentifiedChance;
@@ -77,6 +78,7 @@ public class Config {
     public Config(FileConfiguration config) {
         this.config = config;
 
+        checkSaturation = config.getBoolean("ConfigValues.checkSaturation");
         specialMobChance = config.getInt("ConfigValues.specialMobChance");
         sockettedItemChance = config.getInt("ConfigValues.sockettedItemChance");
         unidentifiedChance = config.getInt("ConfigValues.unidentifiedChance");

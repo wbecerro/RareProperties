@@ -489,6 +489,41 @@ public class Utilities {
         return true;
     }
 
+    public boolean checkFoodCost(Player player, int cost) {
+        if(RareProperties.config.checkSaturation) {
+            if(player.getSaturation() >= cost) {
+                return true;
+            } else {
+                int rest = cost - (int) player.getSaturation();
+                return player.getFoodLevel() >= rest;
+            }
+        }
+
+        return player.getFoodLevel() >= cost;
+    }
+
+    public boolean applyFoodCost(Player player, int cost) {
+        if(!checkFoodCost(player, cost)) {
+            player.sendMessage(RareProperties.messages.notEnoughFood);
+            return false;
+        }
+
+        if(RareProperties.config.checkSaturation) {
+            if(player.getSaturation() >= cost) {
+                player.setSaturation(player.getSaturation() - cost);
+            } else {
+                int rest = cost - (int) player.getSaturation();
+                player.setSaturation(0f);
+                player.setFoodLevel(player.getFoodLevel() - rest);
+            }
+
+            return true;
+        }
+
+        player.setFoodLevel(player.getFoodLevel() - cost);
+        return true;
+    }
+
     private int findColorSocket(String[] colors, String color) {
         int size = colors.length;
         for(int i=0;i<size;i++) {

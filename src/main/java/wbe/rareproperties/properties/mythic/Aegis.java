@@ -22,7 +22,10 @@ public class Aegis extends RareProperty {
 
     @Override
     public void applyEffect(Player player, Event event) {
-        player.setHealth(player.getHealth() - RareProperties.propertyConfig.aegisHealth);
+        if(!applyHealthCost(player, RareProperties.propertyConfig.aegisHealth)) {
+            return;
+        }
+
         PotionEffect potion = new PotionEffect(PotionEffectType.RESISTANCE, RareProperties.propertyConfig.aegisDuration * 20,
                 RareProperties.propertyConfig.aegisResistance - 1);
         player.addPotionEffect(potion);
@@ -49,11 +52,6 @@ public class Aegis extends RareProperty {
         level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
-            return false;
-        }
-
-        if(player.getHealth() <= RareProperties.propertyConfig.aegisHealth) {
-            player.sendMessage(RareProperties.messages.notEnoughHealth);
             return false;
         }
 

@@ -23,7 +23,7 @@ public class Burst extends RareProperty {
     public void applyEffect(Player player, Event event) {
         int cost = RareProperties.propertyConfig.burstCost - getLevel();
 
-        if(player.getFoodLevel() < cost) {
+        if(!applyFoodCost(player, cost)) {
             return;
         }
 
@@ -36,8 +36,6 @@ public class Burst extends RareProperty {
             unitVector.setY(0.55 / getLevel());
             ent.setVelocity(unitVector.multiply(RareProperties.propertyConfig.burstVelocity));
         }
-
-        player.setFoodLevel(player.getFoodLevel() - cost);
     }
 
     @Override

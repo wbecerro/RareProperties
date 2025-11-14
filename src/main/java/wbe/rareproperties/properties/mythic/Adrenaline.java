@@ -22,7 +22,10 @@ public class Adrenaline extends RareProperty {
 
     @Override
     public void applyEffect(Player player, Event event) {
-        player.setHealth(player.getHealth() - RareProperties.propertyConfig.adrenalineHealth);
+        if(!applyHealthCost(player, RareProperties.propertyConfig.adrenalineHealth)) {
+            return;
+        }
+
         PotionEffect potion = new PotionEffect(PotionEffectType.STRENGTH,
                 RareProperties.propertyConfig.adrenalineStrengthDuration * 20 * getLevel(),
                 RareProperties.propertyConfig.adrenalineStrength - 1);
@@ -56,11 +59,6 @@ public class Adrenaline extends RareProperty {
         level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
-            return false;
-        }
-
-        if(player.getHealth() <= RareProperties.propertyConfig.adrenalineHealth) {
-            player.sendMessage(RareProperties.messages.notEnoughHealth);
             return false;
         }
 

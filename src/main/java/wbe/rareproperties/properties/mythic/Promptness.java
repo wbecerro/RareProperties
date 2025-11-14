@@ -22,7 +22,10 @@ public class Promptness extends RareProperty {
 
     @Override
     public void applyEffect(Player player, Event event) {
-        player.setHealth(player.getHealth() - RareProperties.propertyConfig.promptnessHealth);
+        if(!applyHealthCost(player, RareProperties.propertyConfig.promptnessHealth)) {
+             return;
+        }
+
         PotionEffect potion = new PotionEffect(PotionEffectType.SPEED, RareProperties.propertyConfig.promptnessDuration * 20,
                 RareProperties.propertyConfig.promptnessSpeed * getLevel() - 1);
         player.addPotionEffect(potion);
@@ -46,11 +49,6 @@ public class Promptness extends RareProperty {
         level = checkHands(inventory, getExternalName());
 
         if(level < 0) {
-            return false;
-        }
-
-        if(player.getHealth() <= RareProperties.propertyConfig.promptnessHealth) {
-            player.sendMessage(RareProperties.messages.notEnoughHealth);
             return false;
         }
 

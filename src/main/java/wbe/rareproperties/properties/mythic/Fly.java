@@ -23,6 +23,7 @@ public class Fly extends RareProperty {
     public void applyEffect(Player player, Event event) {
         if(player.getFoodLevel() <= 0) {
             player.setAllowFlight(false);
+            player.setFlying(false);
         } else {
             player.setAllowFlight(true);
             player.setFlySpeed(0.1F);
@@ -50,6 +51,7 @@ public class Fly extends RareProperty {
         if(level < 0) {
             Fly.playersFlying.remove(player);
             player.setAllowFlight(false);
+            player.setFlying(false);
             return false;
         }
 

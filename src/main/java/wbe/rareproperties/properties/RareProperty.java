@@ -169,4 +169,26 @@ public abstract class RareProperty {
 
         return level > 0 ? level : -1;
     }
+
+    public boolean checkFoodCost(Player player, int cost) {
+        return utilities.checkFoodCost(player, cost);
+    }
+
+    public boolean applyFoodCost(Player player, int cost) {
+        return utilities.applyFoodCost(player, cost);
+    }
+
+    public boolean checkHealthCost(Player player, int cost) {
+        return player.getHealth() > cost;
+    }
+
+    public boolean applyHealthCost(Player player, int cost) {
+        if(!checkHealthCost(player, cost)) {
+            player.sendMessage(RareProperties.messages.notEnoughHealth);
+            return false;
+        }
+
+        player.setHealth(player.getHealth() - cost);
+        return true;
+    }
 }

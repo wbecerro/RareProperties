@@ -13,7 +13,10 @@ import java.util.Set;
 
 public class Scheduler {
 
+    private static Utilities utilities;
+
     public static void startSchedulers(RareProperties plugin) {
+        utilities = new Utilities(plugin);
         startFlyCost( plugin);
         startSunTimeChecking(plugin);
         startMoonTimeChecking(plugin);
@@ -26,15 +29,13 @@ public class Scheduler {
             public void run() {
                 Set<Player> keys = Fly.playersFlying.keySet();
                 for(Player player : keys) {
-                    if(player.isFlying()) {
-                        int level = Fly.playersFlying.get(player);
-                        int rest = RareProperties.propertyConfig.flyCost - level;
-                        final int food = rest;
-                        int foodLevel = Math.max(player.getFoodLevel() - food, 0);
-                        player.setFoodLevel(foodLevel);
+                    if(!player.isFlying()) {
+                        continue;
                     }
 
-                    if(player.getFoodLevel() <= 0) {
+                    int cost = RareProperties.propertyConfig.flyCost - Fly.playersFlying.get(player);
+                    if(!utilities.applyFoodCost(player, cost)) {
+                        player.setAllowFlight(false);
                         player.setFlying(false);
                     }
                 }

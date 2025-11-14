@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class Channeling extends RareProperty {
 
-    public static HashMap<Player, Integer> playersChanneling = new HashMap<Player, Integer>();
+    public static HashMap<Player, Integer> playersChanneling = new HashMap<>();
 
     public Channeling(RareProperties plugin) {
         super(plugin, new ArrayList<>(), "channeling", RareProperties.propertyConfig.channelingName);

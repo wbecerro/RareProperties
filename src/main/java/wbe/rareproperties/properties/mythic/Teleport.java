@@ -20,11 +20,6 @@ public class Teleport extends RareProperty {
     @Override
     public void applyEffect(Player player, Event event) {
         int cost = RareProperties.propertyConfig.teleportCost;
-
-        if(player.getFoodLevel() < cost) {
-            return;
-        }
-
         int distance = 2 + RareProperties.propertyConfig.teleportBlocks * getLevel();
 
         Location playerLocation = player.getLocation();
@@ -37,8 +32,11 @@ public class Teleport extends RareProperty {
         Location copyLocation = playerLocation.clone();
         if(copyLocation.getBlock().isEmpty() || copyLocation.getBlock().isPassable()) {
             if(copyLocation.add(0, 1, 0).getBlock().isEmpty() || copyLocation.add(0, 1, 0).getBlock().isPassable()) {
+                if(!applyFoodCost(player, cost)) {
+                    return;
+                }
+
                 player.teleport(playerLocation);
-                player.setFoodLevel(player.getFoodLevel() - cost);
                 player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F);
                 return;
             }

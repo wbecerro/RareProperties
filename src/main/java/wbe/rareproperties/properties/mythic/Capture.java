@@ -1,6 +1,5 @@
 package wbe.rareproperties.properties.mythic;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -32,7 +31,7 @@ public class Capture extends RareProperty {
             return;
         }
 
-        Material eggMaterial = Material.AIR;
+        Material eggMaterial;
         try {
             String conversion = entity.getType().toString() + "_SPAWN_EGG";
 

@@ -20,20 +20,17 @@ public class Propulsion extends RareProperty {
     @Override
     public void applyEffect(Player player, Event event) {
         int cost = RareProperties.propertyConfig.propulsionCost;
+        if(!applyFoodCost(player, cost)) {
+            return;
+        }
 
         player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
         player.setVelocity(new Vector(0, RareProperties.propertyConfig.propulsionImpulse * getLevel(), 0));
-
-        player.setFoodLevel(player.getFoodLevel() - cost);
     }
 
     @Override
     public boolean checkUse(Player player, Event event) {
         int level = -1;
-
-        if(player.getFoodLevel() < RareProperties.propertyConfig.propulsionCost) {
-            return false;
-        }
 
         PlayerInventory inventory = player.getInventory();
         level = checkHands(inventory, getExternalName());
