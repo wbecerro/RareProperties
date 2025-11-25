@@ -1,29 +1,35 @@
-package wbe.rareproperties.properties.legendary;
+package wbe.rareproperties.properties.epic;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.util.Vector;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Armor extends RareProperty {
+public class Repulsion extends RareProperty {
 
-    private int armorAmount = 0;
+    private int repulsionAmount = 0;
 
-    public Armor(RareProperties plugin) {
-        super(plugin, new ArrayList<>(), "armor", RareProperties.propertyConfig.armorName);
-        setDescription(RareProperties.propertyConfig.armorDescription);
+    public Repulsion(RareProperties plugin) {
+        super(plugin, new ArrayList<>(), "repulsion", RareProperties.propertyConfig.repulsionName);
+        setDescription(RareProperties.propertyConfig.repulsionDescription);
     }
 
     @Override
     public void applyEffect(Player player, Event event) {
-        double damage = ((EntityDamageEvent) event).getDamage();
-        damage = damage * (1 - RareProperties.propertyConfig.armorPercent * armorAmount);
-        ((EntityDamageEvent) event).setDamage(damage);
+        int chance = RareProperties.propertyConfig.repulsionChance * repulsionAmount;
+        Random random = new Random();
+        if(random.nextInt(100) <= chance) {
+            Vector projectileVelocity = ((ProjectileHitEvent) event).getEntity().getVelocity().clone();
+            ((ProjectileHitEvent) event).getEntity().setVelocity(projectileVelocity.multiply(new Vector(-1, -1, -1)));
+            ((ProjectileHitEvent) event).setCancelled(true);
+        }
     }
 
     @Override
@@ -51,10 +57,10 @@ public class Armor extends RareProperty {
             }
             level = checkProperty(item, property);
             if(level > 0) {
-                armorAmount += level;
+                repulsionAmount += level;
             }
         }
 
-        return armorAmount > 0 ? armorAmount : -1;
+        return repulsionAmount > 0 ? repulsionAmount : -1;
     }
 }

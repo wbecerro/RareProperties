@@ -28,9 +28,11 @@ public class Properties {
     public String noctisName;
     public String armorName;
     public String swarmName;
+    public String executionName;
     public String vampirismName;
     public String backstabName;
     public String criticName;
+    public String repulsionName;
     public String electroName;
     public String cutName;
     public String witherName;
@@ -61,9 +63,11 @@ public class Properties {
     public List<String> noctisDescription = new ArrayList<>();
     public List<String> armorDescription = new ArrayList<>();
     public List<String> swarmDescription = new ArrayList<>();
+    public List<String> executionDescription = new ArrayList<>();
     public List<String> vampirismDescription = new ArrayList<>();
     public List<String> backstabDescription = new ArrayList<>();
     public List<String> criticDescription = new ArrayList<>();
+    public List<String> repulsionDescription = new ArrayList<>();
     public List<String> electroDescription = new ArrayList<>();
     public List<String> cutDescription = new ArrayList<>();
     public List<String> witherDescription = new ArrayList<>();
@@ -136,6 +140,8 @@ public class Properties {
     public int swarmMaxEntities;
     public int swarmDistance;
 
+    public double executionExtraDamagePerPercentPerLevel;
+
     public double vampirismHealth;
 
     public double backstabDamage;
@@ -143,6 +149,8 @@ public class Properties {
     public double criticDamage;
     public int criticChance;
     public String criticSound;
+
+    public int repulsionChance;
 
     public double electroDamage;
     public int electroChance;
@@ -200,9 +208,11 @@ public class Properties {
         noctisName = config.getString("Properties.Noctis.name").replace("&", "§");
         armorName = config.getString("Properties.Armor.name").replace("&", "§");
         swarmName = config.getString("Properties.Swarm.name").replace("&", "§");
+        executionName = config.getString("Properties.Execution.name").replace("&", "§");
         vampirismName = config.getString("Properties.Vampirism.name").replace("&", "§");
         backstabName = config.getString("Properties.Backstab.name").replace("&", "§");
         criticName = config.getString("Properties.Critic.name").replace("&", "§");
+        repulsionName = config.getString("Properties.Repulsion.name").replace("&", "§");
         electroName = config.getString("Properties.Electro.name").replace("&", "§");
         cutName = config.getString("Properties.Cut.name").replace("&", "§");
         witherName = config.getString("Properties.Wither.name").replace("&", "§");
@@ -233,9 +243,11 @@ public class Properties {
         noctisDescription = config.getStringList("Properties.Noctis.description");
         armorDescription = config.getStringList("Properties.Armor.description");
         swarmDescription = config.getStringList("Properties.Swarm.description");
+        executionDescription = config.getStringList("Properties.Execution.description");
         vampirismDescription = config.getStringList("Properties.Vampirism.description");
         backstabDescription = config.getStringList("Properties.Backstab.description");
         criticDescription = config.getStringList("Properties.Critic.description");
+        repulsionDescription = config.getStringList("Properties.Repulsion.description");
         electroDescription = config.getStringList("Properties.Electro.description");
         cutDescription = config.getStringList("Properties.Cut.description");
         witherDescription = config.getStringList("Properties.Wither.description");
@@ -290,11 +302,13 @@ public class Properties {
         swarmPercent = config.getInt("Properties.Swarm.maxPercentPerLevel");
         swarmMaxEntities = config.getInt("Properties.Swarm.maxEntities");
         swarmDistance = config.getInt("Properties.Swarm.distance");
+        executionExtraDamagePerPercentPerLevel = config.getDouble("Properties.Execution.extraDamagePerPercentPerLevel");
         vampirismHealth = config.getDouble("Properties.Vampirism.healthSteal");
         backstabDamage = config.getDouble("Properties.Backstab.extraDamage");
         criticDamage = config.getDouble("Properties.Critic.extraDamage");
         criticChance = config.getInt("Properties.Critic.chancePerLevel");
         criticSound = config.getString("Properties.Critic.sound");
+        repulsionChance = config.getInt("Properties.Repulsion.chancePerLevel");
         electroDamage = config.getDouble("Properties.Electro.damagePerLevel");
         electroChance = config.getInt("Properties.Electro.chancePerLevel");
         electroSound = config.getString("Properties.Electro.sound");

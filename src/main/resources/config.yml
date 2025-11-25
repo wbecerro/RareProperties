@@ -258,6 +258,7 @@ Rarities:
         - "Noctis"
         - "Armadura"
         - "Enjambre"
+        - "Ejecución"
     Epic:
       name: "Épico"
       color: "&5"
@@ -266,6 +267,7 @@ Rarities:
         - "Vampirismo"
         - "Puñalada"
         - "Crítico"
+          - "Repulsión"
     Rare:
       name: "Raro"
       color: "&9"
@@ -690,3 +692,21 @@ Properties:
       - "&7&nDescripción:"
       - "&7Otorga corazones de absorción cada cierto tiempo."
       - "&7&oSolo funciona en armadura."
+  Repulsion:
+    name: "Repulsión"
+    chancePerLevel: 3
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Permite que algunos de los proyectiles"
+      - "&7te reboten y no te golpeen."
+      - "&7&oSolo funciona en armadura."
+  Execution:
+    name: "Ejecución"
+    extraDamagePerPercentPerLevel: 0.06
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Aumenta el daño cuanto más baja la vida"
+      - "&7del enemigo."
+      - "&7&oSolo funciona en arma."

@@ -14,6 +14,7 @@ import wbe.rareproperties.properties.common.Shrink;
 import wbe.rareproperties.properties.epic.Backstab;
 import wbe.rareproperties.properties.epic.Critic;
 import wbe.rareproperties.properties.epic.Vampirism;
+import wbe.rareproperties.properties.legendary.Execution;
 import wbe.rareproperties.properties.legendary.Noctis;
 import wbe.rareproperties.properties.legendary.Solem;
 import wbe.rareproperties.properties.legendary.Swarm;
@@ -83,6 +84,13 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean swarmProperty = swarm.checkUse(player, event);
         if(swarmProperty) {
             swarm.applyEffect(player, event);
+        }
+
+        // Comprobación de Ejecución
+        Execution execution = new Execution(plugin);
+        boolean executionProperty = execution.checkUse(player, event);
+        if(executionProperty) {
+            execution.applyEffect(player, event);
         }
 
         // Comprobación de Vampirismo
