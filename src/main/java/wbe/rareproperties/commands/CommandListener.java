@@ -257,6 +257,13 @@ public class CommandListener implements CommandExecutor {
                 } else {
                     player.getInventory().addItem(new OrichalcumShard(plugin));
                 }
+            } else if(args[0].equalsIgnoreCase("count")) {
+                if(!sender.hasPermission("rareproperties.command.count")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                utilities.showAppliedProperties(player);
             } else if(args[0].equalsIgnoreCase("showPlayer")) {
                 if(!sender.hasPermission("rareproperties.command.showPlayer")) {
                     sender.sendMessage(RareProperties.messages.noPermission);

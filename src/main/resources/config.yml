@@ -47,6 +47,12 @@ Messages:
   removedAllProperties: '&b[&cPropiedades&b] &eSe han eliminado todas las propiedades de este objeto.'
   noPropertiesPresent: '&b[&cPropiedades&b] &eEste objeto no tiene propiedades presentes.'
   notEnoughFood: '&b[&cPropiedades&b] &eNo tienes suficiente comida para sacrificar.'
+  appliedHeader:
+    - "&d&m-===-&b [&cPropiedades&b] &d&m-===-"
+    - "&ePropiedades que se te aplican:"
+  appliedProperties: "   &b%property% &e%level%"
+  appliedFooter:
+    - "&d&m-===-&b [&cPropiedades&b] &d&m-===-"
   help:
     - "&d&m -===- &b[&cPropiedades&b] &d&m-===-"
     - "&b/rareproperties &eMuestra esta página."
@@ -267,7 +273,7 @@ Rarities:
         - "Vampirismo"
         - "Puñalada"
         - "Crítico"
-          - "Repulsión"
+        - "Repulsión"
     Rare:
       name: "Raro"
       color: "&9"

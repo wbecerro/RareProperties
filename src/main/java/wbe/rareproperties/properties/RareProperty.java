@@ -1,5 +1,6 @@
 package wbe.rareproperties.properties;
 
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.mythic.Channeling;
 import wbe.rareproperties.util.Utilities;
 
 import java.text.Normalizer;
@@ -105,6 +107,36 @@ public abstract class RareProperty {
 
     public abstract boolean checkUse(Player player, Event event);
 
+    public int checkUseHands(Player player) {
+        int level = -1;
+
+        if(!utilities.hasProperty(player.getInventory().getItemInMainHand(), getExternalName())) {
+            if(!utilities.hasProperty(player.getInventory().getItemInOffHand(), getExternalName())) {
+                return level;
+            }
+        }
+
+        PlayerInventory inventory = player.getInventory();
+        ItemStack item = inventory.getItemInMainHand();
+        level = checkProperty(item, getExternalName());
+
+        if(level < 0) {
+            item = inventory.getItemInOffHand();
+            level = checkProperty(item, getExternalName());
+        }
+
+        return level;
+    }
+
+    public int checkUseArmor(Player player) {
+        int level = -1;
+
+        PlayerInventory inventory = player.getInventory();
+        level = checkArmorAccumulative(inventory, getExternalName());
+
+        return level;
+    }
+
     public int checkProperty(ItemStack is, String property) {
         ItemMeta meta = is.getItemMeta();
         int level = -1;
@@ -144,6 +176,7 @@ public abstract class RareProperty {
             if(item == null) {
                 continue;
             }
+
             level = checkProperty(item, property);
             if(level > 0) {
                 return level;
@@ -153,6 +186,7 @@ public abstract class RareProperty {
         return -1;
     }
 
+
     public int checkArmorAccumulative(PlayerInventory inventory, String property) {
         ItemStack[] armor = inventory.getArmorContents();
         int level = 0;
@@ -161,6 +195,7 @@ public abstract class RareProperty {
             if(item == null) {
                 continue;
             }
+
             itemLevel = checkProperty(item, property);
             if(itemLevel > 0) {
                 level += itemLevel;

@@ -40,6 +40,9 @@ public class Messages {
     public String removedAllProperties;
     public String noPropertiesPresent;
     public String notEnoughFood;
+    public List<String> appliedHeader;
+    public String appliedProperties;
+    public List<String> appliedFooter;
 
     public Messages(FileConfiguration config) {
         this.config = config;
@@ -76,5 +79,8 @@ public class Messages {
         removedAllProperties = config.getString("Messages.removedAllProperties").replace("&", "§");
         noPropertiesPresent = config.getString("Messages.noPropertiesPresent").replace("&", "§");
         notEnoughFood = config.getString("Messages.notEnoughFood").replace("&", "§");
+        appliedHeader = config.getStringList("Messages.appliedHeader");
+        appliedProperties = config.getString("Messages.appliedProperties").replace("&", "§");
+        appliedFooter = config.getStringList("Messages.appliedFooter");
     }
 }

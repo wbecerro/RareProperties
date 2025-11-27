@@ -20,6 +20,7 @@ import wbe.rareproperties.rarities.PropertyRarity;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -522,6 +523,35 @@ public class Utilities {
 
         player.setFoodLevel(player.getFoodLevel() - cost);
         return true;
+    }
+
+    public void showAppliedProperties(Player player) {
+        HashMap<RareProperty, Integer> applied = getAppliedProperties(player);
+        for(String line : RareProperties.messages.appliedHeader) {
+            player.sendMessage(line.replace("&", "§"));
+        }
+
+        for(RareProperty property : applied.keySet()) {
+            player.sendMessage(RareProperties.messages.appliedProperties
+                    .replace("%property%", property.getExternalName())
+                    .replace("%level%", DecimalToRoman.intToRoman(applied.get(property))));
+        }
+
+        for(String line : RareProperties.messages.appliedFooter) {
+            player.sendMessage(line.replace("&", "§"));
+        }
+    }
+
+    private HashMap<RareProperty, Integer> getAppliedProperties(Player player) {
+        HashMap<RareProperty, Integer> applied = new HashMap<>();
+        for(RareProperty property : RareProperties.properties) {
+            int level = Math.max(property.checkUseHands(player), property.checkUseArmor(player));
+            if(level > 0) {
+                applied.put(property, level);
+            }
+        }
+
+        return applied;
     }
 
     private int findColorSocket(String[] colors, String color) {
