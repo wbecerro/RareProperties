@@ -29,6 +29,7 @@ public class Config {
     public int itemSlotChance;
     public int maxUpgradeLevel;
     public double orichalcumShardChance;
+    public double experienceGroupDistance;
     public List<String> blacklistedWorlds = new ArrayList<>();
     public List<String> blacklistedWorldsItems = new ArrayList<>();
 
@@ -90,6 +91,7 @@ public class Config {
         itemSlotChance = config.getInt("ConfigValues.itemSlotChance");
         maxUpgradeLevel = config.getInt("ConfigValues.maxUpgradeLevel");
         orichalcumShardChance = config.getDouble("ConfigValues.orichalcumShardChance");
+        experienceGroupDistance = config.getDouble("ConfigValues.experienceGroupDistance");
         blacklistedWorlds = config.getStringList("ConfigValues.blacklistedWorlds");
         blacklistedWorldsItems = config.getStringList("ConfigValues.blacklistedWorldsItems");
 

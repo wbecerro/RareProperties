@@ -27,5 +27,6 @@ public class EventListeners {
         pluginManager.registerEvents(new PrepareAnvilListeners(plugin), plugin);
         pluginManager.registerEvents(new PlayerJoinListeners(), plugin);
         pluginManager.registerEvents(new ProjectileHitListeners(plugin), plugin);
+        pluginManager.registerEvents(new EntitySpawnListeners(plugin), plugin);
     }
 }

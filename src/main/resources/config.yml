@@ -225,6 +225,7 @@ ConfigValues:
   itemSlotChance: 40
   maxUpgradeLevel: 5
   orichalcumShardChance: 0.05
+  experienceGroupDistance: 2
   blacklistedWorlds:
     - Halloween
   blacklistedWorldsItems:
