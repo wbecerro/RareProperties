@@ -29,6 +29,7 @@ public class Properties {
     public String armorName;
     public String swarmName;
     public String executionName;
+    public String radianceName;
     public String vampirismName;
     public String backstabName;
     public String criticName;
@@ -64,6 +65,7 @@ public class Properties {
     public List<String> armorDescription = new ArrayList<>();
     public List<String> swarmDescription = new ArrayList<>();
     public List<String> executionDescription = new ArrayList<>();
+    public List<String> radianceDescription = new ArrayList<>();
     public List<String> vampirismDescription = new ArrayList<>();
     public List<String> backstabDescription = new ArrayList<>();
     public List<String> criticDescription = new ArrayList<>();
@@ -142,6 +144,8 @@ public class Properties {
 
     public double executionExtraDamagePerPercentPerLevel;
 
+    public double radianceExtraDamage;
+
     public double vampirismHealth;
 
     public double backstabDamage;
@@ -209,6 +213,7 @@ public class Properties {
         armorName = config.getString("Properties.Armor.name").replace("&", "§");
         swarmName = config.getString("Properties.Swarm.name").replace("&", "§");
         executionName = config.getString("Properties.Execution.name").replace("&", "§");
+        radianceName = config.getString("Properties.Radiance.name").replace("&", "§");
         vampirismName = config.getString("Properties.Vampirism.name").replace("&", "§");
         backstabName = config.getString("Properties.Backstab.name").replace("&", "§");
         criticName = config.getString("Properties.Critic.name").replace("&", "§");
@@ -244,6 +249,7 @@ public class Properties {
         armorDescription = config.getStringList("Properties.Armor.description");
         swarmDescription = config.getStringList("Properties.Swarm.description");
         executionDescription = config.getStringList("Properties.Execution.description");
+        radianceDescription = config.getStringList("Properties.Radiance.description");
         vampirismDescription = config.getStringList("Properties.Vampirism.description");
         backstabDescription = config.getStringList("Properties.Backstab.description");
         criticDescription = config.getStringList("Properties.Critic.description");
@@ -303,6 +309,7 @@ public class Properties {
         swarmMaxEntities = config.getInt("Properties.Swarm.maxEntities");
         swarmDistance = config.getInt("Properties.Swarm.distance");
         executionExtraDamagePerPercentPerLevel = config.getDouble("Properties.Execution.extraDamagePerPercentPerLevel");
+        radianceExtraDamage = config.getDouble("Properties.Radiance.damagePercent");
         vampirismHealth = config.getDouble("Properties.Vampirism.healthSteal");
         backstabDamage = config.getDouble("Properties.Backstab.extraDamage");
         criticDamage = config.getDouble("Properties.Critic.extraDamage");

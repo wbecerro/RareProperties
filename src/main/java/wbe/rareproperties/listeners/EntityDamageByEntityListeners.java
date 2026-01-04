@@ -14,10 +14,7 @@ import wbe.rareproperties.properties.common.Shrink;
 import wbe.rareproperties.properties.epic.Backstab;
 import wbe.rareproperties.properties.epic.Critic;
 import wbe.rareproperties.properties.epic.Vampirism;
-import wbe.rareproperties.properties.legendary.Execution;
-import wbe.rareproperties.properties.legendary.Noctis;
-import wbe.rareproperties.properties.legendary.Solem;
-import wbe.rareproperties.properties.legendary.Swarm;
+import wbe.rareproperties.properties.legendary.*;
 import wbe.rareproperties.properties.rare.Cut;
 import wbe.rareproperties.properties.rare.Electro;
 import wbe.rareproperties.properties.rare.Poison;
@@ -91,6 +88,13 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean executionProperty = execution.checkUse(player, event);
         if(executionProperty) {
             execution.applyEffect(player, event);
+        }
+
+        // Comprobación de Fulgor
+        Radiance radiance = new Radiance(plugin);
+        boolean radianceProperty = radiance.checkUse(player, event);
+        if(radianceProperty) {
+            radiance.applyEffect(player, event);
         }
 
         // Comprobación de Vampirismo

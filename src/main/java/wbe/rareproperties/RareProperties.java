@@ -93,7 +93,7 @@ public class RareProperties extends JavaPlugin {
                 new Backstab(this), new Critic(this), new Electro(this), new Cut(this), new Wither(this), new Poison(this),
                 new Fire(this), new Freezee(this), new Explosion(this), new Shrink(this), new Enlarge(this), new Adrenaline(this),
                 new Swarm(this), new Rocketry(this), new Purity(this), new Instability(this), new Channeling(this), new Repulsion(this),
-                new Execution(this)));
+                new Execution(this), new Radiance(this)));
     }
 
     private void createPrefixFile() {

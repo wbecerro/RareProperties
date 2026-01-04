@@ -266,6 +266,7 @@ Rarities:
         - "Armadura"
         - "Enjambre"
         - "Ejecución"
+        - "Fulgor"
     Epic:
       name: "Épico"
       color: "&5"
@@ -716,4 +717,12 @@ Properties:
       - "&7&nDescripción:"
       - "&7Aumenta el daño cuanto más baja la vida"
       - "&7del enemigo."
+      - "&7&oSolo funciona en arma."
+  Radiance:
+    name: "Fulgor"
+    damagePercent: 0.02
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Aumenta el daño cuando hay tormenta."
       - "&7&oSolo funciona en arma."
