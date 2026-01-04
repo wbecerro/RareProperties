@@ -23,12 +23,9 @@ public class Radiance extends RareProperty {
     @Override
     public void applyEffect(Player player, Event event) {
         double damage = ((EntityDamageByEntityEvent) event).getDamage();
-        Bukkit.broadcast("Daño base: " + damage, "*");
         double percent = 1 + getLevel() * RareProperties.propertyConfig.radianceExtraDamage;
-        Bukkit.broadcast("Porcentaje extra: " + percent, "*");
 
         damage = damage * percent;
-        Bukkit.broadcast("Daño final: " + damage, "*");
         ((EntityDamageByEntityEvent) event).setDamage(damage);
     }
 
@@ -45,7 +42,6 @@ public class Radiance extends RareProperty {
         }
 
         if(player.getWorld().hasStorm()) {
-            Bukkit.broadcast("Hay tormenta", "*");
             setLevel(level);
             return true;
         }
