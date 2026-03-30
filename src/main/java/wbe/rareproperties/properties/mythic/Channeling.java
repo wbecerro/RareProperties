@@ -24,10 +24,11 @@ public class Channeling extends RareProperty {
 
     @Override
     public void applyEffect(Player player, Event event) {
-        if(!playersChanneling.containsKey(player)) {
-            playersChanneling.put(player, getLevel());
-            changeMaxAbsorption(10000, player);
-            player.setAbsorptionAmount(RareProperties.propertyConfig.channelingHalfHearts * getLevel());
+        playersChanneling.put(player, getLevel());
+        changeMaxAbsorption(10000, player);
+        double absorption = RareProperties.propertyConfig.channelingHalfHearts * getLevel();
+        if(player.getAbsorptionAmount() < absorption) {
+            player.setAbsorptionAmount(absorption);
         }
     }
 

@@ -9,6 +9,7 @@ import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.RareProperty;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Purity extends RareProperty {
 
@@ -19,6 +20,11 @@ public class Purity extends RareProperty {
 
     @Override
     public void applyEffect(Player player, Event event) {
+        Random random = new Random();
+        if(random.nextInt(100) + 1 > RareProperties.propertyConfig.purityChance * getLevel()) {
+            return;
+        }
+
         EntityPotionEffectEvent potionEffectEvent = (EntityPotionEffectEvent) event;
         PotionEffect potionEffect = potionEffectEvent.getNewEffect();
         if(!potionEffect.getType().getCategory().equals(PotionEffectTypeCategory.HARMFUL)) {

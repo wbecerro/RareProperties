@@ -674,6 +674,7 @@ Properties:
       - "&7&oSolo funciona en arma."
   Purity:
     name: "Pureza"
+    chancePerLevel: 12
     description:
       - "&7"
       - "&7&nDescripción:"

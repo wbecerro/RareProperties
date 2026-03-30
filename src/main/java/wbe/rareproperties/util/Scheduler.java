@@ -49,8 +49,10 @@ public class Scheduler {
             public void run() {
                 Set<Player> keys = Channeling.playersChanneling.keySet();
                 for(Player player : keys) {
-                    player.setAbsorptionAmount(RareProperties.propertyConfig.channelingHalfHearts
-                            * Channeling.playersChanneling.get(player));
+                    double absorption = RareProperties.propertyConfig.channelingHalfHearts * Channeling.playersChanneling.get(player);
+                    if(player.getAbsorptionAmount() < absorption) {
+                        player.setAbsorptionAmount(absorption);
+                    }
                 }
             }
         }, 0L, RareProperties.propertyConfig.channelingTime * 20L);

@@ -129,6 +129,8 @@ public class Properties {
 
     public int rocketryChance;
 
+    public int purityChance;
+
     public int channelingHalfHearts;
     public int channelingTime;
 
@@ -300,6 +302,7 @@ public class Properties {
         adrenalineSoundOff = config.getString("Properties.Adrenaline.soundOff");
         adrenalineHealth = config.getInt("Properties.Adrenaline.healthCost");
         rocketryChance = config.getInt("Properties.Rocketry.chancePerLevel");
+        purityChance = config.getInt("Properties.Purity.chancePerLevel");
         channelingHalfHearts = config.getInt("Properties.Channeling.halfHeartsPerLevel");
         channelingTime = config.getInt("Properties.Channeling.rechargeTime");
         solemDamage = config.getDouble("Properties.Solem.damagePercent");
