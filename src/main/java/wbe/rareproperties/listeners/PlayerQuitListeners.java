@@ -1,11 +1,11 @@
 package wbe.rareproperties.listeners;
 
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import wbe.rareproperties.properties.AttributeModifiedPlayer;
 import wbe.rareproperties.properties.RareProperty;
 
 public class PlayerQuitListeners implements Listener {
@@ -14,13 +14,16 @@ public class PlayerQuitListeners implements Listener {
     public void resetScaleOnQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if(RareProperty.scaleModified.get(player) == null) {
+        if(RareProperty.attributeModified.get(player) == null) {
             return;
         }
 
-        if(RareProperty.scaleModified.get(player)) {
-            player.getAttribute(Attribute.SCALE).setBaseValue(1);
-            RareProperty.scaleModified.put(player, false);
+        if(!RareProperty.attributeModified.get(player).isEmpty()) {
+            for(AttributeModifiedPlayer modifiedPlayer : RareProperty.attributeModified.get(player)) {
+                player.getAttribute(modifiedPlayer.getAttribute()).removeModifier(modifiedPlayer.getModifier());
+            }
+
+            RareProperty.attributeModified.remove(player);
         }
     }
 }

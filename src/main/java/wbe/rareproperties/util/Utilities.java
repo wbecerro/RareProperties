@@ -3,6 +3,7 @@ package wbe.rareproperties.util;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -19,10 +20,7 @@ import wbe.rareproperties.rarities.ItemRarity;
 import wbe.rareproperties.rarities.PropertyRarity;
 
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Utilities {
 
@@ -30,6 +28,16 @@ public class Utilities {
 
     public Utilities(RareProperties plugin) {
         this.plugin = plugin;
+    }
+
+    public AttributeModifier searchModifier(Collection<AttributeModifier> modifiers, NamespacedKey key) {
+        for(AttributeModifier modifier : modifiers) {
+            if(modifier.getKey().equals(key)) {
+                return modifier;
+            }
+        }
+
+        return null;
     }
 
     public ArrayList<String> getValid() {

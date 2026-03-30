@@ -30,6 +30,7 @@ public class Properties {
     public String swarmName;
     public String executionName;
     public String radianceName;
+    public String gravitonName;
     public String vampirismName;
     public String backstabName;
     public String criticName;
@@ -66,6 +67,7 @@ public class Properties {
     public List<String> swarmDescription = new ArrayList<>();
     public List<String> executionDescription = new ArrayList<>();
     public List<String> radianceDescription = new ArrayList<>();
+    public List<String> gravitonDescription = new ArrayList<>();
     public List<String> vampirismDescription = new ArrayList<>();
     public List<String> backstabDescription = new ArrayList<>();
     public List<String> criticDescription = new ArrayList<>();
@@ -148,6 +150,9 @@ public class Properties {
 
     public double radianceExtraDamage;
 
+    public double gravityPerLevel;
+    public int gravitonDuration;
+
     public double vampirismHealth;
 
     public double backstabDamage;
@@ -216,6 +221,7 @@ public class Properties {
         swarmName = config.getString("Properties.Swarm.name").replace("&", "§");
         executionName = config.getString("Properties.Execution.name").replace("&", "§");
         radianceName = config.getString("Properties.Radiance.name").replace("&", "§");
+        gravitonName = config.getString("Properties.Graviton.name").replace("&", "§");
         vampirismName = config.getString("Properties.Vampirism.name").replace("&", "§");
         backstabName = config.getString("Properties.Backstab.name").replace("&", "§");
         criticName = config.getString("Properties.Critic.name").replace("&", "§");
@@ -252,6 +258,7 @@ public class Properties {
         swarmDescription = config.getStringList("Properties.Swarm.description");
         executionDescription = config.getStringList("Properties.Execution.description");
         radianceDescription = config.getStringList("Properties.Radiance.description");
+        gravitonDescription = config.getStringList("Properties.Graviton.description");
         vampirismDescription = config.getStringList("Properties.Vampirism.description");
         backstabDescription = config.getStringList("Properties.Backstab.description");
         criticDescription = config.getStringList("Properties.Critic.description");
@@ -313,6 +320,8 @@ public class Properties {
         swarmDistance = config.getInt("Properties.Swarm.distance");
         executionExtraDamagePerPercentPerLevel = config.getDouble("Properties.Execution.extraDamagePerPercentPerLevel");
         radianceExtraDamage = config.getDouble("Properties.Radiance.damagePercent");
+        gravityPerLevel = config.getDouble("Properties.Graviton.gravityPerLevel");
+        gravitonDuration = config.getInt("Properties.Graviton.duration");
         vampirismHealth = config.getDouble("Properties.Vampirism.healthSteal");
         backstabDamage = config.getDouble("Properties.Backstab.extraDamage");
         criticDamage = config.getDouble("Properties.Critic.extraDamage");

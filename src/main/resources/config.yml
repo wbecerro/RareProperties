@@ -441,7 +441,7 @@ Properties:
     name: "Égida"
     resistanceLevel: 2
     absortionLevel: 2
-    sizeMultiplier: 1.5
+    sizeMultiplier: 0.5
     effectsDuration: 60
     healthCost: 10
     description:
@@ -464,7 +464,7 @@ Properties:
   Promptness:
     name: "Presteza"
     speedLevel: 1
-    sizeMultiplier: 0.6
+    sizeMultiplier: -0.6
     effectsDuration: 60
     healthCost: 7
     description:
@@ -727,3 +727,12 @@ Properties:
       - "&7&nDescripción:"
       - "&7Aumenta el daño cuando hay tormenta."
       - "&7&oSolo funciona en arma."
+  Graviton:
+    name: "Gravitón"
+    gravityPerLevel: 0.5
+    duration: 10
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Aumenta tu gravedad momentáneamente."
+      - "&7&oSolo funciona en maza (clic derecho)."

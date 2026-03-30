@@ -1,7 +1,7 @@
 package wbe.rareproperties.properties;
 
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
-import wbe.rareproperties.properties.mythic.Channeling;
 import wbe.rareproperties.util.Utilities;
 
 import java.text.Normalizer;
@@ -34,7 +33,7 @@ public abstract class RareProperty {
 
     public Utilities utilities;
 
-    public static HashMap<Player, Boolean> scaleModified = new HashMap<>();
+    public static HashMap<Player, List<AttributeModifiedPlayer>> attributeModified = new HashMap<>();
 
     public RareProperty(RareProperties plugin, List<String> description, String name, String externalName) {
         this.name = name;
