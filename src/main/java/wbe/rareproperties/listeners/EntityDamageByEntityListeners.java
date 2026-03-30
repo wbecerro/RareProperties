@@ -19,6 +19,7 @@ import wbe.rareproperties.properties.rare.Cut;
 import wbe.rareproperties.properties.rare.Electro;
 import wbe.rareproperties.properties.rare.Poison;
 import wbe.rareproperties.properties.rare.Wither;
+import wbe.rareproperties.properties.uncommon.Dexterity;
 import wbe.rareproperties.properties.uncommon.Fire;
 import wbe.rareproperties.properties.uncommon.Freezee;
 
@@ -158,6 +159,13 @@ public class EntityDamageByEntityListeners implements Listener {
         boolean freezeeProperty = freezee.checkUse(player, event);
         if(freezeeProperty) {
             freezee.applyEffect(player, event);
+        }
+
+        // Comprobación de Destreza
+        Dexterity dexterity = new Dexterity(plugin);
+        boolean dexterityProperty = dexterity.checkUse(player, event);
+        if(dexterityProperty) {
+            dexterity.applyEffect(player, event);
         }
 
         // Comprobación de Explosión

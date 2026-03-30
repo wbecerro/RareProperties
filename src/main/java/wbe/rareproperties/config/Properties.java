@@ -42,6 +42,7 @@ public class Properties {
     public String fireName;
     public String freezeeName;
     public String instabilityName;
+    public String dexterityName;
     public String explosionName;
     public String shrinkName;
     public String enlargeName;
@@ -79,6 +80,7 @@ public class Properties {
     public List<String> fireDescription = new ArrayList<>();
     public List<String> freezeeDescription = new ArrayList<>();
     public List<String> instabilityDescription = new ArrayList<>();
+    public List<String> dexterityDescription = new ArrayList<>();
     public List<String> explosionDescription = new ArrayList<>();
     public List<String> shrinkDescription = new ArrayList<>();
     public List<String> enlargeDescription = new ArrayList<>();
@@ -186,6 +188,10 @@ public class Properties {
     public int instabilityModifier;
     public int instabilityDuration;
 
+    public double dexteritySpeed;
+    public int dexterityDuration;
+    public int dexterityChance;
+
     public int explosionChance;
     public double explosionDamage;
 
@@ -233,6 +239,7 @@ public class Properties {
         fireName = config.getString("Properties.Fire.name").replace("&", "§");
         freezeeName = config.getString("Properties.Freezee.name").replace("&", "§");
         instabilityName = config.getString("Properties.Instability.name").replace("&", "§");
+        dexterityName = config.getString("Properties.Dexterity.name").replace("&", "§");
         explosionName = config.getString("Properties.Explosion.name").replace("&", "§");
         shrinkName = config.getString("Properties.Shrink.name").replace("&", "§");
         enlargeName = config.getString("Properties.Enlarge.name").replace("&", "§");
@@ -270,6 +277,7 @@ public class Properties {
         fireDescription = config.getStringList("Properties.Fire.description");
         freezeeDescription = config.getStringList("Properties.Freezee.description");
         instabilityDescription = config.getStringList("Properties.Instability.description");
+        dexterityDescription = config.getStringList("Properties.Dexterity.description");
         explosionDescription = config.getStringList("Properties.Explosion.description");
         shrinkDescription = config.getStringList("Properties.Shrink.description");
         enlargeDescription = config.getStringList("Properties.Enlarge.description");
@@ -344,6 +352,9 @@ public class Properties {
         instabilityChance = config.getInt("Properties.Instability.chancePerLevel");
         instabilityModifier = config.getInt("Properties.Instability.effectLevel");
         instabilityDuration = config.getInt("Properties.Instability.durationPerLevel");
+        dexteritySpeed = config.getDouble("Properties.Dexterity.speedPerLevel");
+        dexterityDuration = config.getInt("Properties.Dexterity.durationPerLevel");
+        dexterityChance = config.getInt("Properties.Dexterity.chancePerLevel");
         explosionChance = config.getInt("Properties.Explosion.chancePerLevel");
         explosionDamage = config.getDouble("Properties.Explosion.damage");
         shrinkChance = config.getInt("Properties.Shrink.chancePerLevel");

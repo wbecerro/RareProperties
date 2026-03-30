@@ -267,6 +267,7 @@ Rarities:
         - "Enjambre"
         - "Ejecución"
         - "Fulgor"
+        - "Gravitón"
     Epic:
       name: "Épico"
       color: "&5"
@@ -293,6 +294,7 @@ Rarities:
         - "Ígneo"
         - "Gélido"
         - "Inestabilidad"
+        - "Destreza"
     Common:
       name: "Común"
       color: "&f"
@@ -736,3 +738,14 @@ Properties:
       - "&7&nDescripción:"
       - "&7Aumenta tu gravedad momentáneamente."
       - "&7&oSolo funciona en maza (clic derecho)."
+  Dexterity:
+    name: "Destreza"
+    speedPerLevel: 0.15
+    durationPerLevel: 7
+    chancePerLevel: 10
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Probabilidad de aumentar tu velocidad"
+      - "&7al atacar."
+      - "&7&oSolo funciona en arma."
