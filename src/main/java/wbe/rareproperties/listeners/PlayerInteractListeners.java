@@ -11,10 +11,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.epic.Parry;
 import wbe.rareproperties.properties.legendary.Graviton;
 import wbe.rareproperties.properties.mythic.*;
 import wbe.rareproperties.util.Utilities;
-
 
 public class PlayerInteractListeners implements Listener {
 
@@ -25,6 +25,25 @@ public class PlayerInteractListeners implements Listener {
     public PlayerInteractListeners(RareProperties plugin) {
         this.plugin = plugin;
         utilities = new Utilities(plugin);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onUsingShield(PlayerInteractEvent event) {
+        if(event.getAction().equals(Action.PHYSICAL)) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        if(!player.getInventory().getItem(event.getHand()).getType().equals(Material.SHIELD)) {
+            return;
+        }
+
+        // Comprobación de Contraataque
+        Parry parry = new Parry(plugin);
+        boolean parryProperty = parry.checkUse(player, event);
+        if(parryProperty) {
+            parry.applyEffect(player, event);
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

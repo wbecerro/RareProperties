@@ -277,6 +277,7 @@ Rarities:
         - "Puñalada"
         - "Crítico"
         - "Repulsión"
+        - "Contraataque"
     Rare:
       name: "Raro"
       color: "&9"
@@ -749,3 +750,16 @@ Properties:
       - "&7Probabilidad de aumentar tu velocidad"
       - "&7al atacar."
       - "&7&oSolo funciona en arma."
+  Parry:
+    name: "Contraataque"
+    damage: 15
+    parryTicks: 30
+    parrySound: BLOCK_PISTON_EXTEND
+    parryCooldownTicks: 80
+    parryCooldownTicksPerLevel: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Permite contraatacar los golpes y negar el daño"
+      - "&7recibido y devolver parte."
+      - "&7&oSolo funciona en escudo."

@@ -35,6 +35,7 @@ public class Properties {
     public String backstabName;
     public String criticName;
     public String repulsionName;
+    public String parryName;
     public String electroName;
     public String cutName;
     public String witherName;
@@ -73,6 +74,7 @@ public class Properties {
     public List<String> backstabDescription = new ArrayList<>();
     public List<String> criticDescription = new ArrayList<>();
     public List<String> repulsionDescription = new ArrayList<>();
+    public List<String> parryDescription = new ArrayList<>();
     public List<String> electroDescription = new ArrayList<>();
     public List<String> cutDescription = new ArrayList<>();
     public List<String> witherDescription = new ArrayList<>();
@@ -165,6 +167,12 @@ public class Properties {
 
     public int repulsionChance;
 
+    public double parryDamage;
+    public int parryTicks;
+    public int parryCooldownTicks;
+    public int parryCooldownTicksPerLevel;
+    public String parrySound;
+
     public double electroDamage;
     public int electroChance;
     public String electroSound;
@@ -232,6 +240,7 @@ public class Properties {
         backstabName = config.getString("Properties.Backstab.name").replace("&", "§");
         criticName = config.getString("Properties.Critic.name").replace("&", "§");
         repulsionName = config.getString("Properties.Repulsion.name").replace("&", "§");
+        parryName = config.getString("Properties.Parry.name").replace("&", "§");
         electroName = config.getString("Properties.Electro.name").replace("&", "§");
         cutName = config.getString("Properties.Cut.name").replace("&", "§");
         witherName = config.getString("Properties.Wither.name").replace("&", "§");
@@ -270,6 +279,7 @@ public class Properties {
         backstabDescription = config.getStringList("Properties.Backstab.description");
         criticDescription = config.getStringList("Properties.Critic.description");
         repulsionDescription = config.getStringList("Properties.Repulsion.description");
+        parryDescription = config.getStringList("Properties.Parry.description");
         electroDescription = config.getStringList("Properties.Electro.description");
         cutDescription = config.getStringList("Properties.Cut.description");
         witherDescription = config.getStringList("Properties.Wither.description");
@@ -336,6 +346,11 @@ public class Properties {
         criticChance = config.getInt("Properties.Critic.chancePerLevel");
         criticSound = config.getString("Properties.Critic.sound");
         repulsionChance = config.getInt("Properties.Repulsion.chancePerLevel");
+        parryDamage = config.getDouble("Properties.Parry.damage");
+        parryTicks = config.getInt("Properties.Parry.parryTicks");
+        parryCooldownTicks = config.getInt("Properties.Parry.parryCooldownTicks");
+        parryCooldownTicksPerLevel = config.getInt("Properties.Parry.parryCooldownTicksPerLevel");
+        parrySound = config.getString("Properties.Parry.parrySound");
         electroDamage = config.getDouble("Properties.Electro.damagePerLevel");
         electroChance = config.getInt("Properties.Electro.chancePerLevel");
         electroSound = config.getString("Properties.Electro.sound");

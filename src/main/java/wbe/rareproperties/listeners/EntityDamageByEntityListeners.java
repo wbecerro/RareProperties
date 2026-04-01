@@ -1,6 +1,8 @@
 package wbe.rareproperties.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +15,7 @@ import wbe.rareproperties.properties.common.Explosion;
 import wbe.rareproperties.properties.common.Shrink;
 import wbe.rareproperties.properties.epic.Backstab;
 import wbe.rareproperties.properties.epic.Critic;
+import wbe.rareproperties.properties.epic.Parry;
 import wbe.rareproperties.properties.epic.Vampirism;
 import wbe.rareproperties.properties.legendary.*;
 import wbe.rareproperties.properties.rare.Cut;
@@ -23,13 +26,33 @@ import wbe.rareproperties.properties.uncommon.Dexterity;
 import wbe.rareproperties.properties.uncommon.Fire;
 import wbe.rareproperties.properties.uncommon.Freezee;
 
+import java.time.Instant;
+
 public class EntityDamageByEntityListeners implements Listener {
 
     private RareProperties plugin;
 
-
     public EntityDamageByEntityListeners(RareProperties plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void handleParry(EntityDamageByEntityEvent event) {
+        if(event.isCancelled()) {
+            return;
+        }
+
+        if(!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+        if(event.getDamager() instanceof LivingEntity damager) {
+            if(Instant.now().getEpochSecond() - Parry.playerParry.get(player) < RareProperties.propertyConfig.parryTicks / 20) {
+                damager.damage(event.getDamage() * (RareProperties.propertyConfig.parryDamage / 100));
+                player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.parrySound), 1F, 2.0F);
+                event.setCancelled(true);
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
