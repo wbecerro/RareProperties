@@ -43,7 +43,7 @@ public class Graviton extends RareProperty {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(), new Runnable() {
             @Override
             public void run() {
-                player.getAttribute(Attribute.SCALE).removeModifier(attributeModifier);
+                player.getAttribute(Attribute.GRAVITY).removeModifier(attributeModifier);
                 attributeModified.get(player).remove(modifiedPlayer);
             }
         }, RareProperties.propertyConfig.gravitonDuration * 20L);

@@ -732,7 +732,7 @@ Properties:
   Graviton:
     name: "Gravitón"
     gravityPerLevel: 0.5
-    duration: 10
+    duration: 5
     description:
       - "&7"
       - "&7&nDescripción:"

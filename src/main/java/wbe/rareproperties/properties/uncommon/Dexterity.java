@@ -6,7 +6,6 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -30,7 +29,8 @@ public class Dexterity extends RareProperty {
     @Override
     public void applyEffect(Player player, Event event) {
         Random random = new Random();
-        if(random.nextInt(100) + 1 > RareProperties.propertyConfig.dexterityChance * getLevel()) {
+        int randomNumber = random.nextInt(100);
+        if(randomNumber > RareProperties.propertyConfig.dexterityChance * getLevel()) {
             return;
         }
 
@@ -53,7 +53,7 @@ public class Dexterity extends RareProperty {
                 player.getAttribute(Attribute.MOVEMENT_SPEED).removeModifier(attributeModifier);
                 attributeModified.get(player).remove(modifiedPlayer);
             }
-        }, RareProperties.propertyConfig.dexterityDuration * 20L);
+        }, RareProperties.propertyConfig.dexterityDuration * 20L * getLevel());
     }
 
     @Override
@@ -68,6 +68,7 @@ public class Dexterity extends RareProperty {
             return false;
         }
 
-        return false;
+        setLevel(level);
+        return true;
     }
 }

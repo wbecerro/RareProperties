@@ -1,7 +1,9 @@
 package wbe.rareproperties;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import wbe.rareproperties.commands.CommandListener;
 import wbe.rareproperties.commands.TabListener;
@@ -10,6 +12,7 @@ import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.config.Properties;
 import wbe.rareproperties.items.ItemManager;
 import wbe.rareproperties.listeners.EventListeners;
+import wbe.rareproperties.properties.AttributeModifiedPlayer;
 import wbe.rareproperties.properties.RareProperty;
 import wbe.rareproperties.properties.common.*;
 import wbe.rareproperties.properties.epic.*;
@@ -65,6 +68,10 @@ public class RareProperties extends JavaPlugin {
         getCommand("rareproperties").setTabCompleter(this.tabListener);
         this.eventListeners.initializeListeners();
         Scheduler.startSchedulers(this);
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            RareProperty.attributeModified.put(player, new ArrayList<>());
+        }
     }
 
     public void onDisable() {
@@ -72,6 +79,20 @@ public class RareProperties extends JavaPlugin {
         recipeLoader.unloadRecipes();
         reloadConfig();
         getLogger().info("RareProperties disabled correctly");
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            if(RareProperty.attributeModified.get(player) == null) {
+                return;
+            }
+
+            if(!RareProperty.attributeModified.get(player).isEmpty()) {
+                for(AttributeModifiedPlayer modifiedPlayer : RareProperty.attributeModified.get(player)) {
+                    player.getAttribute(modifiedPlayer.getAttribute()).removeModifier(modifiedPlayer.getModifier());
+                }
+
+                RareProperty.attributeModified.remove(player);
+            }
+        }
     }
 
     public ArrayList<RareProperty> getProperties() {
