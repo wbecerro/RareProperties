@@ -40,6 +40,9 @@ public class Messages {
     public String removedAllProperties;
     public String noPropertiesPresent;
     public String notEnoughFood;
+    public String itemIsAir;
+    public String itemIsNotRare;
+    public String itemConverted;
     public List<String> appliedHeader;
     public String appliedProperties;
     public List<String> appliedFooter;
@@ -79,6 +82,9 @@ public class Messages {
         removedAllProperties = config.getString("Messages.removedAllProperties").replace("&", "§");
         noPropertiesPresent = config.getString("Messages.noPropertiesPresent").replace("&", "§");
         notEnoughFood = config.getString("Messages.notEnoughFood").replace("&", "§");
+        itemIsAir = config.getString("Messages.itemIsAir").replace("&", "§");
+        itemIsNotRare = config.getString("Messages.itemIsNotRare").replace("&", "§");
+        itemConverted = config.getString("Messages.itemConverted").replace("&", "§");
         appliedHeader = config.getStringList("Messages.appliedHeader");
         appliedProperties = config.getString("Messages.appliedProperties").replace("&", "§");
         appliedFooter = config.getStringList("Messages.appliedFooter");

@@ -84,6 +84,9 @@ public class ItemManager {
 
         NamespacedKey limitKey = new NamespacedKey(plugin, "RarePropertiesLimit");
         meta.getPersistentDataContainer().set(limitKey, PersistentDataType.INTEGER, socketSlots);
+        NamespacedKey rarityKey = new NamespacedKey(plugin, "rareItem");
+        meta.getPersistentDataContainer().set(rarityKey, PersistentDataType.STRING, rarity.getId());
+
         baseItem.setItemMeta(meta);
 
         Damageable damageable = (Damageable) baseItem.getItemMeta();
@@ -155,6 +158,10 @@ public class ItemManager {
 
         ItemMeta meta = baseItem.getItemMeta();
         meta.setDisplayName((rarity.getColor() + prefix + " " + suffix).replace("&", "§"));
+
+        NamespacedKey rarityKey = new NamespacedKey(plugin, "rareItem");
+        meta.getPersistentDataContainer().set(rarityKey, PersistentDataType.STRING, rarity.getId());
+
         baseItem.setItemMeta(meta);
 
         Damageable damageable = (Damageable) baseItem.getItemMeta();
@@ -195,6 +202,10 @@ public class ItemManager {
 
         ItemMeta meta = baseItem.getItemMeta();
         meta.setDisplayName((rarity.getColor() + prefix + " " + suffix).replace("&", "§"));
+
+        NamespacedKey rarityKey = new NamespacedKey(plugin, "rareItem");
+        meta.getPersistentDataContainer().set(rarityKey, PersistentDataType.STRING, rarity.getId());
+
         baseItem.setItemMeta(meta);
 
         Damageable damageable = (Damageable) baseItem.getItemMeta();
@@ -235,6 +246,10 @@ public class ItemManager {
 
         ItemMeta meta = baseItem.getItemMeta();
         meta.setDisplayName((rarity.getColor() + prefix + " " + suffix).replace("&", "§"));
+
+        NamespacedKey rarityKey = new NamespacedKey(plugin, "rareItem");
+        meta.getPersistentDataContainer().set(rarityKey, PersistentDataType.STRING, rarity.getId());
+
         baseItem.setItemMeta(meta);
 
         Damageable damageable = (Damageable) baseItem.getItemMeta();

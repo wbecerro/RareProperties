@@ -9,11 +9,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.config.Messages;
 import wbe.rareproperties.items.ItemManager;
 import wbe.rareproperties.items.OrichalcumShard;
 import wbe.rareproperties.items.SpecialCraftingItem;
+import wbe.rareproperties.items.Token;
 import wbe.rareproperties.util.Utilities;
 
 import java.util.Random;
@@ -151,11 +153,59 @@ public class CommandListener implements CommandExecutor {
                     utilities.giveTome(player);
                 }
             } else if(args[0].equalsIgnoreCase("showItem")) {
-                if(!sender.hasPermission("rareproperties.command.showItem")) {
+                if (!sender.hasPermission("rareproperties.command.showItem")) {
                     sender.sendMessage(RareProperties.messages.noPermission);
                     return false;
                 }
                 sender.sendMessage(player.getInventory().getItemInMainHand().toString());
+            } else if(args[0].equalsIgnoreCase("token")) {
+                if(!sender.hasPermission("rareproperties.command.token")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                if(args.length < 2) {
+                    sender.sendMessage(RareProperties.messages.notEnoughArgs);
+                    return false;
+                }
+
+                String rarity = args[1];
+                if(player.getInventory().firstEmpty() == -1) {
+                    player.getWorld().dropItem(player.getLocation(), new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
+                } else {
+                    player.getInventory().addItem(new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
+                }
+            } else if(args[0].equalsIgnoreCase("convert")) {
+                if(!sender.hasPermission("rareproperties.command.convert")) {
+                    sender.sendMessage(RareProperties.messages.noPermission);
+                    return false;
+                }
+
+                ItemStack hand = player.getInventory().getItemInMainHand();
+                if(hand == null || hand.getType().equals(Material.AIR)) {
+                    sender.sendMessage(RareProperties.messages.itemIsAir);
+                    return false;
+                }
+
+                NamespacedKey rarityKey = new NamespacedKey(plugin, "rareItem");
+                if(hand.getItemMeta() == null) {
+                    sender.sendMessage(RareProperties.messages.itemIsNotRare);
+                    return false;
+                }
+
+                if(!hand.getItemMeta().getPersistentDataContainer().has(rarityKey)) {
+                    sender.sendMessage(RareProperties.messages.itemIsNotRare);
+                    return false;
+                }
+
+                String rarity = hand.getItemMeta().getPersistentDataContainer().get(rarityKey, PersistentDataType.STRING);
+                player.getInventory().remove(hand);
+                if(player.getInventory().firstEmpty() == -1) {
+                    player.getWorld().dropItem(player.getLocation(), new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
+                } else {
+                    player.getInventory().addItem(new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
+                }
+                player.sendMessage(RareProperties.messages.itemConverted);
             } else if(args[0].equalsIgnoreCase("item")) {
                 if(!sender.hasPermission("rareproperties.command.item")) {
                     sender.sendMessage(RareProperties.messages.noPermission);

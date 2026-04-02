@@ -1,8 +1,12 @@
 package wbe.rareproperties.rarities;
 
+import org.bukkit.Material;
+
 public class ItemRarity {
 
     private String id;
+
+    private String name;
 
     private int maxEnchants;
 
@@ -16,14 +20,18 @@ public class ItemRarity {
 
     private int weight;
 
-    public ItemRarity(String id, int maxEnchants, int minEnchants, int maxEnchantLevel, int maxProperties, String color, int weight) {
+    private Material tokenMaterial;
+
+    public ItemRarity(String id, String name, int maxEnchants, int minEnchants, int maxEnchantLevel, int maxProperties, String color, int weight, Material tokenMaterial) {
         this.id = id;
+        this.name = name;
         this.maxEnchants = maxEnchants;
         this.minEnchants = minEnchants;
         this.maxEnchantLevel = maxEnchantLevel;
         this.maxProperties = maxProperties;
         this.color = color;
         this.weight = weight;
+        this.tokenMaterial = tokenMaterial;
     }
 
     public String getId() {
@@ -32,6 +40,14 @@ public class ItemRarity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getMaxEnchants() {
@@ -80,5 +96,13 @@ public class ItemRarity {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public Material getTokenMaterial() {
+        return tokenMaterial;
+    }
+
+    public void setTokenMaterial(Material tokenMaterial) {
+        this.tokenMaterial = tokenMaterial;
     }
 }

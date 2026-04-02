@@ -47,6 +47,9 @@ Messages:
   removedAllProperties: '&b[&cPropiedades&b] &eSe han eliminado todas las propiedades de este objeto.'
   noPropertiesPresent: '&b[&cPropiedades&b] &eEste objeto no tiene propiedades presentes.'
   notEnoughFood: '&b[&cPropiedades&b] &eNo tienes suficiente comida para sacrificar.'
+  itemIsAir: '&b[&cPropiedades&b] &eDebes tener un objeto en la mano.'
+  itemIsNotRare: '&b[&cPropiedades&b] &eNecesitas un objeto especial para hacer esto.'
+  itemConverted: '&b[&cPropiedades&b] &eObjeto convertido a fragmento con éxito.'
   appliedHeader:
     - "&d&m-===-&b [&cPropiedades&b] &d&m-===-"
     - "&ePropiedades que se te aplican:"
@@ -71,6 +74,8 @@ Messages:
     - "&b/rareproperties addSocket [Color] &eAñade un hueco de runa a un objeto."
     - "&b/rareproperties specialItem [Jugador] &eDa un &e&lLibro de Tot&e."
     - "&b/rareproperties orichalcumShard [Jugador] &eDa una &b&lPieza de oricalco&e."
+    - "&b/rareproperties token [Rareza] &eDa una &b&lFragmento&e."
+    - "&b/rareproperties convert &eConvierte un objeto especial en fragmento."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
@@ -135,6 +140,14 @@ OrichalcumShard:
     - "&dSolo se puede aplicar siempre que el nuevo"
     - "&dnivel no supere en más de 1 al máximo."
 
+Token:
+  name: "%color%Fragmento %rarity%"
+  lore:
+    - "&7"
+    - "&7Fragmento de un objeto especial"
+    - "&7que permite canalizar su poder"
+    - "&7y potenciar otro objeto."
+
 RareItems:
   materials:
     armorMaterial:
@@ -165,26 +178,31 @@ RareItems:
       - WOODEN_AXE
       - WOODEN_HOE
       - WOODEN_SWORD
+      - WOODEN_SPEAR
       - STONE_SHOVEL
       - STONE_PICKAXE
       - STONE_AXE
       - STONE_HOE
       - STONE_SWORD
+      - STONE_SPEAR
       - IRON_SHOVEL
       - IRON_PICKAXE
       - IRON_AXE
       - IRON_HOE
       - IRON_SWORD
+      - IRON_SPEAR
       - GOLDEN_SHOVEL
       - GOLDEN_PICKAXE
       - GOLDEN_AXE
       - GOLDEN_HOE
       - GOLDEN_SWORD
+      - GOLDEN_SPEAR
       - DIAMOND_SHOVEL
       - DIAMOND_PICKAXE
       - DIAMOND_AXE
       - DIAMOND_HOE
       - DIAMOND_SWORD
+      - DIAMOND_SPEAR
       - FISHING_ROD
       - FLINT_AND_STEEL
       - SHEARS
@@ -306,61 +324,77 @@ Rarities:
         - "Agrandamiento"
   Items:
     Supreme:
+      name: "supremo"
       maxEnchants: 10
       minEnchants: 5
       maxEnchantLevel: 10
       maxProperties: 4
       color: "&c&l&n"
       weight: 1
+      tokenItem: RED_DYE
     Divine:
+      name: "divino"
       maxEnchants: 8
       minEnchants: 3
       maxEnchantLevel: 8
       maxProperties: 3
       color: "&f&l&n"
       weight: 5
+      tokenItem: WHITE_DYE
     Mythic:
+      name: "mítico"
       maxEnchants: 6
       minEnchants: 3
       maxEnchantLevel: 7
       maxProperties: 2
       color: "&d&n"
       weight: 15
+      tokenItem: PINK_DYE
     Legendary:
+      name: "legendario"
       maxEnchants: 5
       minEnchants: 2
       maxEnchantLevel: 6
       maxProperties: 2
       color: "&6&n"
       weight: 45
+      tokenItem: ORANGE_DYE
     Epic:
+      name: "épico"
       maxEnchants: 4
       minEnchants: 2
       maxEnchantLevel: 4
       maxProperties: 1
       color: "&5&n"
       weight: 135
+      tokenItem: PURPLE_DYE
     Rare:
+      name: "raro"
       maxEnchants: 3
       minEnchants: 1
       maxEnchantLevel: 3
       maxProperties: 1
       color: "&9&n"
       weight: 405
+      tokenItem: BLUE_DYE
     Uncommon:
+      name: "poco común"
       maxEnchants: 2
       minEnchants: 1
       maxEnchantLevel: 2
       maxProperties: 0
       color: "&a&n"
       weight: 1215
+      tokenItem: LIME_DYE
     Common:
+      name: "común"
       maxEnchants: 1
       minEnchants: 0
       maxEnchantLevel: 1
       maxProperties: 0
       color: "&b&n"
       weight: 3645
+      tokenItem: LIGHT_BLUE_DYE
 
 ###################
 ### PROPIEDADES ###

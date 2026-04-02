@@ -16,7 +16,7 @@ public class TabListener implements TabCompleter {
 
     private final List<String> subCommands = Arrays.asList("help", "list", "add", "remove", "get",
             "give", "giveRandom", "socket", "tome", "showItem", "item", "addSocket", "specialItem", "reload",
-            "showPlayer", "removeAllKeys", "orichalcumShard", "count");
+            "showPlayer", "removeAllKeys", "orichalcumShard", "count", "token", "convert");
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
@@ -71,6 +71,16 @@ public class TabListener implements TabCompleter {
                     completions.addAll(RareProperties.config.socketColors);
                     completions.add("<Otro color>");
                     break;
+                case "token":
+                    List<String> rarities = new ArrayList<>();
+                    RareProperties.config.itemRarities.forEach((rarity -> {
+                        if(args[1].isEmpty()) {
+                            rarities.add(rarity.getId());
+                        } else if(rarity.getId().startsWith(args[1])) {
+                            rarities.add(rarity.getId());
+                        }
+                    }));
+                    completions.addAll(rarities);
             }
         }
 

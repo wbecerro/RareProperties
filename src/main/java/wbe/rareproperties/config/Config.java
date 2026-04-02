@@ -63,6 +63,9 @@ public class Config {
     public String orichalcumShardName;
     public List<String> orichalcumShardLore;
 
+    public String tokenName;
+    public List<String> tokenLore;
+
     public List<String> armorMaterials;
     public List<String> weaponMaterials;
 
@@ -120,6 +123,9 @@ public class Config {
         orichalcumShardName = config.getString("OrichalcumShard.name").replace("&", "§");
         orichalcumShardLore = config.getStringList("OrichalcumShard.lore");
 
+        tokenName = config.getString("Token.name").replace("&", "§");
+        tokenLore = config.getStringList("Token.lore");
+
         armorMaterials = config.getStringList("RareItems.materials.armorMaterial");
         weaponMaterials = config.getStringList("RareItems.materials.weaponMaterial");
 
@@ -160,6 +166,7 @@ public class Config {
     private void loadItemRarites() {
         Set<String> configRarities = config.getConfigurationSection("Rarities.Items").getKeys(false);
         for(String rarity : configRarities) {
+            String name = config.getString("Rarities.Items." + rarity + ".name");
             int weight = config.getInt("Rarities.Items." + rarity + ".weight");
             totalItemWeight += weight;
             int maxEnchants = config.getInt("Rarities.Items." + rarity + ".maxEnchants");
@@ -167,19 +174,21 @@ public class Config {
             int maxEnchantLevel = config.getInt("Rarities.Items." + rarity + ".maxEnchantLevel");
             int maxProperties = config.getInt("Rarities.Items." + rarity + ".maxProperties");
             String color = config.getString("Rarities.Items." + rarity + ".color");
-            ItemRarity itemRarity = new ItemRarity(rarity, maxEnchants, minEnchants, maxEnchantLevel, maxProperties, color, weight);
+            Material tokenMaterial = Material.valueOf(config.getString("Rarities.Items." + rarity + ".tokenItem"));
+            ItemRarity itemRarity = new ItemRarity(rarity, name, maxEnchants, minEnchants, maxEnchantLevel, maxProperties, color, weight, tokenMaterial);
             itemRarities.add(itemRarity);
         }
     }
 
     public ItemRarity getRarityFromName(String rarity) {
+        String name = config.getString("Rarities.Items." + rarity + ".name");
         int weight = config.getInt("Rarities.Items." + rarity + ".weight");
         int maxEnchants = config.getInt("Rarities.Items." + rarity + ".maxEnchants");
         int minEnchants = config.getInt("Rarities.Items." + rarity + ".minEnchants");
         int maxEnchantLevel = config.getInt("Rarities.Items." + rarity + ".maxEnchantLevel");
         int maxProperties = config.getInt("Rarities.Items." + rarity + ".maxProperties");
         String color = config.getString("Rarities.Items." + rarity + ".color");
-        ItemRarity itemRarity = new ItemRarity(rarity, maxEnchants, minEnchants, maxEnchantLevel, maxProperties, color, weight);
-        return itemRarity;
+        Material tokenMaterial = Material.valueOf(config.getString("Rarities.Items." + rarity + ".tokenItem"));
+        return new ItemRarity(rarity, name, maxEnchants, minEnchants, maxEnchantLevel, maxProperties, color, weight, tokenMaterial);
     }
 }
