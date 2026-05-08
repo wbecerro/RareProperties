@@ -47,6 +47,10 @@ public class EntityDamageByEntityListeners implements Listener {
         }
 
         if(event.getDamager() instanceof LivingEntity damager) {
+            if(Parry.playerParry.get(player) == null) {
+                return;
+            }
+
             if(Instant.now().getEpochSecond() - Parry.playerParry.get(player) < RareProperties.propertyConfig.parryTicks / 20) {
                 damager.damage(event.getDamage() * (RareProperties.propertyConfig.parryDamage / 100));
                 player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.parrySound), 1F, 2.0F);
