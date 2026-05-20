@@ -75,7 +75,7 @@ Messages:
     - "&b/rareproperties specialItem [Jugador] &eDa un &e&lLibro de Tot&e."
     - "&b/rareproperties orichalcumShard [Jugador] &eDa una &b&lPieza de oricalco&e."
     - "&b/rareproperties token [Rareza] &eDa una &b&lFragmento&e."
-    - "&b/rareproperties convert &eConvierte un objeto especial en fragmento."
+    - "&b/rareproperties convert [all] &eConvierte un objeto especial en fragmento."
     - "&b/rareproperties reload &eRecarga la configuración del plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"

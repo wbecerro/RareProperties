@@ -15,6 +15,7 @@ import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.items.IdentifierTome;
 import wbe.rareproperties.items.SindrisFavour;
 import wbe.rareproperties.items.Socket;
+import wbe.rareproperties.items.Token;
 import wbe.rareproperties.properties.RareProperty;
 import wbe.rareproperties.rarities.ItemRarity;
 import wbe.rareproperties.rarities.PropertyRarity;
@@ -176,6 +177,9 @@ public class Utilities {
         NamespacedKey key = new NamespacedKey(plugin, Normalizer.normalize("RareProperties" + property,
                 Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, level);
+        NamespacedKey removable = new NamespacedKey(plugin, Normalizer.normalize("RemovableRareProperties" + property,
+                Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
+        meta.getPersistentDataContainer().set(removable, PersistentDataType.BOOLEAN, true);
 
         item.setItemMeta(meta);
     }
@@ -547,6 +551,48 @@ public class Utilities {
 
         for(String line : RareProperties.messages.appliedFooter) {
             player.sendMessage(line.replace("&", "§"));
+        }
+    }
+
+    public void convertAllItems(Player player, boolean messages) {
+        ItemStack[] items = player.getInventory().getContents();
+        for(ItemStack item : items) {
+            convertItem(item, player, messages);
+        }
+    }
+
+    public void convertItem(ItemStack item, Player player, boolean messages) {
+        if(item == null || item.getType().equals(Material.AIR)) {
+            if(messages) {
+                player.sendMessage(RareProperties.messages.itemIsAir);
+            }
+
+            return;
+        }
+
+        NamespacedKey rarityKey = new NamespacedKey(plugin, "rareItem");
+        if(item.getItemMeta() == null) {
+            if(messages) {
+                player.sendMessage(RareProperties.messages.itemIsNotRare);
+            }
+
+            return;
+        }
+
+        if(!item.getItemMeta().getPersistentDataContainer().has(rarityKey)) {
+            if(messages) {
+                player.sendMessage(RareProperties.messages.itemIsNotRare);
+            }
+
+            return;
+        }
+
+        String rarity = item.getItemMeta().getPersistentDataContainer().get(rarityKey, PersistentDataType.STRING);
+        player.getInventory().remove(item);
+        if(player.getInventory().firstEmpty() == -1) {
+            player.getWorld().dropItem(player.getLocation(), new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
+        } else {
+            player.getInventory().addItem(new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
         }
     }
 

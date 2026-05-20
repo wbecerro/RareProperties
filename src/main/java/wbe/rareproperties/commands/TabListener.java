@@ -81,6 +81,8 @@ public class TabListener implements TabCompleter {
                         }
                     }));
                     completions.addAll(rarities);
+                case "convert":
+                    completions.add("all");
             }
         }
 

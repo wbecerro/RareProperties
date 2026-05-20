@@ -182,29 +182,12 @@ public class CommandListener implements CommandExecutor {
                 }
 
                 ItemStack hand = player.getInventory().getItemInMainHand();
-                if(hand == null || hand.getType().equals(Material.AIR)) {
-                    sender.sendMessage(RareProperties.messages.itemIsAir);
-                    return false;
-                }
-
-                NamespacedKey rarityKey = new NamespacedKey(plugin, "rareItem");
-                if(hand.getItemMeta() == null) {
-                    sender.sendMessage(RareProperties.messages.itemIsNotRare);
-                    return false;
-                }
-
-                if(!hand.getItemMeta().getPersistentDataContainer().has(rarityKey)) {
-                    sender.sendMessage(RareProperties.messages.itemIsNotRare);
-                    return false;
-                }
-
-                String rarity = hand.getItemMeta().getPersistentDataContainer().get(rarityKey, PersistentDataType.STRING);
-                player.getInventory().remove(hand);
-                if(player.getInventory().firstEmpty() == -1) {
-                    player.getWorld().dropItem(player.getLocation(), new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
+                if(args.length > 1 && args[1].equalsIgnoreCase("all")) {
+                    utilities.convertAllItems(player, false);
                 } else {
-                    player.getInventory().addItem(new Token(plugin, RareProperties.config.getRarityFromName(rarity)));
+                    utilities.convertItem(hand, player, true);
                 }
+
                 player.sendMessage(RareProperties.messages.itemConverted);
             } else if(args[0].equalsIgnoreCase("item")) {
                 if(!sender.hasPermission("rareproperties.command.item")) {
