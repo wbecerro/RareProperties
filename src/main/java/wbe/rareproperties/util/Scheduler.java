@@ -1,14 +1,23 @@
 package wbe.rareproperties.util;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import wbe.rareproperties.RareProperties;
+import wbe.rareproperties.properties.RareProperty;
 import wbe.rareproperties.properties.legendary.Noctis;
 import wbe.rareproperties.properties.legendary.Solem;
 import wbe.rareproperties.properties.mythic.Channeling;
 import wbe.rareproperties.properties.mythic.Fly;
+import wbe.rareproperties.properties.mythic.Restoration;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class Scheduler {
@@ -21,6 +30,7 @@ public class Scheduler {
         startSunTimeChecking(plugin);
         startMoonTimeChecking(plugin);
         startChannelingRenew(plugin);
+        startRestoration(plugin);
     }
 
     private static void startFlyCost(RareProperties plugin) {
@@ -56,6 +66,49 @@ public class Scheduler {
                 }
             }
         }, 0L, RareProperties.propertyConfig.channelingTime * 20L);
+    }
+
+    private static void startRestoration(RareProperties plugin) {
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+            @Override
+            public void run() {
+                for(Player player : Restoration.playersRestoration) {
+                    PlayerInventory inventory = player.getInventory();
+                    List<ItemStack> items = Arrays.asList(inventory.getHelmet(), inventory.getChestplate(),
+                            inventory.getLeggings(), inventory.getBoots(), inventory.getItemInMainHand(),
+                            inventory.getItemInOffHand());
+                    for(ItemStack item : items) {
+                        if(item == null || item.getType().equals(Material.AIR)) {
+                            continue;
+                        }
+
+                        int level = utilities.checkProperty(item, RareProperties.propertyConfig.restorationName);
+                        if(level < 0) {
+                            continue;
+                        }
+
+                        ItemMeta meta = item.getItemMeta();
+                        if(!(meta instanceof Damageable damageable)) {
+                            continue;
+                        }
+
+                        if(damageable.getDamage() == 0) {
+                            continue;
+                        }
+
+                        if(player.getLevel() == 0 && player.getExp() == 0) {
+                            continue;
+                        }
+
+                        int damage = damageable.getDamage();
+                        damageable.setDamage(Math.max(0, damage - RareProperties.propertyConfig.restorationDurabilityPerLevel * level));
+                        player.giveExp(-RareProperties.propertyConfig.restorationExpPointsPerUse);
+
+                        item.setItemMeta(damageable);
+                    }
+                }
+            }
+        }, 0L, RareProperties.propertyConfig.restorationRepairTicks);
     }
 
     private static void startSunTimeChecking(RareProperties plugin) {

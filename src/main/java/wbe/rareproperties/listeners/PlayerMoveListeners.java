@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.mythic.Channeling;
 import wbe.rareproperties.properties.mythic.Fly;
+import wbe.rareproperties.properties.mythic.Restoration;
 
 public class PlayerMoveListeners implements Listener {
 
@@ -33,6 +34,13 @@ public class PlayerMoveListeners implements Listener {
         boolean channelingProperty = channeling.checkUse(player, event);
         if(channelingProperty) {
             channeling.applyEffect(player, event);
+        }
+
+        // Comprobación de Restauración
+        Restoration restoration = new Restoration(plugin);
+        boolean restorationProperty = restoration.checkUse(player, event);
+        if(restorationProperty) {
+            restoration.applyEffect(player, event);
         }
     }
 }

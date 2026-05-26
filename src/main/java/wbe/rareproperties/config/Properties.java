@@ -24,6 +24,7 @@ public class Properties {
     public String rocketryName;
     public String purityName;
     public String channelingName;
+    public String restorationName;
     public String solemName;
     public String noctisName;
     public String armorName;
@@ -63,6 +64,7 @@ public class Properties {
     public List<String> rocketryDescription = new ArrayList<>();
     public List<String> purityDescription = new ArrayList<>();
     public List<String> channelingDescription = new ArrayList<>();
+    public List<String> restorationDescription = new ArrayList<>();
     public List<String> solemDescription = new ArrayList<>();
     public List<String> noctisDescription = new ArrayList<>();
     public List<String> armorDescription = new ArrayList<>();
@@ -139,6 +141,10 @@ public class Properties {
 
     public int channelingHalfHearts;
     public int channelingTime;
+
+    public int restorationExpPointsPerUse;
+    public int restorationDurabilityPerLevel;
+    public int restorationRepairTicks;
 
     public double solemDamage;
 
@@ -229,6 +235,7 @@ public class Properties {
         rocketryName = config.getString("Properties.Rocketry.name").replace("&", "§");
         purityName = config.getString("Properties.Purity.name").replace("&", "§");
         channelingName = config.getString("Properties.Channeling.name").replace("&", "§");
+        restorationName = config.getString("Properties.Restoration.name").replace("&", "§");
         solemName = config.getString("Properties.Solem.name").replace("&", "§");
         noctisName = config.getString("Properties.Noctis.name").replace("&", "§");
         armorName = config.getString("Properties.Armor.name").replace("&", "§");
@@ -268,6 +275,7 @@ public class Properties {
         rocketryDescription = config.getStringList("Properties.Rocketry.description");
         purityDescription = config.getStringList("Properties.Purity.description");
         channelingDescription = config.getStringList("Properties.Channeling.description");
+        restorationDescription = config.getStringList("Properties.Restoration.description");
         solemDescription = config.getStringList("Properties.Solem.description");
         noctisDescription = config.getStringList("Properties.Noctis.description");
         armorDescription = config.getStringList("Properties.Armor.description");
@@ -330,6 +338,9 @@ public class Properties {
         purityChance = config.getInt("Properties.Purity.chancePerLevel");
         channelingHalfHearts = config.getInt("Properties.Channeling.halfHeartsPerLevel");
         channelingTime = config.getInt("Properties.Channeling.rechargeTime");
+        restorationExpPointsPerUse = config.getInt("Properties.Restoration.expPointsPerUse");
+        restorationDurabilityPerLevel = config.getInt("Properties.Restoration.durabilityPerLevel");
+        restorationRepairTicks = config.getInt("Properties.Restoration.repairTicks");
         solemDamage = config.getDouble("Properties.Solem.damagePercent");
         noctisDamage = config.getDouble("Properties.Noctis.damagePercent");
         armorPercent = config.getDouble("Properties.Armor.reductionPercent");

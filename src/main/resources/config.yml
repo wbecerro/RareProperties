@@ -274,6 +274,7 @@ Rarities:
         - "Adrenalina"
         - "Pureza"
         - "Canalización"
+        - "Restauración"
     Legendary:
       name: "Legendario"
       color: "&6"
@@ -797,3 +798,14 @@ Properties:
       - "&7Permite contraatacar los golpes y negar el daño"
       - "&7recibido y devolver parte."
       - "&7&oSolo funciona en escudo."
+  Restoration:
+    name: "Restauración"
+    expPointsPerUse: 5
+    durabilityPerLevel: 1
+    repairTicks: 5
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Permite drenar la experiencia del jugador"
+      - "&7para reparar la armadura u otros objetos."
+      - "&7&oPuede ser aplicado a todo."
