@@ -65,22 +65,15 @@ public class EntityDamageByEntityListeners implements Listener {
             return;
         }
 
-        if(!(event.getDamager() instanceof Player)) {
+        if(!(event.getDamager() instanceof Player player)) {
             return;
         }
 
-        if(!(event.getEntity() instanceof LivingEntity)) {
+        if(!(event.getEntity() instanceof LivingEntity damaged)) {
             return;
         }
-
-        LivingEntity damaged = (LivingEntity) event.getEntity();
-        Player player = (Player) event.getDamager();
 
         if(event.getDamage() <= 0.0D) {
-            return;
-        }
-
-        if(player.getAttackCooldown() < 0.3) {
             return;
         }
 

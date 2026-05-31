@@ -21,7 +21,8 @@ public class Vampirism extends RareProperty {
     @Override
     public void applyEffect(Player player, Event event) {
         double damage = ((EntityDamageByEntityEvent) event).getDamage();
-        double healing = damage * (getLevel() * RareProperties.propertyConfig.vampirismHealth);
+        double healing = Math.min(damage * (getLevel() * RareProperties.propertyConfig.vampirismHealth),
+                player.getAttribute(Attribute.MAX_HEALTH).getValue() * RareProperties.propertyConfig.vampirismMaxHeal);
         double newHealth = player.getHealth() + healing;
         double maxHealth = player.getAttribute(Attribute.MAX_HEALTH).getValue();
 

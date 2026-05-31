@@ -164,6 +164,7 @@ public class Properties {
     public int gravitonDuration;
 
     public double vampirismHealth;
+    public double vampirismMaxHeal;
 
     public double backstabDamage;
 
@@ -352,6 +353,7 @@ public class Properties {
         gravityPerLevel = config.getDouble("Properties.Graviton.gravityPerLevel");
         gravitonDuration = config.getInt("Properties.Graviton.duration");
         vampirismHealth = config.getDouble("Properties.Vampirism.healthSteal");
+        vampirismMaxHeal = config.getDouble("Properties.Vampirism.maxHeal");
         backstabDamage = config.getDouble("Properties.Backstab.extraDamage");
         criticDamage = config.getDouble("Properties.Critic.extraDamage");
         criticChance = config.getInt("Properties.Critic.chancePerLevel");

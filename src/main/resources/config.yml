@@ -596,6 +596,7 @@ Properties:
   Vampirism:
     name: "Vampirismo"
     healthSteal: 0.01
+    maxHeal: 0.08
     description:
       - "&7"
       - "&7&nDescripción:"
