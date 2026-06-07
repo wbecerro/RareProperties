@@ -24,9 +24,10 @@ public class Fly extends RareProperty {
         if(player.getFoodLevel() <= 0) {
             player.setAllowFlight(false);
             player.setFlying(false);
+            player.setFlySpeed(0);
         } else {
             player.setAllowFlight(true);
-            player.setFlySpeed(0.1F);
+            player.setFlySpeed(RareProperties.propertyConfig.flySpeedPerLevel * getLevel());
         }
 
         playersFlying.put(player, getLevel());

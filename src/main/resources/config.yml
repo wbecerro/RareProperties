@@ -405,6 +405,7 @@ Properties:
   Fly:
     name: "Vuelo"
     baseCost: 8
+    flySpeedPerLevel: 0.1
     time: 5
     description:
       - "&7"

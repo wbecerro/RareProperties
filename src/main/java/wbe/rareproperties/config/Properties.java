@@ -90,6 +90,7 @@ public class Properties {
     public List<String> enlargeDescription = new ArrayList<>();
 
     public int flyCost;
+    public float flySpeedPerLevel;
     public int flyTime;
 
     public int repairCost;
@@ -302,6 +303,7 @@ public class Properties {
         enlargeDescription = config.getStringList("Properties.Enlarge.description");
 
         flyCost = config.getInt("Properties.Fly.baseCost");
+        flySpeedPerLevel = (float) config.getDouble("Properties.Fly.flySpeedPerLevel");
         flyTime = config.getInt("Properties.Fly.time");
         repairCost = config.getInt("Properties.Repair.baseCost");
         repairPercent = config.getInt("Properties.Repair.repairPercentage");
