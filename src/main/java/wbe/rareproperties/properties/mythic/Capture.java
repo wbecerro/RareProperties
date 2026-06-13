@@ -54,7 +54,8 @@ public class Capture extends RareProperty {
 
         PlayerInventory inventory = player.getInventory();
         ItemStack item = inventory.getItemInMainHand();
-        level = checkProperty(item, getExternalName());
+        level = Math.max(checkProperty(item, getExternalName()), 0);
+        level += checkArmorAccumulative(inventory, getExternalName());
 
         if(level < 0) {
             return false;

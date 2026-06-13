@@ -27,7 +27,7 @@ public class Fly extends RareProperty {
             player.setFlySpeed(0);
         } else {
             player.setAllowFlight(true);
-            player.setFlySpeed(RareProperties.propertyConfig.flySpeedPerLevel * getLevel());
+            player.setFlySpeed(Math.min(RareProperties.propertyConfig.flySpeedPerLevel * getLevel(), 1));
         }
 
         playersFlying.put(player, getLevel());

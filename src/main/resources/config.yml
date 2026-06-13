@@ -466,7 +466,7 @@ Properties:
       - "&7&nDescripción:"
       - "&7Permite conseguir huevos de entidades"
       - "&7al matarlas con una pequeña posibilidad."
-      - "&7&oSolo funciona en arma."
+      - "&7&oFunciona en armadura y arma."
   Reinforced:
     name: "Reforzado"
     baseProbability: 5
