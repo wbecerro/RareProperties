@@ -32,6 +32,8 @@ public class IdentifierTome extends ItemStack {
 
         meta.setLore(lore);
 
+        meta.setMaxStackSize(64);
+
         NamespacedKey key = new NamespacedKey(plugin, "IdentifierTome");
         meta.getPersistentDataContainer().set(key, PersistentDataType.BOOLEAN, true);
         setItemMeta(meta);

@@ -30,6 +30,8 @@ public class SpecialCraftingItem extends ItemStack {
             lore.add(line.replace("&", "§"));
         }
 
+        meta.setMaxStackSize(64);
+
         meta.addEnchant(Enchantment.INFINITY, 1, true);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
