@@ -297,6 +297,7 @@ Rarities:
         - "Crítico"
         - "Repulsión"
         - "Contraataque"
+        - "Bestialidad"
     Rare:
       name: "Raro"
       color: "&9"
@@ -811,3 +812,11 @@ Properties:
       - "&7Permite drenar la experiencia del jugador"
       - "&7para reparar la armadura u otros objetos."
       - "&7&oPuede ser aplicado a todo."
+  Bestiality:
+    name: "Bestialidad"
+    damageModifierPerLevel: 0.05
+    description:
+      - "&7"
+      - "&7&nDescripción:"
+      - "&7Permite aumentar el daño de las"
+      - "&7mascotas del jugador."

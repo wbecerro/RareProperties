@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,10 +14,7 @@ import wbe.rareproperties.RareProperties;
 import wbe.rareproperties.properties.common.Enlarge;
 import wbe.rareproperties.properties.common.Explosion;
 import wbe.rareproperties.properties.common.Shrink;
-import wbe.rareproperties.properties.epic.Backstab;
-import wbe.rareproperties.properties.epic.Critic;
-import wbe.rareproperties.properties.epic.Parry;
-import wbe.rareproperties.properties.epic.Vampirism;
+import wbe.rareproperties.properties.epic.*;
 import wbe.rareproperties.properties.legendary.*;
 import wbe.rareproperties.properties.rare.Cut;
 import wbe.rareproperties.properties.rare.Electro;
@@ -56,6 +54,32 @@ public class EntityDamageByEntityListeners implements Listener {
                 player.playSound(player.getLocation(), Sound.valueOf(RareProperties.propertyConfig.parrySound), 1F, 2.0F);
                 event.setCancelled(true);
             }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void handlePetDamage(EntityDamageByEntityEvent event) {
+        if(event.isCancelled()) {
+            return;
+        }
+
+        if(!(event.getDamager() instanceof Tameable pet)) {
+            return;
+        }
+
+        if(pet.getOwner() == null) {
+            return;
+        }
+
+        if(!(pet.getOwner() instanceof Player player)) {
+            return;
+        }
+
+        // Comprobación de Bestialidad
+        Bestiality bestiality = new Bestiality(plugin);
+        boolean bestialityProperty = bestiality.checkUse(player, event);
+        if(bestialityProperty) {
+            bestiality.applyEffect(player, event);
         }
     }
 

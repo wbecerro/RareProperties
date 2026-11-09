@@ -37,6 +37,7 @@ public class Properties {
     public String criticName;
     public String repulsionName;
     public String parryName;
+    public String bestialityName;
     public String electroName;
     public String cutName;
     public String witherName;
@@ -77,6 +78,7 @@ public class Properties {
     public List<String> criticDescription = new ArrayList<>();
     public List<String> repulsionDescription = new ArrayList<>();
     public List<String> parryDescription = new ArrayList<>();
+    public List<String> bestialityDescription = new ArrayList<>();
     public List<String> electroDescription = new ArrayList<>();
     public List<String> cutDescription = new ArrayList<>();
     public List<String> witherDescription = new ArrayList<>();
@@ -181,6 +183,8 @@ public class Properties {
     public int parryCooldownTicksPerLevel;
     public String parrySound;
 
+    public double bestialityDamage;
+
     public double electroDamage;
     public int electroChance;
     public String electroSound;
@@ -250,6 +254,7 @@ public class Properties {
         criticName = config.getString("Properties.Critic.name").replace("&", "§");
         repulsionName = config.getString("Properties.Repulsion.name").replace("&", "§");
         parryName = config.getString("Properties.Parry.name").replace("&", "§");
+        bestialityName = config.getString("Properties.Bestiality.name").replace("&", "§");
         electroName = config.getString("Properties.Electro.name").replace("&", "§");
         cutName = config.getString("Properties.Cut.name").replace("&", "§");
         witherName = config.getString("Properties.Wither.name").replace("&", "§");
@@ -290,6 +295,7 @@ public class Properties {
         criticDescription = config.getStringList("Properties.Critic.description");
         repulsionDescription = config.getStringList("Properties.Repulsion.description");
         parryDescription = config.getStringList("Properties.Parry.description");
+        bestialityDescription = config.getStringList("Properties.Bestiality.description");
         electroDescription = config.getStringList("Properties.Electro.description");
         cutDescription = config.getStringList("Properties.Cut.description");
         witherDescription = config.getStringList("Properties.Wither.description");
@@ -366,6 +372,7 @@ public class Properties {
         parryCooldownTicks = config.getInt("Properties.Parry.parryCooldownTicks");
         parryCooldownTicksPerLevel = config.getInt("Properties.Parry.parryCooldownTicksPerLevel");
         parrySound = config.getString("Properties.Parry.parrySound");
+        bestialityDamage = config.getDouble("Properties.Bestiality.damageModifierPerLevel");
         electroDamage = config.getDouble("Properties.Electro.damagePerLevel");
         electroChance = config.getInt("Properties.Electro.chancePerLevel");
         electroSound = config.getString("Properties.Electro.sound");
